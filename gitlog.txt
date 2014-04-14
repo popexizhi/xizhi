@@ -62,4 +62,37 @@ error: failed to push some refs to 'E:/pc/other/thinking/learning/testgit/../git
 try'
 -----------------------------------------------------------------------------
 ]
+[popexizhi:ok,pope常犯的错误命令应该是
+git push origin master
+自己写成了:git push origin master
+]
 [参考:http://www.ibm.com/developerworks/cn/opensource/os-cn-tourofgit/]
+6.//拉取修改版本
+[popexizhi:git 这个很帅,pope执行时提示如下
+E:\pc\other\thinking\learning\testgit\xizhi>git push origin master
+Password for 'https://popexizhi@code.google.com':
+To https://popexizhi@code.google.com/p/xizhi/
+ ! [rejected]        master -> master (fetch first)
+error: failed to push some refs to 'https://popexizhi@code.google.com/p/xizh
+hint: Updates were rejected because the remote contains work that you do
+hint: not have locally. This is usually caused by another repository pushing
+hint: to the same ref. You may want to first integrate the remote changes
+hint: (e.g., 'git pull ...') before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+之后直接尝试]
+git pull 再次尝试git push origin master 就ok 了。
+----------------------------
+而要将远程仓库抓取数据到本地，可以使用 git fetch 命令，从而获取所有本地仓库中还没有的数据。
+$ git fetch [remote-name]
+如果设置了某个分支用于跟踪某个远端仓库的分支，可以使用 git pull 命令自动抓取数据下来，然后将远端分支自动合并到本地仓库中当前分支。从这个角度，git pull 等价于 git fetch + git merge 的功能。
+$ git pull [remote-name]
+-------------------------------------
+[http://www.ibm.com/developerworks/cn/opensource/os-cn-tourofgit/]
+====================================================正文结束==================
+[popexizhi:
+1.log写的好乱，应该找个好方法更新记录结构了:)
+2.http://www.ibm.com/developerworks/cn/opensource/os-cn-tourofgit/ 
+IBM的这个内容写的很不错哟，好好阅读一下写写笔记吧
+3.popexizhi计划的git使用方案，和其他代码的迁移是否要做thinking
+]
+

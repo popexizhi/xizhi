@@ -9,6 +9,7 @@ git add filename //add file ,* is ok
 git commit -m "xxxx" //提交修改到本地缓存 
 5.//推送修改到远端库
 git push orign master //master为本地要推送的分支名称
+add test
 [popexizhi:
 出现报错如下
 -----------------------------------------------------------------------

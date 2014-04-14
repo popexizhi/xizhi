@@ -1,7 +1,24 @@
 git log
 1.git init //初始化本地库
+.git目录的简要说明:
+===========================================================
+表 1 .git 目录简要说明
+
+子目录名	简要描述
+branches	 Git 项目分支信息，新版 Git 已经不再使用该目录。
+config	 Git 项目配置信息
+description	 Git 项目描述信息
+HEAD	 指向 Git 项目当前分支的头指针
+hooks	 默认的"hooks"脚本，被特定事件发生前后触发。
+info	 里面含一个 exclude 文件，指 Git 项目要忽略的文件。
+objects	 Git 的数据对象，包括：commits, trees, blobs, tags。
+refs	 指向所有 Git 项目分支的指针
+====================================================================
 2.git clone 版本库名称 //检出库内容
+[针对第二类 Git 仓库，我们不需要 git init 初始化仓库，取而代之的是，使用 git clone 直接将远程镜像克隆到本地仓库。
+http://www.ibm.com/developerworks/cn/opensource/os-cn-tourofgit/]
 3.//创建用户&mail
+[如果是第一次使用 Git，均需要配置用户信息，包括用户名与 Email（如下所示），以便以后每次 Git 提交时都可以自动引用这两条信息，说明是谁更新与提交了代码。http://www.ibm.com/developerworks/cn/opensource/os-cn-tourofgit/ ]
 git config --global user.email "usermail@xxx"
 git config --global user.name "username"
 4.//增加修改到本地缓存
@@ -44,3 +61,4 @@ error: failed to push some refs to 'E:/pc/other/thinking/learning/testgit/../git
 try'
 -----------------------------------------------------------------------------
 ]
+[参考:http://www.ibm.com/developerworks/cn/opensource/os-cn-tourofgit/]

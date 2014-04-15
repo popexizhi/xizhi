@@ -1,34 +1,34 @@
-git log
-1.git init //³õÊ¼»¯±¾µØ¿â
-.gitÄ¿Â¼µÄ¼òÒªËµÃ÷:
+ï»¿git log
+1.git init //åˆå§‹åŒ–æœ¬åœ°åº“
+.gitç›®å½•çš„ç®€è¦è¯´æ˜:
 ===========================================================
-±í 1 .git Ä¿Â¼¼òÒªËµÃ÷
+è¡¨ 1 .git ç›®å½•ç®€è¦è¯´æ˜
 
-×ÓÄ¿Â¼Ãû	¼òÒªÃèÊö
-branches	 Git ÏîÄ¿·ÖÖ§ĞÅÏ¢£¬ĞÂ°æ Git ÒÑ¾­²»ÔÙÊ¹ÓÃ¸ÃÄ¿Â¼¡£
-config	 Git ÏîÄ¿ÅäÖÃĞÅÏ¢
-description	 Git ÏîÄ¿ÃèÊöĞÅÏ¢
-HEAD	 Ö¸Ïò Git ÏîÄ¿µ±Ç°·ÖÖ§µÄÍ·Ö¸Õë
-hooks	 Ä¬ÈÏµÄ"hooks"½Å±¾£¬±»ÌØ¶¨ÊÂ¼ş·¢ÉúÇ°ºó´¥·¢¡£
-info	 ÀïÃæº¬Ò»¸ö exclude ÎÄ¼ş£¬Ö¸ Git ÏîÄ¿ÒªºöÂÔµÄÎÄ¼ş¡£
-objects	 Git µÄÊı¾İ¶ÔÏó£¬°üÀ¨£ºcommits, trees, blobs, tags¡£
-refs	 Ö¸ÏòËùÓĞ Git ÏîÄ¿·ÖÖ§µÄÖ¸Õë
+å­ç›®å½•å	ç®€è¦æè¿°
+branches	 Git é¡¹ç›®åˆ†æ”¯ä¿¡æ¯ï¼Œæ–°ç‰ˆ Git å·²ç»ä¸å†ä½¿ç”¨è¯¥ç›®å½•ã€‚
+config	 Git é¡¹ç›®é…ç½®ä¿¡æ¯
+description	 Git é¡¹ç›®æè¿°ä¿¡æ¯
+HEAD	 æŒ‡å‘ Git é¡¹ç›®å½“å‰åˆ†æ”¯çš„å¤´æŒ‡é’ˆ
+hooks	 é»˜è®¤çš„"hooks"è„šæœ¬ï¼Œè¢«ç‰¹å®šäº‹ä»¶å‘ç”Ÿå‰åè§¦å‘ã€‚
+info	 é‡Œé¢å«ä¸€ä¸ª exclude æ–‡ä»¶ï¼ŒæŒ‡ Git é¡¹ç›®è¦å¿½ç•¥çš„æ–‡ä»¶ã€‚
+objects	 Git çš„æ•°æ®å¯¹è±¡ï¼ŒåŒ…æ‹¬ï¼šcommits, trees, blobs, tagsã€‚
+refs	 æŒ‡å‘æ‰€æœ‰ Git é¡¹ç›®åˆ†æ”¯çš„æŒ‡é’ˆ
 ====================================================================
-2.git clone °æ±¾¿âÃû³Æ //¼ì³ö¿âÄÚÈİ
-[Õë¶ÔµÚ¶şÀà Git ²Ö¿â£¬ÎÒÃÇ²»ĞèÒª git init ³õÊ¼»¯²Ö¿â£¬È¡¶ø´úÖ®µÄÊÇ£¬Ê¹ÓÃ git clone Ö±½Ó½«Ô¶³Ì¾µÏñ¿ËÂ¡µ½±¾µØ²Ö¿â¡£
+2.git clone ç‰ˆæœ¬åº“åç§° //æ£€å‡ºåº“å†…å®¹
+[é’ˆå¯¹ç¬¬äºŒç±» Git ä»“åº“ï¼Œæˆ‘ä»¬ä¸éœ€è¦ git init åˆå§‹åŒ–ä»“åº“ï¼Œå–è€Œä»£ä¹‹çš„æ˜¯ï¼Œä½¿ç”¨ git clone ç›´æ¥å°†è¿œç¨‹é•œåƒå…‹éš†åˆ°æœ¬åœ°ä»“åº“ã€‚
 http://www.ibm.com/developerworks/cn/opensource/os-cn-tourofgit/]
-3.//´´½¨ÓÃ»§&mail
-[Èç¹ûÊÇµÚÒ»´ÎÊ¹ÓÃ Git£¬¾ùĞèÒªÅäÖÃÓÃ»§ĞÅÏ¢£¬°üÀ¨ÓÃ»§ÃûÓë Email£¨ÈçÏÂËùÊ¾£©£¬ÒÔ±ãÒÔºóÃ¿´Î Git Ìá½»Ê±¶¼¿ÉÒÔ×Ô¶¯ÒıÓÃÕâÁ½ÌõĞÅÏ¢£¬ËµÃ÷ÊÇË­¸üĞÂÓëÌá½»ÁË´úÂë¡£http://www.ibm.com/developerworks/cn/opensource/os-cn-tourofgit/ ]
+3.//åˆ›å»ºç”¨æˆ·&mail
+[å¦‚æœæ˜¯ç¬¬ä¸€æ¬¡ä½¿ç”¨ Gitï¼Œå‡éœ€è¦é…ç½®ç”¨æˆ·ä¿¡æ¯ï¼ŒåŒ…æ‹¬ç”¨æˆ·åä¸ Emailï¼ˆå¦‚ä¸‹æ‰€ç¤ºï¼‰ï¼Œä»¥ä¾¿ä»¥åæ¯æ¬¡ Git æäº¤æ—¶éƒ½å¯ä»¥è‡ªåŠ¨å¼•ç”¨è¿™ä¸¤æ¡ä¿¡æ¯ï¼Œè¯´æ˜æ˜¯è°æ›´æ–°ä¸æäº¤äº†ä»£ç ã€‚http://www.ibm.com/developerworks/cn/opensource/os-cn-tourofgit/ ]
 git config --global user.email "usermail@xxx"
 git config --global user.name "username"
-4.//Ôö¼ÓĞŞ¸Äµ½±¾µØ»º´æ
+4.//å¢åŠ ä¿®æ”¹åˆ°æœ¬åœ°ç¼“å­˜
 git add filename //add file ,* is ok
-git commit -m "xxxx" //Ìá½»ĞŞ¸Äµ½±¾µØ»º´æ 
-5.//ÍÆËÍĞŞ¸Äµ½Ô¶¶Ë¿â
-git push orign master //masterÎª±¾µØÒªÍÆËÍµÄ·ÖÖ§Ãû³Æ
+git commit -m "xxxx" //æäº¤ä¿®æ”¹åˆ°æœ¬åœ°ç¼“å­˜ 
+5.//æ¨é€ä¿®æ”¹åˆ°è¿œç«¯åº“
+git push orign master //masterä¸ºæœ¬åœ°è¦æ¨é€çš„åˆ†æ”¯åç§°
 add test
 [popexizhi:
-³öÏÖ±¨´íÈçÏÂ
+å‡ºç°æŠ¥é”™å¦‚ä¸‹
 -----------------------------------------------------------------------
 E:\pc\other\thinking\learning\testgit\gittry>git push origin master
 Counting objects: 5, done.
@@ -62,13 +62,13 @@ error: failed to push some refs to 'E:/pc/other/thinking/learning/testgit/../git
 try'
 -----------------------------------------------------------------------------
 ]
-[popexizhi:ok,pope³£·¸µÄ´íÎóÃüÁîÓ¦¸ÃÊÇ
+[popexizhi:ok,popeå¸¸çŠ¯çš„é”™è¯¯å‘½ä»¤åº”è¯¥æ˜¯
 git push origin master
-×Ô¼ºĞ´³ÉÁË:git push origin master
+è‡ªå·±å†™æˆäº†:git push origin master
 ]
-[²Î¿¼:http://www.ibm.com/developerworks/cn/opensource/os-cn-tourofgit/]
-6.//À­È¡ĞŞ¸Ä°æ±¾
-[popexizhi:git Õâ¸öºÜË§,popeÖ´ĞĞÊ±ÌáÊ¾ÈçÏÂ
+[å‚è€ƒ:http://www.ibm.com/developerworks/cn/opensource/os-cn-tourofgit/]
+6.//æ‹‰å–ä¿®æ”¹ç‰ˆæœ¬
+[popexizhi:git è¿™ä¸ªå¾ˆå¸…,popeæ‰§è¡Œæ—¶æç¤ºå¦‚ä¸‹
 E:\pc\other\thinking\learning\testgit\xizhi>git push origin master
 Password for 'https://popexizhi@code.google.com':
 To https://popexizhi@code.google.com/p/xizhi/
@@ -79,20 +79,20 @@ hint: not have locally. This is usually caused by another repository pushing
 hint: to the same ref. You may want to first integrate the remote changes
 hint: (e.g., 'git pull ...') before pushing again.
 hint: See the 'Note about fast-forwards' in 'git push --help' for details.
-Ö®ºóÖ±½Ó³¢ÊÔ]
-git pull ÔÙ´Î³¢ÊÔgit push origin master ¾Íok ÁË¡£
+ä¹‹åç›´æ¥å°è¯•]
+git pull å†æ¬¡å°è¯•git push origin master å°±ok äº†ã€‚
 ----------------------------
-¶øÒª½«Ô¶³Ì²Ö¿â×¥È¡Êı¾İµ½±¾µØ£¬¿ÉÒÔÊ¹ÓÃ git fetch ÃüÁî£¬´Ó¶ø»ñÈ¡ËùÓĞ±¾µØ²Ö¿âÖĞ»¹Ã»ÓĞµÄÊı¾İ¡£
+è€Œè¦å°†è¿œç¨‹ä»“åº“æŠ“å–æ•°æ®åˆ°æœ¬åœ°ï¼Œå¯ä»¥ä½¿ç”¨ git fetch å‘½ä»¤ï¼Œä»è€Œè·å–æ‰€æœ‰æœ¬åœ°ä»“åº“ä¸­è¿˜æ²¡æœ‰çš„æ•°æ®ã€‚
 $ git fetch [remote-name]
-Èç¹ûÉèÖÃÁËÄ³¸ö·ÖÖ§ÓÃÓÚ¸ú×ÙÄ³¸öÔ¶¶Ë²Ö¿âµÄ·ÖÖ§£¬¿ÉÒÔÊ¹ÓÃ git pull ÃüÁî×Ô¶¯×¥È¡Êı¾İÏÂÀ´£¬È»ºó½«Ô¶¶Ë·ÖÖ§×Ô¶¯ºÏ²¢µ½±¾µØ²Ö¿âÖĞµ±Ç°·ÖÖ§¡£´ÓÕâ¸ö½Ç¶È£¬git pull µÈ¼ÛÓÚ git fetch + git merge µÄ¹¦ÄÜ¡£
+å¦‚æœè®¾ç½®äº†æŸä¸ªåˆ†æ”¯ç”¨äºè·Ÿè¸ªæŸä¸ªè¿œç«¯ä»“åº“çš„åˆ†æ”¯ï¼Œå¯ä»¥ä½¿ç”¨ git pull å‘½ä»¤è‡ªåŠ¨æŠ“å–æ•°æ®ä¸‹æ¥ï¼Œç„¶åå°†è¿œç«¯åˆ†æ”¯è‡ªåŠ¨åˆå¹¶åˆ°æœ¬åœ°ä»“åº“ä¸­å½“å‰åˆ†æ”¯ã€‚ä»è¿™ä¸ªè§’åº¦ï¼Œgit pull ç­‰ä»·äº git fetch + git merge çš„åŠŸèƒ½ã€‚
 $ git pull [remote-name]
 -------------------------------------
 [http://www.ibm.com/developerworks/cn/opensource/os-cn-tourofgit/]
-====================================================ÕıÎÄ½áÊø==================
+====================================================æ­£æ–‡ç»“æŸ==================
 [popexizhi:
-1.logĞ´µÄºÃÂÒ£¬Ó¦¸ÃÕÒ¸öºÃ·½·¨¸üĞÂ¼ÇÂ¼½á¹¹ÁË:)
+1.logå†™çš„å¥½ä¹±ï¼Œåº”è¯¥æ‰¾ä¸ªå¥½æ–¹æ³•æ›´æ–°è®°å½•ç»“æ„äº†:)
 2.http://www.ibm.com/developerworks/cn/opensource/os-cn-tourofgit/ 
-IBMµÄÕâ¸öÄÚÈİĞ´µÄºÜ²»´íÓ´£¬ºÃºÃÔÄ¶ÁÒ»ÏÂĞ´Ğ´±Ê¼Ç°É
-3.popexizhi¼Æ»®µÄgitÊ¹ÓÃ·½°¸£¬ºÍÆäËû´úÂëµÄÇ¨ÒÆÊÇ·ñÒª×öthinking
+IBMçš„è¿™ä¸ªå†…å®¹å†™çš„å¾ˆä¸é”™å“Ÿï¼Œå¥½å¥½é˜…è¯»ä¸€ä¸‹å†™å†™ç¬”è®°å§
+3.popexizhiè®¡åˆ’çš„gitä½¿ç”¨æ–¹æ¡ˆï¼Œå’Œå…¶ä»–ä»£ç çš„è¿ç§»æ˜¯å¦è¦åšthinking
 ]
 

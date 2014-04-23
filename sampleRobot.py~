@@ -74,7 +74,6 @@ class SampleBot(GtalkRobot):
 	'''food'''
 	self.replyMessage(user,"i will open it!")
 	#send message to ardino
-	
 
     #This method is used to response users.
     def command_100_default(self, user, message, args):

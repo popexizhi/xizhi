@@ -28,7 +28,7 @@ import sys
 import time
 
 from PyGtalkRobot import GtalkRobot
-
+from chamberlain import chamberlain # ardino use
 ############################################################################################################################
 
 class SampleBot(GtalkRobot):
@@ -74,6 +74,8 @@ class SampleBot(GtalkRobot):
 	'''food'''
 	self.replyMessage(user,"i will open it!")
 	#send message to ardino
+	#newcham=chamberlain
+
 	
 
     #This method is used to response users.

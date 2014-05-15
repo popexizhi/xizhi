@@ -74,6 +74,7 @@ class SampleBot(GtalkRobot):
 	'''food'''
 	self.replyMessage(user,"i will open it!")
 	#send message to ardino
+	#newcham=chamberlain
 
 	
 

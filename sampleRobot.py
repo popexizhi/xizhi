@@ -74,7 +74,11 @@ class SampleBot(GtalkRobot):
 	'''food'''
 	self.replyMessage(user,"i will open it!")
 	#send message to ardino
-	#newcham=chamberlain
+	newcham=chamberlain()
+	#add ip [def:127.0.0.1:5005/chamberlain.__init__]
+	#message power
+	newcham.callpower("open")
+	print newcham.showpoer() #print set res
 
 	
 

@@ -79,7 +79,7 @@ class SampleBot(GtalkRobot):
 	#message power
 	newcham.callpower("open")
 	res=newcham.showpower() #print set res
-	self.replayMessage(user,res)
+	self.replyMessage(user,res)
     
     #This method is used to close power.[popexizhi add]
     def command_004_closepower(self,user,message,args):
@@ -91,7 +91,7 @@ class SampleBot(GtalkRobot):
 	#message power
 	closecham.callpower("c") # add char message
 	res=closecham.showpower() #print set res
-	self.replayMessage(user,res)
+	self.replyMessage(user,res)
 
 
 	

@@ -28,7 +28,7 @@ byte mac[] = {
 IPAddress ip(192,168,1, 177);
 IPAddress gateway(192,168,1, 1);
 IPAddress subnet(255, 255, 0, 0);
-const int _powerPin=13;    //the number for power pin  [add for popexihi]
+const int _powerPin=8;    //the number for power pin  [add for popexihi]
 
 // telnet defaults to port 23
 EthernetServer server(23);

@@ -68,7 +68,7 @@ class SampleBot(GtalkRobot):
         
         self.replyMessage(user, "\nEmail sent to "+ email_addr +" at: "+time.strftime("%Y-%m-%d %a %H:%M:%S", time.gmtime()))
     
-    #Thie method is used to open power. [popexizhi add ]
+    #This method is used to open power. [popexizhi add ]
     def command_003_openpower(self,user,message,args):
 	#for open power using,send open power message to ardino
 	'''food'''
@@ -79,6 +79,18 @@ class SampleBot(GtalkRobot):
 	#message power
 	newcham.callpower("open")
 	print newcham.showpoer() #print set res
+    
+    #This method is used to close power.[popexizhi add]
+    def command_004_closepower(self,user,message,args):
+	#for close power using,send close power message to ardino
+	'''close_power'''
+	self.replyMessage(user,"ok,close power")
+	#send message to ardino
+	closecham=chamberlain()
+	#message power
+	closecham.callpower("c") # add char message
+	print closecham.showpoer() #print set res
+
 
 	
 

@@ -78,7 +78,8 @@ class SampleBot(GtalkRobot):
 	#add ip [def:127.0.0.1:5005/chamberlain.__init__]
 	#message power
 	newcham.callpower("open")
-	print newcham.showpoer() #print set res
+	res=newcham.showpower() #print set res
+	self.replayMessage(user,res)
     
     #This method is used to close power.[popexizhi add]
     def command_004_closepower(self,user,message,args):
@@ -89,7 +90,8 @@ class SampleBot(GtalkRobot):
 	closecham=chamberlain()
 	#message power
 	closecham.callpower("c") # add char message
-	print closecham.showpoer() #print set res
+	res=closecham.showpower() #print set res
+	self.replayMessage(user,res)
 
 
 	

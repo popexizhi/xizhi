@@ -11,6 +11,7 @@ class chamberlain():
 		self.TCP_IP = '127.0.0.1'
 		self.TCP_PORT = 5005
 		self.BUFFER_SIZE = 1024
+		self.data=""
 
 	def setnewadd(self,tcp,port):
 		"""set other ip """
@@ -31,11 +32,14 @@ class chamberlain():
 	
 	def _getdata(self):
 		"""get ardino data """
+		print "chamberlain-----------get ardino data"
 		self.data=self.powercall.recv(self.BUFFER_SIZE)
 	
 	def _closepower(self):
 		"""close tcp link """
+		print "chamberlain-----------close tcp link"
 		self.powercall.close()
+		print "ok,close"
 	def showpower(self):
 		return self.data
 

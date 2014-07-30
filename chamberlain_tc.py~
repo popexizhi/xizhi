@@ -1,0 +1,31 @@
+#
+"""
+test for chamberlain.py
+"""
+import os
+import subprocess
+from chamberlain import chamberlain
+import unittest
+import thread
+class test_chamberlain(unittest.TestCase):
+	
+	def setUp(self):
+		"""start Demo Server """
+		dserver="testD\\Servertcp.py"
+		os.system("pwd")
+		thread.start_new_thread(subprocess.call,('python '+dserver))
+		#os.system("python "+dserver)
+	
+	def testcallpower(self):
+		"""test message to sever """
+		print "testcallpower"
+		pass
+
+	def testshowpower(self):
+		"test server recve message"
+		print "testshowpower"
+		pass
+
+
+if __name__=="__main__":
+	unittest.main()

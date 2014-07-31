@@ -41,26 +41,18 @@ void setup() {
   server.begin();
   //initialise the power pin as an output
    pinMode(_powerPin,OUTPUT); 
+   digitalWrite(_powerPin,LOW);
  // Open serial communications and wait for port to open:
-  Serial.begin(9600);
-   while (!Serial) {
-    ; // wait for serial port to connect. Needed for Leonardo only
-  }
+  //Serial.begin(9600);
+   //while (!Serial) {
+   // ; // wait for serial port to connect. Needed for Leonardo only
+  //}
 
 
-  Serial.print("Chat server address:");
-  Serial.println(Ethernet.localIP());
+  //Serial.print("Chat server address:");
+  //Serial.println(Ethernet.localIP());
 }
-void _Openpower(){
- // add for popexizhi 
- // open power
-digitalWrite(_powerPin,HIGH);
-}
-void _Closepower(){
-// add for popexizhi
-// close power
-digitalWrite(_powerPin,LOW);
-}
+
 void loop() {
   // wait for a new client:
   EthernetClient client = server.available();
@@ -70,8 +62,8 @@ void loop() {
     if (!alreadyConnected) {
       // clead out the input buffer:
       client.flush();    
-      Serial.println("We have a new client");
-      client.println("Hello,arduino is ok!"); 
+      //Serial.println("We have a new client");
+      client.println("Hello,arduino is ok!2.1"); 
       alreadyConnected = true;
     } 
 
@@ -79,20 +71,40 @@ void loop() {
       // read the bytes incoming from the client:
       char thisChar = client.read();
       //String getcon=String("open");
-      String getcon = String(thisChar);
+      //String getcon;
+      //getcon =String(thisChar;
       // echo the bytes back to the client:
-      server.write(thisChar);
+      //server.write("client:"+client.available());
+      client.write(thisChar);
+      //server.write("\tif:"+getcon.equals("open"));
       //process thisChar.string
-      if (getcon== "open" ){
+      if (int(thisChar) == int('o')){
       //open power
+      client.write("_Openpower");
       _Openpower();
       }
-      if (getcon == "close"){
+      if (int(thisChar) == int('c')){
      //close power
+     client.write("_Closepower");
       _Closepower();
       }
       // echo the bytes to the server as well:
-      Serial.write(thisChar);
+      //Serial.write(thisChar);
     }
   }
+
+
+}
+
+void _Openpower(){
+ // add for popexizhi 
+ // open power
+digitalWrite(_powerPin,HIGH);
+delay(1000);
+}
+void _Closepower(){
+// add for popexizhi
+// close power
+digitalWrite(_powerPin,LOW);
+delay(1000);
 }

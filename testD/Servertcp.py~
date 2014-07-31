@@ -19,5 +19,8 @@ while(state):
     		conn.send("ok")  # echo
     		print "send is ok"
 	conn.close()
+	state=0
 	#print "if close server input 0"
-	state=int(raw_input("if close server input 0:"))
+	#state=int(raw_input("if use server input 1:"))
+print "over while********************************************"
+s.close()

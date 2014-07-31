@@ -40,6 +40,7 @@ class chamberlain():
 		print "chamberlain-----------close tcp link"
 		self.powercall.close()
 		print "ok,close"
+
 	def showpower(self):
 		return self.data
 

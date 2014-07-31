@@ -124,8 +124,33 @@
 <node CREATED="1406712907203" ID="ID_204353418" MODIFIED="1406712916531" TEXT="basic send"/>
 <node CREATED="1406712916953" ID="ID_1735584122" MODIFIED="1406712927687" TEXT="basic rec"/>
 <node CREATED="1406714703046" ID="ID_16516939" MODIFIED="1406714710171" TEXT="setup">
-<node CREATED="1406710606906" ID="ID_1411146285" MODIFIED="1406710631703" TEXT="&#x542f;&#x52a8; D server"/>
-<node CREATED="1406714711421" ID="ID_1535004337" MODIFIED="1406714740468" TEXT="[next] &#x591a;&#x7ebf;&#x7a0b;&#x542f;&#x52a8;Dome">
+<node CREATED="1406714711421" ID="ID_1535004337" MODIFIED="1406794955609">
+<richcontent TYPE="NODE"><html>
+  <head>
+    
+  </head>
+  <body>
+    <p>
+      [next]
+    </p>
+  </body>
+</html>
+</richcontent>
+<node CREATED="1406710606906" ID="ID_1411146285" MODIFIED="1406710631703" TEXT="&#x542f;&#x52a8; D server">
+<node CREATED="1406794962718" ID="ID_1309277847" MODIFIED="1406794996312" TEXT="&#x5199;&#x5165;testcase&#x7ebf;&#x7a0b;&#x4e2d; state and stop"/>
+</node>
+</node>
+<node CREATED="1406794953796" ID="ID_834685365" MODIFIED="1406794953796">
+<richcontent TYPE="NODE"><html>
+  <head>
+    
+  </head>
+  <body>
+    <p>
+      &#22810;&#32447;&#31243;&#21551;&#21160;Dome is ok
+    </p>
+  </body>
+</html></richcontent>
 <node CREATED="1406715014906" ID="ID_19391512" MODIFIED="1406715016515" TEXT="http://www.cnblogs.com/tqsummer/archive/2011/01/25/1944771.html"/>
 </node>
 </node>

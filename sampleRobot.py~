@@ -77,7 +77,7 @@ class SampleBot(GtalkRobot):
 	newcham=chamberlain()
 	#add ip [def:127.0.0.1:5005/chamberlain.__init__]
 	#message power
-	newcham.callpower("open")
+	newcham.callpower("o")
 	res=newcham.showpower() #print set res
 	self.replyMessage(user,res)
     

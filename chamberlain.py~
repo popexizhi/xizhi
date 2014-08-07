@@ -3,6 +3,7 @@
 # chamberlain : Ϊardino's wifi �ṩ message
 # 
 import socket
+import sys
 
 ###############################################
 class chamberlain():
@@ -12,6 +13,7 @@ class chamberlain():
 		self.TCP_PORT = 5005
 		self.BUFFER_SIZE = 1024
 		self.data=""
+		self.conST=0 #socket connect state ,1 <estas> ok
 
 	def setnewadd(self,tcp,port):
 		"""set other ip """
@@ -21,14 +23,24 @@ class chamberlain():
 	def callpower(self,message="open"):
 		self.MESSAGE = message
 		self._findpower()
-		self._getdata()
-		self._closepower()
+		if(1 == self.conST): #if arduino connect is ok
+			self._getdata()
+			self._closepower()
 
 	def _findpower(self):
 		"""tcp link ardino and send message"""
 		self.powercall=socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-		self.powercall.connect((self.TCP_IP,self.TCP_PORT))
-		self.powercall.send(self.MESSAGE)
+		#add socket except popexizhi 07/08/14
+		try:
+			self.powercall.connect((self.TCP_IP,self.TCP_PORT))
+			self.powercall.send(self.MESSAGE)
+			self.conST=1
+		except:
+			(ErrorType,ErrorValue,ErrorTB) =sys.exc_info()
+			(errno,err_msg)=ErrorValue
+			print "*************chamberlain.py*****************"
+			print "Connect server failed:%s, errno=%d" % (err_msg,errno)
+			print "ErrorValue:%s" % ErrorTB
 	
 	def _getdata(self):
 		"""get ardino data """
@@ -40,6 +52,7 @@ class chamberlain():
 		print "chamberlain-----------close tcp link"
 		self.powercall.close()
 		print "ok,close"
+
 	def showpower(self):
 		return self.data
 

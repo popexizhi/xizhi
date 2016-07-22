@@ -17,3 +17,9 @@ why
 蜀之鄙有二僧:其一贫，其一富。 贫者语于富者曰：“吾欲之南海,何如？” 富者曰：“子何恃而往7？” 曰：“吾一瓶一钵足矣。” 富者曰：“吾数年来欲买舟而下，犹未能也。子何恃而往？” 越明年，贫者自南海还，以告富者，富者有惭色。
 
 西蜀之去南海，不知几千里也。 僧富者不能至而贫者至焉。 人之立志，顾不如蜀鄙之僧哉？ 是故聪与敏，可恃而不可恃也， 自恃其聪与敏而不学者，自败者也。 昏与庸，可限而不可限也； 不自限其昏与庸而力学不倦者，自力者也
+#xizhi - Esperanto
+- Kial estas xizhi ?
+
+
+Kiam mi estis infana, mi esperis oni amiko kiel samas ドラえもん; Kiam mi estis juna, i esperis la amiko estas lizkontrakto kiel sama kiel Wall-Kaj. Sed Dio estas tro okupita, li ne estas tempo por mi atingas la deziratan.
+Mi estas kiel pli malnovaj kiel sentas la deziron estas pli forta, decidas fari gxin sola, komencu kodigo enoficigis la plano por Xizhi. Mi esperas povis finita estas kiam i estis maljuna.

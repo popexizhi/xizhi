@@ -1,4 +1,4 @@
-<map version="0.9.0">
+<map version="1.0.1">
 <!-- To view this file, download free mind mapping software FreeMind from http://freemind.sourceforge.net -->
 <node CREATED="1399197727781" ID="ID_723433277" MODIFIED="1399197743734" TEXT="robot framework">
 <node CREATED="1399197744875" ID="ID_225576903" MODIFIED="1399197754875" POSITION="right" TEXT="bas">
@@ -13,6 +13,7 @@
 </node>
 </node>
 </node>
+<node CREATED="1469175184212" ID="ID_756255647" MODIFIED="1469175184212" TEXT=""/>
 </node>
 <node CREATED="1399277298406" ID="ID_371826309" MODIFIED="1399277302234" POSITION="right" TEXT="[next]">
 <node CREATED="1399277303640" ID="ID_1600643695" LINK="#ID_1781398968" MODIFIED="1399277331343" TEXT="commet"/>
@@ -35,7 +36,7 @@
 <node CREATED="1405580920078" ID="ID_1646783035" MODIFIED="1405580927015" TEXT="robot using">
 <node CREATED="1405582687562" ID="ID_1187404711" MODIFIED="1405582716250" TEXT="uml:struct"/>
 <node CREATED="1405582716687" ID="ID_1788116956" MODIFIED="1405582719781" TEXT="&#x95ee;&#x9898;">
-<node CREATED="1405582720890" FOLDED="true" ID="ID_825423404" MODIFIED="1405587718453" TEXT="arudino ">
+<node CREATED="1405582720890" FOLDED="true" ID="ID_825423404" MODIFIED="1469175216752" TEXT="arudino ">
 <node CREATED="1405582756406" ID="ID_527782420" MODIFIED="1405583309890">
 <richcontent TYPE="NODE"><html>
   <head>
@@ -43,46 +44,46 @@
   </head>
   <body>
     <p>
-      string &#21305;&#37197; &#19981;&#26159; == &#65311;
+      string &#x5339;&#x914d; &#x4e0d;&#x662f; == &#xff1f;
     </p>
     <p>
-      &#33258;&#24049;&#23450;&#20041;&#22914;&#19979;:
+      &#x81ea;&#x5df1;&#x5b9a;&#x4e49;&#x5982;&#x4e0b;:
     </p>
     <p>
       String getcon = String(thisChar);
     </p>
     <p>
-      if (getcon== &quot;open&quot; ){
+      if (getcon== "open" ){
     </p>
     <p>
-      &#160;&#160;&#160;&#160;&#160;&#160;//open power
+      &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;//open power
     </p>
     <p>
-      &#160;&#160;&#160;&#160;&#160;&#160;_Openpower();
+      &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;_Openpower();
     </p>
     <p>
-      &#160;&#160;&#160;&#160;&#160;&#160;}
+      &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;}
     </p>
     <p>
-      thisChar&#36828;&#31243;&#36755;&#20986;&#20026;open&#21518;&#22914;&#20309;&#37117;&#19981;&#25191;&#34892;if&#20013;&#30340;&#23450;&#20041;&#12290;&#37057;&#38391;&#65292;&#26368;&#21518;&#23558;&#21629;&#20196;&#25913;&#20026;&#21333;&#23383;&#33410;char&#30340;&#21305;&#37197;&#26159;&#36716;&#20026;int&#27604;&#36739;&#30340;&#65292;&#22914;&#19979;:
+      thisChar&#x8fdc;&#x7a0b;&#x8f93;&#x51fa;&#x4e3a;open&#x540e;&#x5982;&#x4f55;&#x90fd;&#x4e0d;&#x6267;&#x884c;if&#x4e2d;&#x7684;&#x5b9a;&#x4e49;&#x3002;&#x90c1;&#x95f7;&#xff0c;&#x6700;&#x540e;&#x5c06;&#x547d;&#x4ee4;&#x6539;&#x4e3a;&#x5355;&#x5b57;&#x8282;char&#x7684;&#x5339;&#x914d;&#x662f;&#x8f6c;&#x4e3a;int&#x6bd4;&#x8f83;&#x7684;&#xff0c;&#x5982;&#x4e0b;:
     </p>
     <p>
-      if(int(thisChar)==int(&quot;o&quot;) )
+      if(int(thisChar)==int("o") )
     </p>
     <p>
       {
     </p>
     <p>
-      &#160;&#160;&#160;&#160;&#160;&#160;//open power
+      &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;//open power
     </p>
     <p>
-      &#160;&#160;&#160;&#160;&#160;&#160;_Openpower();
+      &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;_Openpower();
     </p>
     <p>
-      &#160;&#160;&#160;&#160;&#160;&#160;}
+      &#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;}
     </p>
     <p>
-      &#35843;&#35797;&#36890;&#36807;&#20102;&#65292;&#20294;&#36825;&#20010;&#26159;&#20010;&#38382;&#39064;&#65292;&#35201;&#25630;&#28165;&#26970;&#19968;&#19979;
+      &#x8c03;&#x8bd5;&#x901a;&#x8fc7;&#x4e86;&#xff0c;&#x4f46;&#x8fd9;&#x4e2a;&#x662f;&#x4e2a;&#x95ee;&#x9898;&#xff0c;&#x8981;&#x641e;&#x6e05;&#x695a;&#x4e00;&#x4e0b;
     </p>
   </body>
 </html></richcontent>
@@ -100,13 +101,13 @@
   </head>
   <body>
     <p>
-      SPI&#20351;&#29992;&#26102;&#20250;&#21344;&#29992;13&#21475;&#65292;&#33258;&#24049;&#27979;&#35797;&#26102;&#24320;&#22987;&#23450;&#20041;pin13&#20026;OUTPUT,&#35843;&#35797;&#26102;led&#24635;&#26159;hight&#65292;&#21518;&#26469;&#21534;&#25552;&#37266;&#25165;&#21457;&#29616;&#30340;&#65292;&#35201;&#22909;&#22909;&#30475;&#25163;&#20876;&#21834;!
+      SPI&#x4f7f;&#x7528;&#x65f6;&#x4f1a;&#x5360;&#x7528;13&#x53e3;&#xff0c;&#x81ea;&#x5df1;&#x6d4b;&#x8bd5;&#x65f6;&#x5f00;&#x59cb;&#x5b9a;&#x4e49;pin13&#x4e3a;OUTPUT,&#x8c03;&#x8bd5;&#x65f6;led&#x603b;&#x662f;hight&#xff0c;&#x540e;&#x6765;&#x541e;&#x63d0;&#x9192;&#x624d;&#x53d1;&#x73b0;&#x7684;&#xff0c;&#x8981;&#x597d;&#x597d;&#x770b;&#x624b;&#x518c;&#x554a;!
     </p>
     <p>
-      add&#65306;http://arduino.cc/en/Tutorial/BarometricPressureSensor
+      add&#xff1a;http://arduino.cc/en/Tutorial/BarometricPressureSensor
     </p>
     <p>
-      &#21344;&#29992;&#30340;&#26159;13&#65292;12&#65292;11
+      &#x5360;&#x7528;&#x7684;&#x662f;13&#xff0c;12&#xff0c;11
     </p>
   </body>
 </html></richcontent>
@@ -114,7 +115,14 @@
 </node>
 </node>
 </node>
-<node CREATED="1405580905109" ID="ID_1298671356" MODIFIED="1405580905109" TEXT="5.next?"/>
+<node CREATED="1405580905109" ID="ID_1298671356" MODIFIED="1469175245600" TEXT="5.next">
+<node CREATED="1469175246618" ID="ID_1649476712" MODIFIED="1469175252473" TEXT="22/6/17">
+<node CREATED="1469175253658" ID="ID_1980277983" MODIFIED="1469175287667" TEXT="readme &#x7ffb;&#x8bd1;esperanto &#x7248;"/>
+<node CREATED="1469175288019" ID="ID_1921549624" MODIFIED="1469175417488" TEXT="add:&#x571f;&#x58e4;&#x6e7f;&#x5ea6;&#x63a2;&#x6d4b;&#x7684;client"/>
+<node CREATED="1469175418620" ID="ID_1105597517" MODIFIED="1469175464792" TEXT="add:&#x901a;&#x4fe1;&#x901a;&#x9053;&#x591a;&#x6761;&#xff08;&#x9632;&#x6b62;&#x5f53;&#x524d;gtalk&#x505c;&#x7528;&#x6216;&#x51fa;&#x95ee;&#x9898;&#x540e;&#x7684;&#x95ee;&#x9898;&#xff09;"/>
+<node CREATED="1469175467470" ID="ID_1887046063" MODIFIED="1469175692592" TEXT="add:web&#x7aef;&#x548c;&#x624b;&#x673a;&#x7aef;&#x7684;show&#x548c;&#x76d1;&#x63a7;"/>
+</node>
+</node>
 </node>
 </node>
 </node>
@@ -134,8 +142,7 @@
       [next]
     </p>
   </body>
-</html>
-</richcontent>
+</html></richcontent>
 <node CREATED="1406710606906" ID="ID_1411146285" MODIFIED="1406710631703" TEXT="&#x542f;&#x52a8; D server">
 <node CREATED="1406794962718" ID="ID_1309277847" MODIFIED="1406794996312" TEXT="&#x5199;&#x5165;testcase&#x7ebf;&#x7a0b;&#x4e2d; state and stop"/>
 </node>
@@ -147,7 +154,7 @@
   </head>
   <body>
     <p>
-      &#22810;&#32447;&#31243;&#21551;&#21160;Dome is ok
+      &#x591a;&#x7ebf;&#x7a0b;&#x542f;&#x52a8;Dome is ok
     </p>
   </body>
 </html></richcontent>

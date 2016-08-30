@@ -1,0 +1,9 @@
+add:http://blog.csdn.net/cnsword/article/details/7964574
+
+[step]
+1.
+linux对arduino设备是能够自动识别的，不需要单独安装驱动。lsusb可以查看到插入的设备.
+2.
+rduino的开发IDE，选择Tools->Board->选择你的ardunio开发板的型号
+3.
+选择串口了，这是你会遇到一个问题，就是Serial Port选项是灰色的，无法选择，这是权限的问题，我们这样来做，打开~/.arduino/preferences.txt文件，将文件中Serial.port=com1修改为Serial.port=/dev/ttyACM0(设备名称可以通过dmesg来查看)，保存，同时以管理员权限运行开发环境sudo arduino这样就完成了开发环境的搭建

@@ -1,14 +1,18 @@
 # -*- coding:utf8 -*-
 import numpy
+from dtojpg import dtjpg
+import collections
 
 def sta_sec(list_data):
     list_data = sort(list_data) #要求list_data中以毫秒为存储单位
     print list_data
     old_d = list_data[0]
+    j = 0
     s_sta = {}
     for i in list_data[1:]:
         print "*" *20
         print i
+        j = j + 1
         if if_same_sec(i[0], old_d[0]):
             #同一计数单位，存储
             s_sta[int(old_d[0]/1000)].append(i) 
@@ -19,6 +23,8 @@ def sta_sec(list_data):
             #2.将新值加入到s_stat
             s_sta[int(old_d[0]/1000)] = []
             s_sta[int(old_d[0]/1000)].append(i)
+
+    s_sta = collections.OrderedDict(sorted(s_sta.items())) #按key对dist排序
     for key in s_sta:
         print key
         print s_sta[key]
@@ -27,8 +33,6 @@ def sta_sec(list_data):
 
 def if_same_sec(now_s, def_s):
     res = ( int(def_s/1000) == int(now_s/1000) )
-    #print "def_s/1000 == now_s/1000 %s" % str(res)
-    #print "def_s %d == now_s %d" % (int(now_s/1000), int(def_s/1000))
     return res
 
 def sort(list_data):
@@ -54,12 +58,18 @@ def TPS(s_sta):
     """
     x_res = [] 
     y_res = []
+    size = len(s_sta)
+    #res = numpy.zeros((size,2))
+    #index = 0
+    res = []
+    #od = collections.OrderedDict(sorted(s_sta.items())) #按key对dist排序
     for sec in s_sta:
         num = len(s_sta[sec])
         print "%s : %d" % (str(sec), num)
+        #res.append([sec, num])
         x_res.append(sec)
         y_res.append(num)
-
+    
     return x_res, y_res
 
 def use_time_second(s_sta):
@@ -118,7 +128,11 @@ def test_TPS():
     list_data[6]=[485443, 14, 133852, 637]
     list_data[7]=[485999, 15, 133852, 638]
     res = sta_sec(list_data)
-    print TPS(res)
+    x, y = TPS(res)
+    print x
+    print y
+    b = dtjpg()
+    b.get_jpg(x, y, "TPS")
 
 def test_use_time_second():
     list_data = numpy.zeros((8, 4))
@@ -131,8 +145,11 @@ def test_use_time_second():
     list_data[6]=[485443, 14, 133852, 637]
     list_data[7]=[485999, 15, 133852, 638]
     res = sta_sec(list_data)
-    print use_time_second(res)
-
+    x, y =  use_time_second(res)
+    print x
+    print y
+    b = dtjpg()
+    b.get_jpg(x, y, "use_time")
 #test_sta_sec()
 #test_TPS()
 test_use_time_second()

@@ -2,33 +2,36 @@
 import numpy
 
 def sta_sec(list_data):
-    sort(list_data) #要求list_data中以毫秒为存储单位
+    list_data = sort(list_data) #要求list_data中以毫秒为存储单位
+    print list_data
     old_d = list_data[0]
     s_sta = {}
     for i in list_data[1:]:
+        print "*" *20
+        print i
         if if_same_sec(i[0], old_d[0]):
             #同一计数单位，存储
             s_sta[old_d[0]/1000].append(i) 
-
+            
         else:
             #1.记录新的old_d
             old_d = i
             #2.将新值加入到s_stat
-            s_sta[old_d[0]/1000] = [i]
-    print s_sta
+            s_sta[old_d[0]/1000] = []
+            s_sta[old_d[0]/1000].append(i)
+    for key in s_sta:
+        print key
+        print s_sta[key]
+        #print "%s : %s" % (str(key), str(value))
     return s_sta
 
 def if_same_sec(now_s, def_s):
     return def_s/1000 == now_s/1000
 
 def sort(list_data):
-    #list_data.argsort()
-    print "numpy.argsort(list_data, axis=0)"
-    x = numpy.argsort(list_data[:,0])
-    list_data = list_data[x]
-    print x
-    print list_data
-    print "***********************************"
+    x = numpy.argsort(list_data[:,0])#以第一列排序，返回之后的序列
+    list_data = list_data[x] #重新调整列表顺序
+    return list_data
 
 def test_sta_sec():
     list_data = numpy.zeros((5, 4))

@@ -3,12 +3,13 @@ import mapping #import host_list
 import random, datetime
 from dtojpg import dtjpg
 import math
-from processt import *
+import processt
+import numpy
 def gettestdata():
-    log_list = []
     #hostid
-    print "hostid len %d" % len(mapping.host_list)
     host_list = mapping.host_list[0:100]
+    host_list_len = len(host_list)
+    print "hostid len %d" % host_list_len
     #package_name
     package_name = 100
     package_list = []
@@ -17,28 +18,34 @@ def gettestdata():
             continue
         package_list.append(i+1)
 
-    print "package len %d" % len(package_list)
+    print "package len %d " % len(package_list)
+    log_list = numpy.zeros((host_list_len*(package_name-1) , 4)) 
     base_time = datetime.datetime.now().microsecond 
     use_time_l = []
     rec_list = []
+    index = 0
     for hostid in host_list:
         for i in package_list:
             #use time
             use_time = random.randint(1, 1000)
             # receive_time
-            #receive_time = datetime.datetime.now().microsecond - random.randint(1, 1000) 
-            receive_time = math.fabs(datetime.datetime.now().microsecond - base_time )
-            log_list.append([receive_time, use_time, hostid, i])
+            receive_time = datetime.datetime.now().microsecond - random.randint(1, 1000) 
+            #receive_time = math.fabs(datetime.datetime.now().microsecond - base_time )
+            assert receive_time > 0
+            log_list[index] = [receive_time, use_time, hostid, i]
             rec_list.append(receive_time)
             use_time_l.append(use_time)
+            index = index + 1
 
     loss(log_list, package_name * len(host_list))
     statistics_use(use_time_l, 1) #统计分析全部数据
     #jpg
-    print "start processt.sta_sec "+ datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S") 
-    res = processt.sta_sec(log_list)
+    p = processt.processt()
+    print "start processt.sta_sec "+ datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    print log_list.shape
+    res = p.sta_sec(log_list)
     print "start processt.TPS "+ datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    x_t, y_t = processt.TPS(res)
+    x_t, y_t = p.TPS(res)
     print x_t
     print y_t
     b = dtjpg()
@@ -46,13 +53,13 @@ def gettestdata():
     b.get_jpg(x_t, y_t, "tps")
     
     print "start processt.use_time_second "+ datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    x_u, y_u = processt.use_time_second(res)
+    x_u, y_u = p.use_time_second(res)
 
     print x_u
     print y_u
     bu = dtjpg()
     print "start jpg :: use_time_second "+ datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    bu.get_jpg(x_u, y_, "use_time_second")
+    bu.get_jpg(x_u, y_u, "use_time_second")
 #    jpg_driver = dtjpg()
 #    rec_list.sort()
 #    jpg_driver.get_jpg(rec_list, use_time_l, filename="testjpg")
@@ -61,7 +68,7 @@ def gettestdata():
     #    con_data = "%s%s\n" % (con_data, i)
     print "log_list len %d" % len(log_list)
     
-    return con_data
+    return log_list
 
 def sta_sec(list_data):
     list_data.sort() #要求list_data中以毫秒为存储单位

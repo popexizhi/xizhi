@@ -9,12 +9,17 @@ class processt():
         old_d = list_data[0]
         j = 0
         s_sta = {}
+        #2.将新值加入到s_stat
+        s_sta[int(old_d[0]/1000)] = []
+        s_sta[int(old_d[0]/1000)].append(old_d)
+
         for i in list_data[1:]:
             print "*" *20
             print i
             j = j + 1
             if self.if_same_sec(i[0], old_d[0]):
                 #同一计数单位，存储
+                #print "key is %s" % str(int(old_d[0]/1000))
                 s_sta[int(old_d[0]/1000)].append(i) 
                 
             else:

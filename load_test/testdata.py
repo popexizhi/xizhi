@@ -3,6 +3,7 @@ import mapping #import host_list
 import random, datetime
 from dtojpg import dtjpg
 import math
+from processt import *
 def gettestdata():
     log_list = []
     #hostid
@@ -26,21 +27,36 @@ def gettestdata():
             use_time = random.randint(1, 1000)
             # receive_time
             #receive_time = datetime.datetime.now().microsecond - random.randint(1, 1000) 
-            receive_time = math.fabs(datetime.datetime.now().microsecond - base_time ))
+            receive_time = math.fabs(datetime.datetime.now().microsecond - base_time )
             log_list.append([receive_time, use_time, hostid, i])
             rec_list.append(receive_time)
             use_time_l.append(use_time)
-            assert -1 <use_time < 32768
-            assert -1 <receive_time < 32768 
 
     loss(log_list, package_name * len(host_list))
-    statistics_use(use_time_l, 1)
+    statistics_use(use_time_l, 1) #统计分析全部数据
     #jpg
-    jpg_driver = dtjpg()
-    rec_list.sort()
-    jpg_driver.get_jpg(rec_list, use_time_l, filename="testjpg")
-    #jpg_driver.get_jpg(rec_list[1:200], rec_list[1:200]  , filename="testjpg")
-    con_data = ""
+    print "start processt.sta_sec "+ datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S") 
+    res = processt.sta_sec(log_list)
+    print "start processt.TPS "+ datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    x_t, y_t = processt.TPS(res)
+    print x_t
+    print y_t
+    b = dtjpg()
+    print "start jpg :: tps "+ datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    b.get_jpg(x_t, y_t, "tps")
+    
+    print "start processt.use_time_second "+ datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    x_u, y_u = processt.use_time_second(res)
+
+    print x_u
+    print y_u
+    bu = dtjpg()
+    print "start jpg :: use_time_second "+ datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    bu.get_jpg(x_u, y_, "use_time_second")
+#    jpg_driver = dtjpg()
+#    rec_list.sort()
+#    jpg_driver.get_jpg(rec_list, use_time_l, filename="testjpg")
+#    con_data = ""
     #for i in log_list:
     #    con_data = "%s%s\n" % (con_data, i)
     print "log_list len %d" % len(log_list)

@@ -91,8 +91,8 @@ class Report(object):
     </style>
 </head>
 <body>
+<h1>Performance Results Report</h1>
 """)
-
 
     def write_closing_html(self):
         with open(self.fn, 'a') as f:
@@ -100,23 +100,27 @@ class Report(object):
 </body>
 </html>
 """)
-
+    def set_summary(self, dist_list):
+        self.write_line('<h2>Summary</h2>')
+        self.write_line('<div class="summary">')
+        for i in dist_list:
+            con = "<b>%s: %s</b><br />\n" % (str(i), str(dist_list[i])) 
+            self.write_line(con)
+        self.write_line("</div>")
 
 if __name__ =="__main__":
-    report = Report("x")
+    report = Report("all")
     i = 100
-    report.write_line('<h1>Performance Results Report</h1>')
-
-    report.write_line('<h2>Summary</h2>')
-
-    report.write_line('<div class="summary">')
-    report.write_line('<b>transactions:</b> %d<br />' % i)#results.total_transactions)
-    report.write_line('<b>errors:</b> %d<br />' % i)#results.total_errors)
-    report.write_line('<b>run time:</b> %d secs<br />' % i)#run_time)
-    report.write_line('<b>rampup:</b> %d secs<br /><br />' % i)#rampup)
-    report.write_line('<b>test start:</b> %s<br />' % str(i))#results.start_datetime)
-    report.write_line('<b>test finish:</b> %s<br /><br />' % str(i))#results.finish_datetime)
-    report.write_line('<b>time-series interval:</b> %s secs<br /><br /><br />' % str(i))#ts_interval)
+    dist_list = {}
+    dist_list["transactions "]= i 
+    dist_list["errors "]= i 
+    dist_list["run time "]= i 
+    dist_list["rampup "]= i 
+    dist_list["test start "]=  i 
+    dist_list["test finish "]=  i 
+    dist_list["time-series interval "]=  i
+    print dist_list
+    report.set_summary(dist_list)
 #    if user_group_configs=:
 #        report.write_line('<b>workload configuration:</b><br /><br />')
 #        report.write_line('<table>')
@@ -125,7 +129,6 @@ if __name__ =="__main__":
 #            report.write_line('<tr><td>%s</td><td>%d</td><td>%s</td></tr>' %
 #            (user_group_config.name, user_group_config.num_threads, user_group_config.script_file))
 #        report.write_line('</table>')
-    report.write_line('</div>')
     report.write_line('<h3>Throughput: 5 sec time-series</h3>')
     x = 'TPS.jpg'
     report.write_line('<img src="%s"></img>' % x)

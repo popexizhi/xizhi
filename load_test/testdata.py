@@ -1,13 +1,13 @@
 # -*- coding:utf8 -*-
 import mapping #import host_list
-import random, datetime
+import random, datetime, time
 from dtojpg import dtjpg
 import math
 import processt
 import numpy
 def gettestdata():
     #hostid
-    host_list = mapping.host_list[0:100]
+    host_list = mapping.host_list#[0:100]
     host_list_len = len(host_list)
     print "hostid len %d" % host_list_len
     #package_name
@@ -29,8 +29,11 @@ def gettestdata():
             #use time
             use_time = random.randint(1, 1000)
             # receive_time
-            receive_time = datetime.datetime.now().microsecond - random.randint(1, 1000) 
-            #receive_time = math.fabs(datetime.datetime.now().microsecond - base_time )
+            #now = datetime.datetime.now()
+            #now_mic = now.microsecond
+            now_mic = int(round(time.time() * 1000))
+            receive_time = now_mic - random.randint(1, 1000) 
+            #print "now_mic %s; receive_time %s" % (str(now_mic), str(receive_time))
             assert receive_time > 0
             log_list[index] = [receive_time, use_time, hostid, i]
             rec_list.append(receive_time)

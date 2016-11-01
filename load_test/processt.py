@@ -14,8 +14,8 @@ class processt():
         s_sta[int(old_d[0]/1000)].append(old_d)
 
         for i in list_data[1:]:
-            print "*" *20
-            print i
+            #print "*" *20
+            #print i
             j = j + 1
             if self.if_same_sec(i[0], old_d[0]):
                 #同一计数单位，存储
@@ -30,9 +30,9 @@ class processt():
                 s_sta[int(old_d[0]/1000)].append(i)
     
         s_sta = collections.OrderedDict(sorted(s_sta.items())) #按key对dist排序
-        for key in s_sta:
-            print key
-            print s_sta[key]
+        #for key in s_sta:
+        #    print key
+        #    print s_sta[key]
             #print "%s : %s" % (str(key), str(value))
         return s_sta
     
@@ -44,6 +44,24 @@ class processt():
         x = numpy.argsort(list_data[:,0])#以第一列排序，返回之后的序列
         list_data = list_data[x] #重新调整列表顺序
         return list_data
+    
+    def loss(self, list_data, pre_totle):
+        c_num = len(list_data)
+        res = pre_totle - c_num
+        print "loss num %d" % res
+        return res
+    
+    def statistics_use(self, list_data, num):
+        Max = max(list_data)
+        Min = min(list_data)
+        num = len(list_data)
+        avg = sum(list_data) / num
+        tps = num / avg 
+        sdsq = sum([(i - avg) ** 2 for i in list_data])
+        stdev = (sdsq / (len(list_data) - 1)) ** .5
+    
+        print "Max %d Min %d num %d avg %d std %s ; TPS %s " % (Max, Min, num, avg, str(stdev), str(tps))
+        return Max, Min, num, avg, str(stdev)
     
     def TPS(self, s_sta):
         """
@@ -155,6 +173,3 @@ class processt():
         print y
         b = dtjpg()
         b.get_jpg(x, y, "use_time")
-    #test_sta_sec()
-    #test_TPS()
-    #test_use_time_second()

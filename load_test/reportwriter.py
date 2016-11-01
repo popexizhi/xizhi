@@ -107,6 +107,10 @@ class Report(object):
             con = "<b>%s: %s</b><br />\n" % (str(i), str(dist_list[i])) 
             self.write_line(con)
         self.write_line("</div>")
+    
+    def set_h3_sum(self, title_h3, jpg_file):
+        self.write_line('<h3>%s</h3>' % str(title_h3))
+        self.write_line('<img src="%s"></img>' % jpg_file)
 
 if __name__ =="__main__":
     report = Report("all")
@@ -129,7 +133,7 @@ if __name__ =="__main__":
 #            report.write_line('<tr><td>%s</td><td>%d</td><td>%s</td></tr>' %
 #            (user_group_config.name, user_group_config.num_threads, user_group_config.script_file))
 #        report.write_line('</table>')
-    report.write_line('<h3>Throughput: 5 sec time-series</h3>')
     x = 'TPS.jpg'
-    report.write_line('<img src="%s"></img>' % x)
-
+    title_tps = "Throughput: 5 sec time-series"
+    for i in xrange(3):
+        report.set_h3_sum(title_tps+str(i), x)

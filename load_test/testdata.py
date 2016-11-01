@@ -1,10 +1,11 @@
 # -*- coding:utf8 -*-
 import mapping #import host_list
 import random, datetime, time
-from dtojpg import dtjpg
+from getjpg import dtjpg
 import math
 import processt
 import numpy
+from reportwriter import Report
 def gettestdata():
     #hostid
     host_list = mapping.host_list#[0:100]
@@ -41,7 +42,12 @@ def gettestdata():
             index = index + 1
 
     loss(log_list, package_name * len(host_list))
-    statistics_use(use_time_l, 1) #统计分析全部数据
+    res = statistics_use(use_time_l, 1) #统计分析全部数据
+    dl = {"Max":res[0], "Min":res[1] , "num": res[2], "avg": res[3], "stdev": res[4]}
+    rh = Report("rh")
+    rh.set_summary(dl)
+    rh.set_h3_sum("tps", "tps.jpg")
+    rh.set_h3_sum("use_time", "use_time_second.jpg")
     #jpg
     p = processt.processt()
     print "start processt.sta_sec "+ datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -54,6 +60,7 @@ def gettestdata():
     b = dtjpg()
     print "start jpg :: tps "+ datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     b.get_jpg(x_t, y_t, "tps")
+
     
     print "start processt.use_time_second "+ datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     x_u, y_u = p.use_time_second(res)

@@ -136,4 +136,4 @@ if __name__ =="__main__":
     x = 'TPS.jpg'
     title_tps = "Throughput: 5 sec time-series"
     for i in xrange(3):
-        report.set_h3_sum(title_tps+str(i), x)
+        self.set_h3_sum(title_tps+str(i), x)

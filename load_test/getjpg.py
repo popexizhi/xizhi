@@ -15,11 +15,22 @@ class dtjpg():
 
     def get_jpg(self, x_list, y_list, filename):
         print "start get_jpg %s; x len %d; y len %d" % (str(time.time()), len(x_list), len(y_list))
-        plt.subplot(1, 1, 1) #图像显示的行列数和第几个图像
-        plt.plot(x_list, y_list)
-        plt.xticks(x_list, x_list) #设置横坐标标记,(对应的坐标值,对应的坐标标签 )
+        fig,ax = plt.subplots() #图像显示的行列数和第几个图像
+        #plt.plot(x_list, y_list)
+        #plt.xticks(x_list, x_list) #设置横坐标标记,(对应的坐标值,对应的坐标标签 )
+        xticks = range(0, len(x_list)) 
+        #xlabels = [x_list[index] for index in xticks]
+        xlabels = x_list
+        xticks.append(len(x_list))
+        #xlabels.append(x_list)
+        ax.set_xticks(xticks)
+        print xticks
+        print xlabels
+        ax.set_xticklabels(xlabels, rotation=20) # rotation 为文字倾斜程度
+        plt.plot(y_list)
         plt.grid(axis = 'both')
         plt.title(filename)
+        plt.grid()
         plt.show()
         savefig(filename+".jpg")
         print "end get_jpg %s" % str(time.time())

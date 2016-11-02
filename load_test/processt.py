@@ -2,6 +2,7 @@
 import numpy
 from dtojpg import dtjpg
 import collections
+import os, re
 class processt():
     def sta_sec(self, list_data):
         list_data = self.sort(list_data) #要求list_data中以毫秒为存储单位
@@ -173,3 +174,46 @@ class processt():
         print y
         b = dtjpg()
         b.get_jpg(x, y, "use_time")
+
+    def file2matrix(self, filename):
+        fr = open(filename)
+        arrayOLlines_len = len(fr.readlines())
+        returnMat = numpy.zeros((arrayOLlines_len, 4))
+        index = 0
+        fr = open(filename)
+        for line in fr.readlines():
+            line = line.split("\n")[0]
+            listFromline = line.split(",")
+            listFromline[1] = int(listFromline[0]) - int(listFromline[1]) #use_time = receive_time - send_time
+            print listFromline
+            returnMat[index,:] = listFromline
+            index +=1
+
+        fr.close()
+        return returnMat
+
+
+    def test_file2matrix(self):
+        filename = "testdata/6063.log"
+        res = self.file2matrix(filename)
+        print res[:,0] + res[:,1]
+        #print res[:,1]
+    
+    def get_files(self, path, format_str="log"):
+        """
+            return path  file
+        """
+        res_files = []
+        for i in os.listdir(path):
+            if re.findall(format_str, i):
+               res_files.append(i)
+        return res_files    
+
+    def test_get_files(self):
+        path = "testdata"
+        print self.get_files(path)
+
+if __name__=="__main__":
+    x = processt()
+    #x.test_file2matrix()
+    x.test_get_files()

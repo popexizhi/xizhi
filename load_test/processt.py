@@ -206,13 +206,15 @@ class processt():
         res_files = []
         for i in os.listdir(path):
             if re.findall(format_str, i):
-               res_files.append(i)
+               res_files.append("%s/%s" % (str(path), str(i)))
         return res_files    
 
     def test_get_files(self):
         path = "testdata"
-        print self.get_files(path)
-
+        res_l = self.get_files(path)
+        for i in res_l:
+            datas = self.file2matrix(i)
+            print datas
 if __name__=="__main__":
     x = processt()
     #x.test_file2matrix()

@@ -45,7 +45,7 @@ def gettestdata():
     p = processt.processt()
     p.loss(log_list, package_name * len(host_list))
     print "start statistics_use "+ datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    res = p.statistics_use(use_time_l, 1) #统计分析全部数据
+    res = p.statistics_use(use_time_l) #统计分析全部数据
     print "end statistics_use "+ datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     dl = {"Max(microsecond)":res[0], "Min(microsecond)":res[1] , "num": res[2], "avg": res[3], "stdev": res[4]}
     rh = Report("test_%s" % str(datetime.datetime.now().strftime("%Y-%m-%d_%H_%M_%S")))

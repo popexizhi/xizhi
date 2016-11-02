@@ -52,16 +52,16 @@ class processt():
         print "loss num %d" % res
         return res
     
-    def statistics_use(self, list_data, num):
-        Max = max(list_data)
-        Min = min(list_data)
-        num = len(list_data)
-        avg = sum(list_data) / num
+    def statistics_use(self, list_data, index):
+        Max = max(list_data[:,index])
+        Min = min(list_data[:,index])
+        num = list_data.shape[0]
+        avg = sum(list_data[:,index]) / num
         tps = num / avg 
-        sdsq = sum([(i - avg) ** 2 for i in list_data])
+        sdsq = sum([(i - avg) ** 2 for i in list_data[:,1]])
         stdev = (sdsq / (len(list_data) - 1)) ** .5
     
-        print "Max %d Min %d num %d avg %d std %s ; TPS %s " % (Max, Min, num, avg, str(stdev), str(tps))
+        print "Max %s Min %s num %s avg %s std %s ; TPS %s " % (str(Max), str(Min), str(num), str(avg), str(stdev), str(tps))
         return Max, Min, num, avg, str(stdev)
     
     def TPS(self, s_sta):

@@ -180,13 +180,16 @@ class processt():
         arrayOLlines_len = len(fr.readlines())
         returnMat = numpy.zeros((arrayOLlines_len, 4))
         index = 0
+        diff_time = 92000 # appserver 与ue的server时间差, 单位:毫秒
         fr = open(filename)
         for line in fr.readlines():
             line = line.split("\n")[0]
             listFromline = line.split(",")
-            listFromline[1] = int(listFromline[0]) - int(listFromline[1]) #use_time = receive_time - send_time
-            print listFromline
-            returnMat[index,:] = listFromline
+            listFromline_res = [listFromline[0], listFromline[2], listFromline[1], 0]
+            listFromline_res[1] = int(listFromline_res[0]) - int(listFromline_res[1]) + diff_time #use_time = receive_time - send_time + diff_time
+            
+            print listFromline_res
+            returnMat[index,:] = listFromline_res
             index +=1
 
         fr.close()

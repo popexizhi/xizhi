@@ -110,7 +110,7 @@ class Report(object):
     
     def set_h3_sum(self, title_h3, jpg_file):
         self.write_line('<h3>%s</h3>' % str(title_h3))
-        self.write_line('<img src="%s"></img>' % jpg_file)
+        self.write_line('<img src="%s" width="50%" height="100%"></img>' % jpg_file)
 
 if __name__ =="__main__":
     report = Report("all")

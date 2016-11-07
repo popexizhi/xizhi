@@ -24,6 +24,7 @@ class sh_control():
         res_log = "ue_log.log"
         com_list = ["ls -all %s|grep 'log.txt_'|awk '{print $9}'>%s" % (path, res_log)] 
         self._list_com(com_list)
+        return res_log
 
 if __name__=="__main__":
     x = sh_control()

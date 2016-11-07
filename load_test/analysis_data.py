@@ -23,8 +23,10 @@ class analy_d():
         for i in x_t:
             z_t.append(PRE_PACK)
         print "start get jpg %s" % str(datetime.datetime.now().strftime("%Y-%m-%d_%H_%M_%S"))
-        self.diff_jpg(x_t, y_t, z_t, jpg_path) 
+        res = self.diff_jpg(x_t, y_t, z_t, jpg_path, diff_min=1) 
         print "end get jpg %s" % str(datetime.datetime.now().strftime("%Y-%m-%d_%H_%M_%S"))
+
+        return res
     
     def random_ue_list(self, ue_list_dir, num=10):
         """
@@ -43,32 +45,44 @@ class analy_d():
         print rand_ue_dir
 
         #2.
+        res_dir ={}
         for key in rand_ue_dir:
             path_ue = "%s/%s" % (str(ue_list_dir), str(rand_ue_dir[key]))
             print "path_ue: %s" % path_ue
-            self.one_ue(path_ue, "test/one%s" % str(rand_ue_dir[key]))
+            res = self.one_ue(path_ue, "test/one%s" % str(rand_ue_dir[key]))
+            res_dir[str(rand_ue_dir[key])] = res
+
+        print "all " * 20
+        print res_dir
+        for key in res_dir:
+            self.rh.set_h3_sum_list("ue_%s" % str(key), res_dir[key])
+
 
     def get_rand(self, ue_list , num):
         res = {}
         while len(res) < num :
-            x = random.randint(0, len(ue_list))
+            x = random.randint(0, len(ue_list)-1)
             print x
+            print ue_list[x]
             res[x] = ue_list[x].split("\n")[0]
         return res
 
     def diff_jpg(self, x_t, y_t, z_t, path, diff_min = 10):   
         #diff_min = 10 #分割图使用时间 默认为10min
         diff_min = 60 * diff_min #
-        assert len(x_t) > diff_min
-        assert len(y_t) > diff_min
+        print len(x_t)
+        #assert len(x_t) > diff_min
+        print len(y_t)
+        #assert len(y_t) > diff_min
         #assert len(z_t) > diff_min
-        t = int(len(x_t)/diff_min)
+        t = int(len(x_t)/diff_min) + 1 
         res_l = []
         for z in xrange(t):
             save_path = "%s_%s" % (str(path),str(z))
             print "start %s.jpg" % save_path
             sta_point = z * diff_min
             end_point = (z+1) * diff_min if (z+1)*diff_min<len(x_t) else len(x_t)
+            print "sta : %s; end: %s" % (str(sta_point), str(end_point))
             self.jpg.test_straight_line(x_t[sta_point:end_point], y_t[sta_point:end_point], z_t[sta_point:end_point], save_path, y_max=y_t)
             res_l.append(save_path)
 
@@ -104,10 +118,10 @@ class analy_d():
             self.rh.set_summary(dl)
             self.rh.set_h3_sum_list("tps", tps_jpg_list)
             self.rh.set_h3_sum_list("use_time_second", use_time_list)
-    
             
+                     
 if __name__=="__main__":
     x = analy_d()
-    #x.get_report("t1")
+    x.get_report("t1")
     #x.one_ue("one_ue.log")
-    x.random_ue_list("/home/jenkins/test")
+    x.random_ue_list("/home/jenkins/test/old")

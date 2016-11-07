@@ -26,6 +26,13 @@ class sh_control():
         self._list_com(com_list)
         return res_log
 
+    def save_ue_log(self, path):
+        ue_log = "ue_log.log"
+        ue_dir = "uelog_d"
+        com_list = ["cat %s/*.log.txt*>%s" % (str(path), str(ue_log)), "mv %s %s/" % (str(ue_log), str(ue_dir))]
+        self._list_com(com_list)
+        return ue_dir, ue_log
+
 if __name__=="__main__":
     x = sh_control()
     x.get_ue_log("/home/jenkins/test")

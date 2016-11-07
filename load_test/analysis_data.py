@@ -13,6 +13,7 @@ class analy_d():
     def __init__(self):
         self.processt = processt()
         self.jpg = dtjpg()
+        self.sh = sh_control()
         self.rh = Report("test/test_%s" % str(datetime.datetime.now().strftime("%Y-%m-%d_%H_%M_%S")))
     
     def one_ue(self, path, jpg_path="test/one_ue"):
@@ -34,8 +35,7 @@ class analy_d():
         2.生成图表，保存报告
         """
         #1.
-        sh = sh_control()
-        ue_list_p = sh.get_ue_log(ue_list_dir) 
+        ue_list_p = self.sh.get_ue_log(ue_list_dir) 
         ue_list =[]
         f = open(ue_list_p)
         ue_list = f.readlines()
@@ -92,7 +92,8 @@ class analy_d():
         #get datas
         pre_data = 100
         loss = 0
-        for i in self.processt.get_files(path):
+        uedir, uelog = self.sh.save_ue_log(path)
+        for i in self.processt.get_files(uedir):
             datas = self.processt.file2matrix(i)
             loss = loss + self.processt.loss(datas, pre_data)
             res = self.processt.statistics_use(datas, 1)

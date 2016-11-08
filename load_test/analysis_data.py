@@ -28,7 +28,11 @@ class analy_d():
         print "end get jpg %s" % str(datetime.datetime.now().strftime("%Y-%m-%d_%H_%M_%S"))
 
         return res
-    
+    def static_ue_list(self, path):
+        res = self.sh.get_files_wc(path)
+        res = self.processt.percentile(res)
+        print res
+
     def random_ue_list(self, ue_list_dir, num=10):
         """
         1.随机筛选
@@ -119,10 +123,19 @@ class analy_d():
             self.rh.set_summary(dl)
             self.rh.set_h3_sum_list("tps", tps_jpg_list)
             self.rh.set_h3_sum_list("use_time_second", use_time_list)
-            
+           
+
+    def save_report(self):
+        self.sh.back_test()
+
+
                      
 if __name__=="__main__":
     x = analy_d()
-    x.get_report("t1")
+    dir_ue_log="/home/jenkins/test"
+    x.get_report(dir_ue_log)
     #x.one_ue("one_ue.log")
-    x.random_ue_list("/home/jenkins/test/old")
+    x.random_ue_list("/home/jenkins/test")
+
+    #x.static_ue_list(dir_ue_log)
+    x.save_report()

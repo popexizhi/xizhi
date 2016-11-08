@@ -3,10 +3,13 @@ import numpy
 from dtojpg import dtjpg
 import collections
 import os, re
+import math
 class processt():
     def sta_sec(self, list_data):
         list_data = self.sort(list_data) #要求list_data中以毫秒为存储单位
         print list_data
+        if len(list_data) == 0:
+            return [] 
         old_d = list_data[0]
         j = 0
         s_sta = {}
@@ -64,6 +67,22 @@ class processt():
         print "Max %s Min %s num %s avg %s std %s ; TPS %s " % (str(Max), str(Min), str(num), str(avg), str(stdev), str(tps))
         return Max, Min, num, avg, str(stdev)
     
+    def percentile(self, list_data):
+        data_res =  []
+        for i in list_data:
+            data_res.append(int(i[0]))
+        print data_res
+        res = sorted(data_res)
+        print res
+        data_res = numpy.array(data_res)
+        r1 = numpy.percentile(data_res, 25)
+        r2 = numpy.percentile(data_res, 50)
+        r3 = numpy.percentile(data_res, 75)
+        r4 = numpy.percentile(data_res, 100)
+        
+        #print numpy.bincount(data_res)
+        print r1, r2 ,r3,r4
+        return res 
     def TPS(self, s_sta):
         """
         s_sta : {key[second] : array[list] }

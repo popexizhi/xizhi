@@ -95,7 +95,7 @@ class analy_d():
         print "all " * 20
         print res_dir
         for key in res_dir:
-            self.rh.set_h3_sum_list("ue_%s" % str(key), res_dir[key])
+            self.rh.set_h3_sum_list("%s" % str(key), res_dir[key])
 
 
     def get_rand(self, ue_list , num):

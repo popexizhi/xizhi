@@ -73,7 +73,6 @@ class processt():
             data_res.append(int(i[0]))
         print data_res
         res = sorted(data_res)
-        print res
         data_res = numpy.array(data_res)
         r1 = numpy.percentile(data_res, 25)
         r2 = numpy.percentile(data_res, 50)
@@ -81,8 +80,17 @@ class processt():
         r4 = numpy.percentile(data_res, 100)
         
         #print numpy.bincount(data_res)
-        print r1, r2 ,r3,r4
-        return res 
+        #print r1, r2 ,r3,r4
+
+        return res
+    
+    def zero_num(self, list_data):
+        res = {}
+        for i in list_data:
+            if 0 == i[0] :
+                res[i[1]] = i[0]
+        return res
+
     def TPS(self, s_sta):
         """
         s_sta : {key[second] : array[list] }

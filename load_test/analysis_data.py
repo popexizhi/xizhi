@@ -43,10 +43,14 @@ class analy_d():
         print "end get jpg %s" % str(datetime.datetime.now().strftime("%Y-%m-%d_%H_%M_%S"))
 
         return res
+    
     def static_ue_list(self, path):
         res = self.sh.get_files_wc(path)
-        res = self.processt.percentile(res)
-        print res
+        #res = self.processt.percentile(res)
+        res_z = self.processt.zero_num(res) 
+        print "zero_ue %d" % len(res_z)
+
+        return res_z
 
     def random_ue_list(self, ue_list_dir, num=10):
         """
@@ -160,7 +164,8 @@ def use_report(dir_ue_log="/home/jenkins/test/process"):
 
 def test():
     x = analy_d()
-    x.test_get_z()
+    #x.test_get_z()
+    x.static_ue_list("/home/jenkins/test/process_20161109_123112")
 
 if __name__=="__main__":
     try:
@@ -171,6 +176,8 @@ if __name__=="__main__":
     if None != dir_ue_log:
         print "use path %s" % dir_ue_log
         use_report(dir_ue_log)
+    if "test" == dir_ue_log:
+        test()
     else:
         #test()
         #assert 1 == 0

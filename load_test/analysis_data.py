@@ -174,11 +174,12 @@ def use_report(dir_ue_log="/home/jenkins/test/process"):
         print "no data"
     else:    
         #x.one_ue("one_ue.log")
+        x.static_ue_list(dir_ue_log)
         x.random_ue_list(dir_ue_log)
-
+        
         #x.static_ue_list(dir_ue_log)
         x.save_report()
-
+        
 def test():
     x = analy_d()
     #x.test_get_z()

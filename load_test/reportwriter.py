@@ -118,6 +118,7 @@ class Report(object):
         size =  len(list_cook_file)
         # jpg
         cook_jpg = """
+               <h3>ue log statistics </h3>
                 <td>
                 <img src="%s" width="100%%" height="100%%"></img>
                     </td>

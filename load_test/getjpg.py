@@ -92,9 +92,9 @@ class dtjpg():
                 lab = res.split(" ")[0]
                 res = res.split(" ")[1].split("000")[0]
                 print "res %s" % str(res)
-                plt.xlabel("Time(s) %s" % lab)
             else:
                 res = " "
+            plt.xlabel("Time(s) %s~%s" % (str(x[0]), str(x[-1]))
             x_lab.append(res)
             index = index + 1
         

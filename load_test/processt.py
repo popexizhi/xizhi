@@ -207,6 +207,8 @@ class processt():
         for line in fr.readlines():
             line = line.split("\n")[0]
             listFromline = line.split(",")
+            if len(listFromline) < (4-1): # numpy.zeros 初始化时的形状要求，如果小于这个值，说明数据不完整
+                continue
             listFromline_res = [listFromline[0], listFromline[2], listFromline[1], 0]
             listFromline_res[1] = int(listFromline_res[0]) - int(listFromline_res[1]) + diff_time #use_time = receive_time - send_time + diff_time
             

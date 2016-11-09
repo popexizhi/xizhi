@@ -16,8 +16,12 @@ send_mail()
 
 do_ana()
 {   
-    echo "sta ana"
-    cd ${do_path} && python analysis_data.py 
+    now_d=`date +%Y%m%d_%H%M%S`
+    echo "sta ana ${now_d}"
+    mv ${dev_path} ${dev_path}_${now_d}
+    mkdir ${dev_path}
+    chmod 777 ${dev_path}
+    cd ${do_path} && python analysis_data.py ${dev_path}_${now_d} 
     
 }
 

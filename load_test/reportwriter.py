@@ -116,8 +116,11 @@ class Report(object):
         self.write_line('<h3>%s</h3>' % str(title_h3))
         str_j = ""
         print jpg_file_list
-        for jpg in jpg_file_list:
-            str_j = str_j + '<img src="%s.jpg" width="100%%" height="100%%"></img>\n' % str(jpg)
+        if type(-1) == type(jpg_file_list) :
+            str_j = "null"
+        else:
+            for jpg in jpg_file_list:
+                str_j = str_j + '<img src="%s.jpg" width="100%%" height="100%%"></img>\n' % str(jpg)
 
         print str_j
         self.write_line(str_j)

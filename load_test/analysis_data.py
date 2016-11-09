@@ -28,6 +28,8 @@ class analy_d():
     def one_ue(self, path, jpg_path="test/one_ue"):
         pre_pack = self.get_z(path)
         datas = self.processt.file2matrix(path)
+        if type(-1) == type(datas):
+            return -1 #文件为空
         res = self.processt.sta_sec(datas)      
         x_t, y_t = self.processt.TPS(res)
         z_t = []
@@ -110,7 +112,7 @@ class analy_d():
         uedir, uelog = self.sh.save_ue_log(path)
         for i in self.processt.get_files(uedir):
             datas = self.processt.file2matrix(i)
-            if -1 == datas:
+            if type(-1) == type(datas):
                 return -1 #无数据处理
             loss = loss + self.processt.loss(datas, pre_data)
             res = self.processt.statistics_use(datas, 1)

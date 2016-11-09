@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VALVE_NUM=100 #max 
+VALVE_NUM=10 #max 
 CORE_NUM=1 #core num
 
 dev_path="/home/jenkins/test/process" #检查路径

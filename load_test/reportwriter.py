@@ -117,7 +117,7 @@ class Report(object):
         str_j = ""
         print jpg_file_list
         for jpg in jpg_file_list:
-            str_j = str_j + '<img src="%s.jpg" width="100%%" height="100%%"></img>\n' % jpg
+            str_j = str_j + '<img src="%s.jpg" width="100%%" height="100%%"></img>\n' % str(jpg)
 
         print str_j
         self.write_line(str_j)

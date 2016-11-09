@@ -84,10 +84,10 @@ class processt():
 
         return res
     
-    def zero_num(self, list_data):
+    def zero_num(self, list_data, def_num = 0):
         res = {}
         for i in list_data:
-            if 0 == i[0] :
+            if def_num == i[0] :
                 res[i[1]] = i[0]
         return res
     

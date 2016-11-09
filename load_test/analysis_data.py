@@ -47,10 +47,23 @@ class analy_d():
     def static_ue_list(self, path):
         res = self.sh.get_files_wc(path)
         #res = self.processt.percentile(res)
+        # zero ue个数统计
         res_z = self.processt.zero_num(res) 
         print "zero_ue %d" % len(res_z)
+        
+        #30 s 以下传输数据ue统计
+        pack_s_num = self.get_z(res[0][1]) #当前固定使用第一个文件的后缀作为标准获取内容
+        res_limit = self.processt.limit(res, limit_num=pack_s_num*30, limit_end = 1)
+        print "res_limit_len %d " % len(res_limit)
+        #print "res_limit %s " % res_limit
 
-        return res_z
+        #jpg
+        f_p = "test/cookue%s" % str(self.now_lab)
+        labes_u = [u'0 package', u'>30s package', u'others']
+        other = len(res) - len(res_z) - len(res_limit)
+        sizes_u = [len(res_z), len(res_limit), other]
+        self.jpg.get_cook_jpg(labes_u, sizes_u, f_p)
+        return res_z, res_limit
 
     def random_ue_list(self, ue_list_dir, num=10):
         """

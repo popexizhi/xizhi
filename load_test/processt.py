@@ -90,7 +90,15 @@ class processt():
             if 0 == i[0] :
                 res[i[1]] = i[0]
         return res
+    
+    def limit(self, list_data, limit_num, limit_end = 0):
+        "[limit_end, limit_num) 直接的的res"
+        res = {}
+        for i in list_data:
+            if (i[0] >= limit_end) and (i[0] < limit_num):
+                res[i[1]] = i[0]
 
+        return res
     def TPS(self, s_sta):
         """
         s_sta : {key[second] : array[list] }

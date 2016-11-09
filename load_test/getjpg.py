@@ -113,13 +113,15 @@ class dtjpg():
         return res
 
 
-    def get_cook_jpg(self): 
+    def get_cook_jpg(self, labes_u, sizes_u, file_p): 
         #调节图形大小，宽，高
         plt.figure(figsize=(6,9))
         #定义饼状图的标签，标签是列表
-        labels = [u'x',u'y',u'z']
+        #labels = [u'x',u'y',u'z']
+        labels = labes_u
         #每个标签占多大，会自动去算百分比
-        sizes = [60,30,10]
+        #sizes = [60,30,10]
+        sizes = sizes_u
         colors = ['red','yellowgreen','lightskyblue']
         #将某部分爆炸出来， 使用括号，将第一块分割出来，数值的大小是分割出来的与其他两块的间隙
         explode = (0.05,0,0)
@@ -145,7 +147,8 @@ class dtjpg():
         plt.axis('equal')
         plt.legend()
         plt.show()
-        filename = "test_cook"
+        #filename = "test_cook"
+        filename = file_p
         savefig("%s.jpg" % filename, dpi=800)
 
 if __name__=="__main__":

@@ -6,6 +6,7 @@ from processt import processt
 from getjpg import dtjpg
 import random
 from ShellCon import sh_control
+import sys
 
 PRE_PACK=10 #单ue预定义的发包量
 UE_NUM = 3000 #ue数量
@@ -144,10 +145,9 @@ class analy_d():
         self.sh.back_test()
 
 
-def use_report():                     
+def use_report(dir_ue_log="/home/jenkins/test/process"):
     x = analy_d()
     #dir_ue_log="/home/jenkins/test/old/old"
-    dir_ue_log="/home/jenkins/test/process"
     if (-1 == x.get_report(dir_ue_log)):
         print "no data"
     else:    
@@ -162,6 +162,15 @@ def test():
     x.test_get_z()
 
 if __name__=="__main__":
-    #test()
-    #assert 1 == 0
-    use_report()
+    try:
+        dir_ue_log = sys.argv[1]
+    except IndexError:
+        dir_ue_log = None
+    
+    if None != dir_ue_log:
+        print "use path %s" % dir_ue_log
+        use_report(dir_ue_log)
+    else:
+        #test()
+        #assert 1 == 0
+        use_report()

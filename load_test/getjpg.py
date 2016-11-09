@@ -55,7 +55,7 @@ class dtjpg():
         x_lab=[]
         #只对x轴为时间处理
         if len(x) > 0 and int(x[0]) > 1478147000:
-            x_lab = self.get_xlabel(plt, x, dev=60) # dev为间隔设置
+            x_lab = self.get_xlabel(plt, x, dev=20) # dev为间隔设置
             print x_lab
         else:
             x_lab = x

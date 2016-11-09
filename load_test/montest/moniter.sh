@@ -48,5 +48,5 @@ do
     echo "log个数检查"
     echo "[load test log 准备pass]个数检查 is pass" >mail_err
     diff_num $dev_db_num $VALVE_NUM
-    sleep 300
+    sleep 600
 done    

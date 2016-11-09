@@ -84,6 +84,7 @@ class dtjpg():
         x_lab = []
         index = 0
         print x
+        
         for i in x:
             if int(i) < 1478570000000:
                 i = int(i) * 1000 #秒钟的以毫秒处理
@@ -94,10 +95,13 @@ class dtjpg():
                 print "res %s" % str(res)
             else:
                 res = " "
-            plt.xlabel("Time(s) %s~%s" % (str(x[0]), str(x[-1]))
             x_lab.append(res)
+            if 0 == index :
+                sta = str(self.datetime_from_millis(int(i)))
+            if (len(x)-1) == index :
+                end = str(self.datetime_from_millis(int(i)))
             index = index + 1
-        
+        plt.xlabel("Time(s) %s~%s" % (sta, end))
         return x_lab
     
     def ylim(self, plt , y):

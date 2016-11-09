@@ -15,6 +15,7 @@ class analy_d():
         self.processt = processt()
         self.jpg = dtjpg()
         self.sh = sh_control()
+        self.now_lab = str(int(time.time()))
         self.rh = Report("test/test_%s" % str(datetime.datetime.now().strftime("%Y-%m-%d_%H_%M_%S")))
     
     def get_z(self, path):
@@ -67,7 +68,7 @@ class analy_d():
         for key in rand_ue_dir:
             path_ue = "%s/%s" % (str(ue_list_dir), str(rand_ue_dir[key]))
             print "path_ue: %s" % path_ue
-            res = self.one_ue(path_ue, "test/one%s" % str(rand_ue_dir[key]))
+            res = self.one_ue(path_ue, "test/one%s_%s" % (str(self.now_lab), str(rand_ue_dir[key]))) #_%s_" % str(self.now_lab)
             res_dir[str(rand_ue_dir[key])] = res
 
         print "all " * 20
@@ -126,12 +127,12 @@ class analy_d():
             
             for u in x_t:
                 z_t.append(PRE_PACK*UE_NUM)    
-            tps_jpg_name = "test/tps"
+            tps_jpg_name = "test/tps_%s_" % str(self.now_lab)
             #self.jpg.get_jpg(x_t, y_t, tps_jpg_name)
             tps_jpg_list = self.diff_jpg(x_t, y_t, z_t, tps_jpg_name)
             
             x_u, y_u = self.processt.use_time_second(res)
-            use_time_jpg_name = "test/use_time_second"
+            use_time_jpg_name = "test/use_time_second_%s_" % str(self.now_lab)
             #self.jpg.get_jpg(x_u, y_u, use_time_jpg_name)
             use_time_list = self.diff_jpg(x_u, y_u, [],use_time_jpg_name)
             

@@ -197,6 +197,9 @@ class processt():
     def file2matrix(self, filename):
         fr = open(filename)
         arrayOLlines_len = len(fr.readlines())
+        if 0 == arrayOLlines_len:
+            print "%s is null" % filename
+            return -1
         returnMat = numpy.zeros((arrayOLlines_len, 4))
         index = 0
         diff_time = 92000 # appserver 与ue的server时间差, 单位:毫秒

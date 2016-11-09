@@ -54,8 +54,8 @@ class dtjpg():
         plt.xlabel("Time(s)")
         x_lab=[]
         #只对x轴为时间处理
-        if x[0] > 1478147000000:
-            x_lab = self.get_xlabel(plt, x, dev=10) # dev为间隔设置
+        if len(x) > 0 and int(x[0]) > 1478147000:
+            x_lab = self.get_xlabel(plt, x, dev=60) # dev为间隔设置
             print x_lab
         else:
             x_lab = x
@@ -76,23 +76,28 @@ class dtjpg():
             plt.plot(x, z, "r-",linewidth=2)
          
         savefig("%s.jpg" % filename, dpi=800)
+        #assert 1 == 0
         print "end get_jpg %s" % str(time.time())
         return plt    
 
     def get_xlabel(self, plt, x, dev=60):
         x_lab = []
         index = 0
+        print x
         for i in x:
-            if 0 == index%dev :
+            if int(i) < 1478570000000:
+                i = int(i) * 1000 #秒钟的以毫秒处理
+            if 0 == int(int(i)/1000)%dev :
                 res = str(self.datetime_from_millis(int(i)))
                 lab = res.split(" ")[0]
                 res = res.split(" ")[1].split("000")[0]
+                print "res %s" % str(res)
+                plt.xlabel("Time(s) %s" % lab)
             else:
                 res = " "
             x_lab.append(res)
             index = index + 1
         
-        plt.xlabel("Time(s) %s" % lab)
         return x_lab
     
     def ylim(self, plt , y):

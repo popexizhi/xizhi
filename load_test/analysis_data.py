@@ -16,13 +16,24 @@ class analy_d():
         self.sh = sh_control()
         self.rh = Report("test/test_%s" % str(datetime.datetime.now().strftime("%Y-%m-%d_%H_%M_%S")))
     
+    def get_z(self, path):
+        """从ue.down.hostid.10279.pid.169185.log.txt_4 中获得log.txt_后的数字 """
+        res = float(path.split("log.txt_")[-1])
+        return res
+    def test_get_z(self):
+        file_p = "ue.down.hostid.10279.pid.169185.log.txt_4"
+        assert 4.0 == self.get_z(file_p)
+
+
     def one_ue(self, path, jpg_path="test/one_ue"):
+        pre_pack = self.get_z(path)
         datas = self.processt.file2matrix(path)
         res = self.processt.sta_sec(datas)      
         x_t, y_t = self.processt.TPS(res)
         z_t = []
         for i in x_t:
-            z_t.append(PRE_PACK)
+            #z_t.append(PRE_PACK)
+            z_t.append(pre_pack)
         print "start get jpg %s" % str(datetime.datetime.now().strftime("%Y-%m-%d_%H_%M_%S"))
         res = self.diff_jpg(x_t, y_t, z_t, jpg_path, diff_min=1) 
         print "end get jpg %s" % str(datetime.datetime.now().strftime("%Y-%m-%d_%H_%M_%S"))
@@ -99,6 +110,8 @@ class analy_d():
         uedir, uelog = self.sh.save_ue_log(path)
         for i in self.processt.get_files(uedir):
             datas = self.processt.file2matrix(i)
+            if -1 == datas:
+                return -1 #无数据处理
             loss = loss + self.processt.loss(datas, pre_data)
             res = self.processt.statistics_use(datas, 1)
             dl = {"Max(microsecond)":res[0], "Min(microsecond)":res[1] , "num": res[2], "avg": res[3], "stdev": res[4]}
@@ -129,13 +142,24 @@ class analy_d():
         self.sh.back_test()
 
 
-                     
-if __name__=="__main__":
+def use_report():                     
     x = analy_d()
-    dir_ue_log="/home/jenkins/test"
-    x.get_report(dir_ue_log)
-    #x.one_ue("one_ue.log")
-    x.random_ue_list("/home/jenkins/test")
+    #dir_ue_log="/home/jenkins/test/old/old"
+    dir_ue_log="/home/jenkins/test/process"
+    if (-1 == x.get_report(dir_ue_log)):
+        print "no data"
+    else:    
+        #x.one_ue("one_ue.log")
+        x.random_ue_list(dir_ue_log)
 
-    #x.static_ue_list(dir_ue_log)
-    x.save_report()
+        #x.static_ue_list(dir_ue_log)
+        x.save_report()
+
+def test():
+    x = analy_d()
+    x.test_get_z()
+
+if __name__=="__main__":
+    #test()
+    #assert 1 == 0
+    use_report()

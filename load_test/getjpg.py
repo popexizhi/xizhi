@@ -148,8 +148,9 @@ class dtjpg():
         plt.legend()
         plt.show()
         #filename = "test_cook"
-        filename = file_p
-        savefig("%s.jpg" % filename, dpi=800)
+        filename = "%s.jpg" % file_p
+        savefig(filename, dpi=80)
+        return filename
 
 if __name__=="__main__":
     b=dtjpg()

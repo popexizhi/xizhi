@@ -67,23 +67,12 @@ class Report(object):
             margin: 0;
             padding: 0;
         }
-        table {
-            margin-left: 10px;
+        td, th {
+            border: 1px solid #dddddd;
+            padding: 8px;
         }
-        td {
-            text-align: right;
-            color: #000000;
-            background: #FFFFFF;
-            padding-left: 10px;
-            padding-right: 10px;
-            padding-bottom: 0;
-        }
-        th {
-            text-align: center;
-            padding-right: 10px;
-            padding-left: 10px;
-            color: #000000;
-            background: #FFFFFF;
+        tr:nth-child(even) {
+            background-color: #dddddd;
         }
         div.summary {
             padding-left: 20px;
@@ -124,6 +113,45 @@ class Report(object):
 
         print str_j
         self.write_line(str_j)
+    
+    def set_cooke_list(self, list_cook_file, jpg_file):
+        size =  len(list_cook_file)
+        # jpg
+        cook_jpg = """
+                <td>
+                <img src="%s" width="100%%" height="100%%"></img>
+                    </td>
+        """ % str(jpg_file)
+        use_str = ""
+        data_file = self.save_files(list_cook_file, jpg_file)
+        for i in list_cook_file:
+            list_cook_head_ = "<h4>%s</h4>" % str(i) #i : 0 package
+            cook_list = ""
+            index = 0
+            for j in list_cook_file[i]:
+                cook_list = cook_list + "\n%s<br>" % str(j) 
+                index = index + 1
+                if index > 10 : #
+                    cook_list = cook_list + '<a href="%s" title="">file_list..</a>' % data_file
+                    break
+            use_str = use_str + "<td>\n\t%s\n\t%s\n</td>" % (str(list_cook_head_), str(cook_list))
+        str_j = "<table>\n%s\n%s </table>" % (cook_jpg, use_str)
+        
+        print str_j
+        self.write_line(str_j)
+    def save_files(self, list_cook_file, jpg_file):
+        res = "%s_.txt" % jpg_file
+        com = ""
+        for i in list_cook_file:
+            com = com + "%s :\n" % str(i)
+            for j in list_cook_file[i]:
+                com =  com + "\t\t%s\n" % str(j)
+        f = open(res, "w")
+        f.write(com)
+        f.close()
+        return res
+
+
 
 if __name__ =="__main__":
     report = Report("all")

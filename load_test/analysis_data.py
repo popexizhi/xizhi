@@ -62,8 +62,12 @@ class analy_d():
         labes_u = [u'0 package', u'>30s', u'others']
         other = len(res) - len(res_z) - len(res_limit)
         sizes_u = [len(res_z), len(res_limit), other]
-        self.jpg.get_cook_jpg(labes_u, sizes_u, f_p)
-        return res_z, res_limit
+        cook_jpg = self.jpg.get_cook_jpg(labes_u, sizes_u, f_p)
+        res_list = {}
+        res_list[labes_u[0]] = res_z 
+        res_list[labes_u[1]] = res_limit 
+        self.rh.set_cooke_list(res_list, cook_jpg)
+        return res_z, res_limit, cook_jpg 
 
     def random_ue_list(self, ue_list_dir, num=10):
         """

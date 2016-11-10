@@ -99,6 +99,34 @@ class processt():
                 res[i[1]] = i[0]
 
         return res
+    def get_num_list(self, list_data):
+        x = sorted(list_data)
+        res = {}
+        old = x[0][0]
+        res[old] = 1
+        for i in x[1:]:
+            i = i[0]
+            if i == old:
+                res[old] = res[old] + 1
+            else:
+                old = i
+                res[old] = 1
+        print len(res)
+        resD = numpy.zeros((len(res), 2))
+        index = 0
+        for key in res:
+            resD[index:,] = [key, res[key]]
+            index = index + 1
+
+        return resD
+        
+    def test_get_num_list(self):
+        """
+        """
+        x = [[2550, 'ue.down.hostid.15419.pid.43844.log.txt_4'], [2418, 'ue.down.hostid.21320.pid.35105.log.txt_4'], [1605, 'ue.down.hostid.24302.pid.118781.log.txt_4'], [1374, 'ue.down.hostid.21272.pid.114338.log.txt_4'], [2567, 'ue.down.hostid.34309.pid.39941.log.txt_4'], [1496, 'ue.down.hostid.15251.pid.41784.log.txt_4'], [508, 'ue.down.hostid.15449.pid.165843.log.txt_4'], [3006, 'ue.down.hostid.30381.pid.130547.log.txt_4'], [1957, 'ue.down.hostid.15326.pid.42800.log.txt_4'], [2514, 'ue.down.hostid.32407.pid.139733.log.txt_4'], [2738, 'ue.down.hostid.3361.pid.135760.log.txt_4'], [2775, 'ue.down.hostid.27270.pid.21273.log.txt_4']]
+
+        print self.get_num_list(x)
+
     def TPS(self, s_sta):
         """
         s_sta : {key[second] : array[list] }
@@ -261,4 +289,5 @@ class processt():
 if __name__=="__main__":
     x = processt()
     #x.test_file2matrix()
-    x.test_get_files()
+    #x.test_get_files()
+    x.test_get_num_list()

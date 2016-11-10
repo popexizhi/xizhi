@@ -48,14 +48,45 @@ class dtjpg():
         plt.plot(x, y)
         savefig("%s.jpg" % filename, dpi=800)
         print "end get_jpg %s" % str(time.time())
+        
+    def test_straight_line_u(self, x, y, z, filename="line_u", y_max=[], dev=500):
+        #test_straight_line_u 非时间轴x使用
+        plt.figure(figsize=((10,2)),facecolor='w', edgecolor='k') 
+        x_lab = []
+        for i in x:
+            if 0 == int(i)%dev:
+                x_lab.append(int(i))
+            else:
+                x_lab.append(" ")
+        
+        plt.xticks(x, x_lab) #设置横坐标标记,(对应的坐标值,对应的坐标标签 )
+        #y 轴处理
+        if len(y_max) > 0:
+            self.ylim(plt, y_max)
+        # 设置图的底边距
+        plt.subplots_adjust(bottom = 0.50)
 
-    def test_straight_line(self, x, y, z, filename="line", y_max=[]):
+        plt.plot(x, y, "b",linewidth=2)
+            
+        #plt.bar(x, z, alpha = .5, color = "g")
+        if len(z) == 0:
+            pass
+        else:
+            plt.plot(x, z, "r-",linewidth=2)
+         
+        f_p = "%s.jpg" % filename
+        savefig(f_p)
+        return f_p    
+
+
+
+    def test_straight_line(self, x, y, z, filename="line", y_max=[], dev=20):
         plt.figure(figsize=((10,2)), dpi=80, facecolor='w', edgecolor='k') 
         plt.xlabel("Time(s)")
         x_lab=[]
         #只对x轴为时间处理
-        if len(x) > 0 and int(x[0]) > 1478147000:
-            x_lab = self.get_xlabel(plt, x, dev=20) # dev为间隔设置
+        if len(x) > 0 and int(x[0]) > 1478147000: #使用非默认值分割
+            x_lab = self.get_xlabel(plt, x, dev=dev) # dev为间隔设置
             print x_lab
         else:
             x_lab = x

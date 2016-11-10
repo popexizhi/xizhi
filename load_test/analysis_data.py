@@ -43,9 +43,23 @@ class analy_d():
         print "end get jpg %s" % str(datetime.datetime.now().strftime("%Y-%m-%d_%H_%M_%S"))
 
         return res
-    
+   
+    def ues_packages_line(self, res_list):
+        #ue packages line
+        resD = self.processt.get_num_list(res_list)
+        f_p = "test/ues_package_line_%s" % str(self.now_lab)
+            
+        resD_jpg_p = self.jpg.test_straight_line_u(resD[:,0], resD[:,1],[],filename = f_p, dev=500)
+        print resD_jpg_p
+
     def static_ue_list(self, path):
         res = self.sh.get_files_wc(path)
+        dis = {"static_ue_package": [res]}
+        f_ue = self.save_txt(dis, "static_ue_list")
+        
+        self.ues_packages_line(res) 
+
+
         #res = self.processt.percentile(res)
         # zero ue个数统计
         res_z = self.processt.zero_num(res) 
@@ -168,6 +182,19 @@ class analy_d():
     def save_report(self):
         self.sh.back_test()
 
+    def save_txt(self, data_l, file_name):
+        file_p = "%s.txt" % str(file_name)
+        com = ""
+        for key in data_l:
+            com = com + "%s:\n" % str(key)
+            for value in data_l[key]:
+                com = com + "%s," % str(value)
+
+        f = open(file_p, "w")
+        f.write(com)
+        f.close()
+
+        return file_p
 
 def use_report(dir_ue_log="/home/jenkins/test/process"):
     x = analy_d()
@@ -185,7 +212,7 @@ def use_report(dir_ue_log="/home/jenkins/test/process"):
 def test():
     x = analy_d()
     #x.test_get_z()
-    x.static_ue_list("/home/jenkins/test/process_20161109_123112")
+    x.static_ue_list("/home/jenkins/test/process_20161110_135236/")
 
 if __name__=="__main__":
     try:

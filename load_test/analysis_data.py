@@ -86,6 +86,8 @@ class analy_d():
 
         #2.
         res_dir ={}
+        if num >= len(ue_list): #如果被抽取样本不足num无法抽取
+            num = len(ue_list) -2 
         for key in rand_ue_dir:
             path_ue = "%s/%s" % (str(ue_list_dir), str(rand_ue_dir[key]))
             print "path_ue: %s" % path_ue

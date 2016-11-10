@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VALVE_NUM=10 #max 
+VALVE_NUM=500 #max 
 CORE_NUM=1 #core num
 
 dev_path="/home/jenkins/test/process" #检查路径
@@ -21,6 +21,7 @@ do_ana()
     mv ${dev_path} ${dev_path}_${now_d}
     mkdir ${dev_path}
     chmod 777 ${dev_path}
+    echo "">nohup.out
     cd ${do_path} && python analysis_data.py ${dev_path}_${now_d} 
     
 }

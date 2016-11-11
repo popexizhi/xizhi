@@ -39,6 +39,10 @@ class analy_d():
             #z_t.append(PRE_PACK)
             z_t.append(pre_pack)
         print "start get jpg %s" % str(datetime.datetime.now().strftime("%Y-%m-%d_%H_%M_%S"))
+        
+        dis = {"one_ue": [x_t, y_t]}
+        f_ue = self.save_txt(dis, str(jpg_path))
+        
         res = self.diff_jpg(x_t, y_t, z_t, jpg_path, diff_min=1) 
         print "end get jpg %s" % str(datetime.datetime.now().strftime("%Y-%m-%d_%H_%M_%S"))
 
@@ -55,7 +59,7 @@ class analy_d():
     def static_ue_list(self, path):
         res = self.sh.get_files_wc(path)
         dis = {"static_ue_package": [res]}
-        f_ue = self.save_txt(dis, "static_ue_list")
+        f_ue = self.save_txt(dis, "test/static_ue_list%s" % str(self.now_lab))
         
         self.ues_packages_line(res) 
 
@@ -166,11 +170,15 @@ class analy_d():
                 z_t.append(PRE_PACK*UE_NUM)    
             tps_jpg_name = "test/tps_%s_" % str(self.now_lab)
             #self.jpg.get_jpg(x_t, y_t, tps_jpg_name)
+            dis = {"tps": [x_t, y_t, z_t]}
+            f_ue = self.save_txt(dis, str(tps_jpg_name))
             tps_jpg_list = self.diff_jpg(x_t, y_t, z_t, tps_jpg_name)
             
             x_u, y_u = self.processt.use_time_second(res)
             use_time_jpg_name = "test/use_time_second_%s_" % str(self.now_lab)
             #self.jpg.get_jpg(x_u, y_u, use_time_jpg_name)
+            dis = {"use_time": [x_u, y_u]}
+            f_ue = self.save_txt(dis, str(use_time_jpg_name))
             use_time_list = self.diff_jpg(x_u, y_u, [],use_time_jpg_name)
             
             #save html
@@ -211,8 +219,10 @@ def use_report(dir_ue_log="/home/jenkins/test/process"):
         
 def test():
     x = analy_d()
-    #x.test_get_z()
-    x.static_ue_list("/home/jenkins/test/process_20161110_135236/")
+    dir_p = "/home/jenkins/test/process_20161110_135236/"
+    x.get_report(dir_p)
+    x.static_ue_list(dir_p)
+    x.random_ue_list(dir_p)
 
 if __name__=="__main__":
     try:

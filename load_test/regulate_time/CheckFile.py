@@ -27,7 +27,7 @@ class CheckFile():
     def show_res_dir(self, res_dir, fname="ue_time.log"):
         res = ""
         for key in res_dir:
-            res=res + "%s: %s\n" % (str(key), str(res_dir[key]))
+            res=res + "%s,%s\n" % (str(key), str(res_dir[key]))
         f = open(fname,"w")
         f.write(res)
         f.close()

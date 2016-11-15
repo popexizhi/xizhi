@@ -49,7 +49,22 @@ class sh_control():
                 
                 res.append([int(res_out.split("\n")[0]), str(i)])
         return res
+
+    def get_dir_files_lines(self, path, file_format="log.txt"):
+        res = self.get_files_wc(path, file_format)
+        file_list = []
+        line_list = []
+        for i in res:
+            file_list.append(i[1])
+            line_list.append(int(i[0]))
+            
+        return file_list, line_list
+
+
 if __name__=="__main__":
     x = sh_control()
     #x.get_ue_log("/home/jenkins/test")
-    print x.get_files_wc("/home/jenkins/test")
+    #print x.get_files_wc("/home/jenkins/test")
+    fl, ll = x.get_dir_files_lines("/home/jenkins/test/process_20161115_103635")
+    print len(fl)
+    print sum(ll)

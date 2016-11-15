@@ -246,7 +246,7 @@ class processt():
             return -1
         returnMat = numpy.zeros((arrayOLlines_len, 4))
         index = 0
-        diff_time = 92000 # appserver 与ue的server时间差, 单位:毫秒
+        diff_time = 1000#92000 # appserver 与ue的server时间差, 单位:毫秒
         fr = open(filename)
         for line in fr.readlines():
             line = line.split("\n")[0]
@@ -262,7 +262,10 @@ class processt():
 
         fr.close()
         return returnMat
-
+    
+    def dir2matrix(self, dirname):
+        #arrayOLline_len = 
+        pass
 
     def test_file2matrix(self):
         filename = "testdata/6063.log"

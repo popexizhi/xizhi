@@ -114,15 +114,15 @@ class Report(object):
         print str_j
         self.write_line(str_j)
     
-    def set_cooke_list(self, list_cook_file, jpg_file):
+    def set_cooke_list(self, list_cook_file, jpg_file, title_name = ""):
         size =  len(list_cook_file)
         # jpg
         cook_jpg = """
-               <h3>ue log statistics </h3>
+               <h3>ue log statistics %s</h3>
                 <td>
                 <img src="%s" width="100%%" height="100%%"></img>
                     </td>
-        """ % str(jpg_file)
+        """ % (str(title_name), str(jpg_file))
         use_str = ""
         data_file = self.save_files(list_cook_file, jpg_file)
         for i in list_cook_file:

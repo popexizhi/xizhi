@@ -77,14 +77,15 @@ class analy_d():
 
         #jpg
         f_p = "test/cookue%s" % str(self.now_lab)
-        labes_u = [u'0 package', u'>30s', u'others']
+        labes_u = [u'0 package', u'<30s', u'others']
         other = len(res) - len(res_z) - len(res_limit)
         sizes_u = [len(res_z), len(res_limit), other]
         cook_jpg = self.jpg.get_cook_jpg(labes_u, sizes_u, f_p)
         res_list = {}
         res_list[labes_u[0]] = res_z 
-        res_list[labes_u[1]] = res_limit 
-        self.rh.set_cooke_list(res_list, cook_jpg)
+        res_list[labes_u[1]] = res_limit
+        title_name = "totle_ue_num :%d, 0 packages:%d, <30s packages:%d" % (len(res), len(res_z), len(res_limit))
+        self.rh.set_cooke_list(res_list, cook_jpg, title_name)
         return res_z, res_limit, cook_jpg 
 
     def random_ue_list(self, ue_list_dir, num=10):
@@ -219,10 +220,11 @@ def use_report(dir_ue_log="/home/jenkins/test/process"):
         
 def test():
     x = analy_d()
-    dir_p = "/home/jenkins/test/process_20161110_135236/"
+    #dir_p = "/home/jenkins/test/process_20161110_135236/"
+    dir_p = "/home/jenkins/test/process/"
     x.get_report(dir_p)
-    x.static_ue_list(dir_p)
-    x.random_ue_list(dir_p)
+    #x.static_ue_list(dir_p)
+    #x.random_ue_list(dir_p)
 
 if __name__=="__main__":
     try:

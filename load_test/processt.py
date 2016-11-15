@@ -263,6 +263,12 @@ class processt():
 
         fr.close()
         return returnMat
+
+    def test_file2matrix(self):
+        filename = "testdata/6063.log"
+        res = self.file2matrix(filename)
+        print res[:,0] + res[:,1]
+        #print res[:,1]
     
     def dir2matrix(self, dirname):
         sh_com = sh_control()
@@ -273,15 +279,27 @@ class processt():
             return -1
         returnMat = numpy.zeros((arrayOLlines_len, 4))
         index = 0
-        #get diff_time 
-
-
-    def test_file2matrix(self):
-        filename = "testdata/6063.log"
-        res = self.file2matrix(filename)
-        print res[:,0] + res[:,1]
-        #print res[:,1]
+        #get diff_time
+        diff_ue_dir = self.get_diff_time(diff_file="regulate_time/list_app_update.log")
+        for i in fl:
+            #get ueid for filename
+            ueid = self.get_ueid_for_filename(i)
+            
+            
     
+    def get_diff_time(self, diff_file="regulate_time/list_app_update.log"):
+        res = {}
+        f = open(diff_file)
+        com = f.readlines()
+        f.close()
+        for i in com:
+            line = i.split("\n")[0].split(",")
+            res[line[0]] = line[1]
+        return res
+    def get_ueid_for_filename(self, filename, reg_str=u"\d\d*"):
+        res = None
+        res = re.findall(reg_str, filename)[0]
+        return res
     def get_files(self, path, format_str="log"):
         """
             return path  file

@@ -4,6 +4,7 @@ from dtojpg import dtjpg
 import collections
 import os, re
 import math
+from ShellCon import sh_control
 class processt():
     def sta_sec(self, list_data):
         list_data = self.sort(list_data) #要求list_data中以毫秒为存储单位
@@ -264,8 +265,16 @@ class processt():
         return returnMat
     
     def dir2matrix(self, dirname):
-        #arrayOLline_len = 
-        pass
+        sh_com = sh_control()
+        fl, ll = sh_com.get_dir_files_lines(dirname)
+        arrayOLline_len = sum(ll)
+        if 0 == arrayOLlines_len:
+            print "%s is null" % dirname
+            return -1
+        returnMat = numpy.zeros((arrayOLlines_len, 4))
+        index = 0
+        #get diff_time 
+
 
     def test_file2matrix(self):
         filename = "testdata/6063.log"

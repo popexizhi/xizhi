@@ -273,21 +273,40 @@ class processt():
     def dir2matrix(self, dirname):
         sh_com = sh_control()
         fl, ll = sh_com.get_dir_files_lines(dirname)
-        arrayOLline_len = sum(ll)
+        arrayOLlines_len = sum(ll)
         if 0 == arrayOLlines_len:
             print "%s is null" % dirname
             return -1
         returnMat = numpy.zeros((arrayOLlines_len, 4))
         index = 0
         #get diff_time
-        diff_ue_dir = self.get_diff_time(diff_file="regulate_time/list_app_update.log")
+        diff_ue_dir = self.get_diff_time(diff_file="regulate_time/use.log")
         for i in fl:
             #get ueid for filename
             ueid = self.get_ueid_for_filename(i)
-            
-            
-    
-    def get_diff_time(self, diff_file="regulate_time/list_app_update.log"):
+            diff_time = float(diff_ue_dir[ueid]) #为diff_data赋值,为空没有处理
+            fr = open("%s/%s" % (dirname, i))
+            for line in fr.readlines():
+                line = line.split("\n")[0]
+                listFromline = line.split(",")
+                if len(listFromline) < (4-1): # numpy.zeros 初始化时的形状要求，如果小于这个值，说明数据不完整
+                    continue
+                listFromline_res = [listFromline[0], listFromline[2], listFromline[1], 0]
+                listFromline_res[1] = self.minus(listFromline[0], listFromline[1] , diff_time)
+                print listFromline_res
+                assert 0<listFromline_res[1] < 60000 #如果存在此问题请检查appserver 与ue的主机时间
+                returnMat[index,:] = listFromline_res
+                index +=1
+
+            fr.close()
+        return returnMat 
+    def minus(self, d1, d2, d3):
+        if float(d3)>0:
+            d3 = 0
+        res =  float(d1) - (float(d2) + float(d3)*1000) #d3 单位转换
+        return res
+
+    def get_diff_time(self, diff_file):
         res = {}
         f = open(diff_file)
         com = f.readlines()

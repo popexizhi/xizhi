@@ -153,11 +153,14 @@ class analy_d():
         #get datas
         pre_data = 100
         loss = 0
-        uedir, uelog = self.sh.save_ue_log(path)
-        for i in self.processt.get_files(uedir):
-            datas = self.processt.file2matrix(i)
+        #uedir, uelog = self.sh.save_ue_log(path)
+        #for i in self.processt.get_files(uedir):  #使用文件加载
+            #datas = self.processt.file2matrix(i)
+        for i in [1]:
+            datas, er_fd = self.processt.dir2matrix(path, "test/soure_%s" % self.new_lab) #加载文件夹中全部log的数据
             if type(-1) == type(datas):
                 return -1 #无数据处理
+            
             loss = loss + self.processt.loss(datas, pre_data)
             res = self.processt.statistics_use(datas, 1)
             dl = {"Max(microsecond)":res[0], "Min(microsecond)":res[1] , "num": res[2], "avg": res[3], "stdev": res[4]}
@@ -178,7 +181,7 @@ class analy_d():
             x_u, y_u = self.processt.use_time_second(res)
             use_time_jpg_name = "test/use_time_second_%s_" % str(self.now_lab)
             #self.jpg.get_jpg(x_u, y_u, use_time_jpg_name)
-            dis = {"use_time": [x_u, y_u]}
+            dis = {"use_time": [x_u, y_u], "err_use_time_file": [er_fd]}
             f_ue = self.save_txt(dis, str(use_time_jpg_name))
             use_time_list = self.diff_jpg(x_u, y_u, [],use_time_jpg_name)
             
@@ -221,7 +224,7 @@ def use_report(dir_ue_log="/home/jenkins/test/process"):
 def test():
     x = analy_d()
     #dir_p = "/home/jenkins/test/process_20161110_135236/"
-    dir_p = "/home/jenkins/test/process/"
+    dir_p = "/home/jenkins/test/process_20161116_141910/"
     x.get_report(dir_p)
     #x.static_ue_list(dir_p)
     #x.random_ue_list(dir_p)
@@ -231,12 +234,12 @@ if __name__=="__main__":
         dir_ue_log = sys.argv[1]
     except IndexError:
         dir_ue_log = None
-    
+    print "dir_ue_log "+str(dir_ue_log) 
+    if "test" == dir_ue_log:
+        test()
     if None != dir_ue_log:
         print "use path %s" % dir_ue_log
         use_report(dir_ue_log)
-    if "test" == dir_ue_log:
-        test()
     else:
         #test()
         #assert 1 == 0

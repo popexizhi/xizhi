@@ -7,7 +7,7 @@ class sh_control():
         pass
     
     def log(self, message):
-        print "*" * 20
+        #print "*" * 20
         print message
     
     def _com(self, cmd):
@@ -44,7 +44,7 @@ class sh_control():
         for i in os.listdir(path):
             if re.findall(file_format, i):
                 res_out,res_err = self._com(cmd_str % (str(path), str(i)))
-                print "res_out %s; res_err %s" % (str(res_out), str(res_err))
+                #print "res_out %s; res_err %s" % (str(res_out), str(res_err))
                 assert None == res_err # res_err wc -l 出现问题请手动检查
                 
                 res.append([int(res_out.split("\n")[0]), str(i)])

@@ -270,36 +270,49 @@ class processt():
         print res[:,0] + res[:,1]
         #print res[:,1]
     
-    def dir2matrix(self, dirname):
+    def dir2matrix(self, dirname, filename="test/test_soure"):
         sh_com = sh_control()
         fl, ll = sh_com.get_dir_files_lines(dirname)
         arrayOLlines_len = sum(ll)
         if 0 == arrayOLlines_len:
             print "%s is null" % dirname
-            return -1
+            return -1, -1
         returnMat = numpy.zeros((arrayOLlines_len, 4))
         index = 0
         #get diff_time
         diff_ue_dir = self.get_diff_time(diff_file="regulate_time/use.log")
+        er_fd = {}
+        f = open(filename,"w")
         for i in fl:
             #get ueid for filename
             ueid = self.get_ueid_for_filename(i)
             diff_time = float(diff_ue_dir[ueid]) #为diff_data赋值,为空没有处理
             fr = open("%s/%s" % (dirname, i))
+            err_line = 0
+            max_err = 0
             for line in fr.readlines():
                 line = line.split("\n")[0]
                 listFromline = line.split(",")
                 if len(listFromline) < (4-1): # numpy.zeros 初始化时的形状要求，如果小于这个值，说明数据不完整
                     continue
-                listFromline_res = [listFromline[0], listFromline[2], listFromline[1], 0]
+                listFromline_res = [listFromline[0], listFromline[2], listFromline[1], ueid]
                 listFromline_res[1] = self.minus(listFromline[0], listFromline[1] , diff_time)
-                print listFromline_res
-                assert 0<listFromline_res[1] < 60000 #如果存在此问题请检查appserver 与ue的主机时间
+                #print listFromline_res
+                f.write("%s\n" % str(listFromline_res))
+                if 0<listFromline_res[1] < 60000 : #如果存在此问题请检查appserver 与ue的主机时间
+                    pass
+                else:
+                    err_line = err_line + 1
+                    #er_fd[i] = err_line
+                    #listFromline_res[1] = 500 # 使用0.5s作为差错处理结果
+                    max_err = max_err if max_err < listFromline_res[1] else listFromline_res[1] # 记录最小差异
                 returnMat[index,:] = listFromline_res
                 index +=1
+            er_fd[ueid] = max_err
 
             fr.close()
-        return returnMat 
+        f.close()
+        return returnMat, er_fd 
     def minus(self, d1, d2, d3):
         if float(d3)>0:
             d3 = 0

@@ -35,7 +35,19 @@ class TestProcesst(unittest.TestCase):
         x = processt()
         res = x.minus(1479175362378,1479175362381,-4.36000013351)
         assert res<60000
-
+    def test_check_data(self):
+        x = processt()
+        data = '1479348994350,content: PacketHeader{"packet_number":"2210","time_stamp":"1479349003987'
+        res = x.check_data(data.split(","))
+        self.assertEqual(res, -1)
+        
+        data = '1479348994350,content'
+        res = x.check_data(data.split(","))
+        self.assertEqual(res, -1)
+        
+        data = '1479348994350,2210,1479349003987'
+        res = x.check_data(data.split(","))
+        self.assertEqual(res, 0)
 class min_get_ue():
     def get_ue_app(self, fp = "regulate_time/ue_app.log"):
         f = open(fp)
@@ -91,6 +103,7 @@ if __name__ == '__main__':
     unittest.main()
     t = min_get_ue()
     print t.get_ue_app()
-    ue_err = t.get_ue_min_log()
+    #ue_err = t.get_ue_min_log("use_time_second_14793466.log")
+    ue_err = t.get_ue_min_log("use_time_second_147934467.log")
     t.get_err_app(ue_err)
 

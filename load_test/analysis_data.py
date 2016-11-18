@@ -157,7 +157,7 @@ class analy_d():
         #for i in self.processt.get_files(uedir):  #使用文件加载
             #datas = self.processt.file2matrix(i)
         for i in [1]:
-            datas, er_fd = self.processt.dir2matrix(path, "test/soure_%s" % self.new_lab) #加载文件夹中全部log的数据
+            datas, er_fd = self.processt.dir2matrix(path, "test/soure_%s" % self.now_lab) #加载文件夹中全部log的数据
             if type(-1) == type(datas):
                 return -1 #无数据处理
             
@@ -224,7 +224,7 @@ def use_report(dir_ue_log="/home/jenkins/test/process"):
 def test():
     x = analy_d()
     #dir_p = "/home/jenkins/test/process_20161110_135236/"
-    dir_p = "/home/jenkins/test/process_20161116_141910/"
+    dir_p = "/home/jenkins/test/process_20161116_160840/"
     x.get_report(dir_p)
     #x.static_ue_list(dir_p)
     #x.random_ue_list(dir_p)

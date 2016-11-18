@@ -293,13 +293,13 @@ class processt():
             for line in fr.readlines():
                 line = line.split("\n")[0]
                 listFromline = line.split(",")
-                if len(listFromline) < (4-1): # numpy.zeros 初始化时的形状要求，如果小于这个值，说明数据不完整
+                if -1 == self.check_data(listFromline): # numpy.zeros 数据完整性处理
                     continue
                 listFromline_res = [listFromline[0], listFromline[2], listFromline[1], ueid]
                 listFromline_res[1] = self.minus(listFromline[0], listFromline[1] , diff_time)
                 #print listFromline_res
                 f.write("%s\n" % str(listFromline_res))
-                if 0<listFromline_res[1] < 60000 : #如果存在此问题请检查appserver 与ue的主机时间
+                if 0<=listFromline_res[1] < 60000 : #如果存在此问题请检查appserver 与ue的主机时间
                     pass
                 else:
                     err_line = err_line + 1
@@ -312,7 +312,17 @@ class processt():
 
             fr.close()
         f.close()
-        return returnMat, er_fd 
+        return returnMat, er_fd
+    def check_data(self, list_line):
+        res = -1
+        if len(list_line) < (4-1): # numpy.zeros 初始化时的形状要求，如果小于这个值，说明数据不完整 
+            return res
+        for i in list_line:
+            if re.findall(u"\c", i):
+                return -1
+
+        return 0 #检查通过
+
     def minus(self, d1, d2, d3):
         if float(d3)>0:
             d3 = 0

@@ -35,7 +35,7 @@ class sh_control():
         return ue_dir, ue_log
 
     def back_test(self, spath="test", dpath="/data/provision_test/load_test"):
-        com_list = ["mkdir %s/test" % spath, "mv %s/*.jpg %s/test" % (spath, spath), "mv %s/*.txt %s/test" % (spath, spath),"scp -r %s slim@192.168.1.25:%s" % (spath, dpath), "rm -rf %s/*" % spath]
+        com_list = ["mkdir %s/test" % spath, "mv %s/*.jpg %s/test" % (spath, spath), "mv %s/*.txt %s/test" % (spath, spath),"scp -r %s slim@192.168.32.167:%s" % (spath, dpath), "rm -rf %s/*" % spath]
         self._list_com(com_list)
 
     def get_files_wc(self, path, file_format="log.txt"):
@@ -48,6 +48,19 @@ class sh_control():
                 assert None == res_err # res_err wc -l 出现问题请手动检查
                 
                 res.append([int(res_out.split("\n")[0]), str(i)])
+        return res
+
+    def get_files_cmd(self, path, file_format="log.txt", cmd_s="tail -n 1 %s/%s"):
+        res = []
+        cmd_str = cmd_s
+        for i in os.listdir(path):
+            if re.findall(file_format, i):
+                res_out,res_err = self._com(cmd_str % (str(path), str(i)))
+                #print "res_out %s; res_err %s" % (str(res_out), str(res_err))
+                fri_data = res_out.split(",")[0]
+                assert None == res_err # res_err wc -l 出现问题请手动检查
+                
+                res.append([fri_data, str(i)])
         return res
 
     def get_dir_files_lines(self, path, file_format="log.txt"):

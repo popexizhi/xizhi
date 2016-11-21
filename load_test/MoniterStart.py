@@ -7,23 +7,36 @@ class mon_sta():
     def __init__(self):
         self.sh = sh_control()
 
-    def get_file_last_time(self, fp):
-        pass
+    def split_log(self, head_tail_log, start_ms, end_ms):
+        res = None
+        assert head_tail_log[0] <= head_tail_log[1] # head_tail_log 存在问题
+        assert start_ms <= end_ms # split point 存在问题
+
+        print "%s: start_ms:%s ;end_ms: %s;" % (str(head_tail_log[2]), str(start_ms), str(end_ms))
+        if head_tail_log[1] <= start_ms:
+            return 0
+        if (end_ms <= head_tail_log[0]) and (head_tail_log[0]!= head_tail_log[1]): #如果只有一个点请在2中处理
+            return 4
+        if (start_ms <= head_tail_log[0]) and (head_tail_log[1] <= end_ms):
+            return 2
+        if head_tail_log[0] < start_ms < head_tail_log[1] <= end_ms :
+            return 1
+        if start_ms <= head_tail_log[0] < end_ms < head_tail_log[1] :
+            return 3
+        if head_tail_log[0] < start_ms < end_ms < head_tail_log[1]:
+            return 5
+        return res
     
-    def get_dir_first_last(self, dir_p):
+    def process_dir(self, dir_p, start_ms, end_ms):
         
         null_ue=[]
-        res = self.sh.
+        res = self.sh.get_files_cmd(dir_p)
         for i in res:
             if "" == i[0]:
                 null_ue.append(i[1])
                 continue
-            if start_ms < int(i[0]) <= end_ms:
-                print "%s is %d< %s <=%d" % (i[1], start_ms, i[0], end_ms)
-            else:
-                #print "err %d< %s <=%d" % (int(start_ms - long_ms), i[0], start_ms)
-                pass
-    
+            split_num = self.split_log(i)
+            print "%s is %s" % (str(split_num), i[2])
 
 if __name__=="__main__":
     x =  mon_sta()

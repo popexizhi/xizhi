@@ -22,6 +22,8 @@ class mon_sta_test(unittest.TestCase):
         self.assertEqual(3, x.split_log([4,6,"3_4_6"], sta_ms, end_ms))
         self.assertEqual(3, x.split_log([2,6,"3_2_6"], sta_ms, end_ms))
         self.assertEqual(5, x.split_log([0,6,"5_0_6"], sta_ms, end_ms))
+
+        self.assertEqual(4, x.split_log([1479436746035, 1479436746035, 'ue.down.hostid.27456.pid.24563.log.txt_4_3_4'], 1479436452044, 1479436745045))
     def test_process_dir(self):
         
         x =  mon_sta()
@@ -33,9 +35,13 @@ class mon_sta_test(unittest.TestCase):
         res = x.process_dir(dp, sta_time, end_time)
         for key in res:
             pre_res = int(re.findall("\d$", key)[0])
-            print pre_res
+            print "%s %s" % (key ,pre_res)
             self.assertEqual(res[key], pre_res)
         print "*****************"
+
+    def test_zero_d(self):
+        x = mon_sta()
+        x.zero_d( dir_p="test", fp="all", mess="testall", err_fp="test/err")
 
 if __name__=="__main__":
     unittest.main()

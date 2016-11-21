@@ -33,6 +33,14 @@ do_ana()
     cd ${do_path} && python analysis_data.py ${dev_path}_${now_d} 
     
 }
+save_log()
+{
+    now_d=`date +%Y,%m,%d,%H,%M,%S,`
+    time_long="3600"
+    echo "save_log ${now_d}"
+    
+    cd ${do_path} && python MoniterStart.py ${dev_path} ${now_d} ${time_long}
+}
 
 
 diff_num()
@@ -51,11 +59,12 @@ diff_num()
 while true
 do
     echo "[`date`]**********************************************"
-    dev_log_num=`ls -all ${dev_path}|grep "log.txt"|wc -l`
+    #dev_log_num=`ls -all ${dev_path}|grep "log.txt"|wc -l`
     echo "dev db_num ${dev_log_num}"
     echo "************************************************"
-    echo "log个数检查"
-    echo "[load test log 准备pass]个数检查 is pass" >mail_err
-    diff_num ${dev_log_num} ${VALVE_NUM}
-    sleep 300
+    #echo "log个数检查"
+    #echo "[load test log 准备pass]个数检查 is pass" >mail_err
+    #diff_num ${dev_log_num} ${VALVE_NUM}
+    save_log 
+    sleep 3600
 done    

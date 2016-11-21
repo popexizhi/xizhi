@@ -1,6 +1,6 @@
 #-*-coding:utf8-*-
 import os, datetime, time
-import re
+import re, sys
 from ShellCon import sh_control
 
 class mon_sta():
@@ -61,7 +61,7 @@ class mon_sta():
                 pass
 
 
-        return list_res
+        return new_dir, err_dir, list_res
     
 
 
@@ -77,12 +77,27 @@ class mon_sta():
         print "[MoniterStart] %s" % mes
 
 if __name__=="__main__":
-    x =  mon_sta()
+    dp = sys.argv[1] #文件路径
+    print "dp %s" % dp
+    long_t = int(sys.argv[3]) * 1000 #单位:s,转换为毫秒
+    print "long_t %d" % long_t 
+    sta_t = sys.argv[2] #
+    print "sta_t %s" % sta_t
+    time_l = sta_t.split(",") #开始时间,使用,分割
+    print len(time_l)
+    time_l = [int(time_l[0]), int(time_l[1]),int(time_l[2]), int(time_l[3]), int(time_l[4]),int(time_l[5]), 0, 0, 0]
+    print "time_l %s" % str(time_l)
+    date = time.mktime(time_l)
+    print date
     #dp = "/home/jenkins/test/process_20161121_072124"
-    dp = "/home/jenkins/test/process_20161121_090514"
-    #dp = "test"
-    #date = "20161120213800"
-    date = time.mktime([2016,11,21,05,38,00,0,0,0])
+    #dp = "/home/jenkins/test/process_20161121_090514"
+    #date = time.mktime([2016,11,21,05,38,00,0,0,0])
+    #long_t = 3600 * 1000 * 2
     sta_time = int(date*1000)
-    end_time = int(date*1000 + 3600000)
-    res = x.process_dir(dp, sta_time, end_time)
+    end_time = int(date*1000 + long_t)
+    print "dp %s; sta_time :%s; end_time : %s" % (dp, str(sta_time), str(end_time))
+    #assert 1 == 0
+    x =  mon_sta()
+    res_dir, err_p, res = x.process_dir(dp, sta_time, end_time)
+    from analysis_data import use_report
+    use_report(res_dir)

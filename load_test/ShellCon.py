@@ -78,7 +78,37 @@ class sh_control():
             line_list.append(int(i[0]))
             
         return file_list, line_list
+    
+    def save_range_log_s(self, ranges, fp):
+        print "ranges %s; fp %s" % (str(ranges), fp)
 
+    def save_range_log_f(self, ranges, fp, new_fp):
+        print "open f ranges %s; fp %s" % (str(ranges), fp)
+        sta_ms = ranges[0] if None != ranges[0] else 0
+        end_ms = ranges[1] if None != ranges[1] else 2479000000000
+
+        f = open(fp)
+        com = f.readlines()
+        f.close()
+        new_com = []
+        for i in com:
+            point = i.split(",")[0]
+            if int(sta_ms) <= int(point) <= int(end_ms):
+                new_com.append(i)
+            if int(end_ms) < int(point):
+                break
+        for j in new_com:
+            com.remove(j)
+
+        self.save_file("%s_bk" % fp, com)
+        self.save_file(new_fp, new_com)
+        return new_fp
+
+    def save_file(self, fp, com):
+        f = open(fp, "w")
+        for i in com:
+            f.write(i)
+        f.close()
 
 if __name__=="__main__":
     x = sh_control()

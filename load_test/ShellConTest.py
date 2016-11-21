@@ -5,9 +5,14 @@ import unittest
 class sh_control_test(unittest.TestCase):
     def test_get_files_cmd(self):
         x = sh_control()
-        res = x.get_files_cmd("/home/jenkins/test/process_20161118_111317")
+        #res = x.get_files_cmd("/home/jenkins/test/process_20161118_111317")
+        res = x.get_files_cmd("test")
         print res
-
+    
+    def test_save_range_log_s(self):
+        x = sh_control()
+        res = x.save_range_log_s((None,1), "test/ue_save_range.log")
+        res = x.save_range_log_f((1479436452521,1479436458874), "test/ue_save_range.log", "test/1")
 
 if __name__=="__main__":
     unittest.main()

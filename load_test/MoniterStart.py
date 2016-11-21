@@ -1,5 +1,5 @@
 #-*-coding:utf8-*-
-import os, datetime
+import os, datetime, time
 import re
 from ShellCon import sh_control
 
@@ -41,6 +41,7 @@ class mon_sta():
         for i in res:
             if "" == i[0]:
                 null_ue.append(i[2])
+                self.sh._com("mv %s/%s %s" % (dir_p, i[2], new_dir) ) #0 files mv
                 continue
             i = [int(i[0]), int(i[1]), i[2]]
             split_num = self.split_log(i, start_ms, end_ms)
@@ -77,8 +78,11 @@ class mon_sta():
 
 if __name__=="__main__":
     x =  mon_sta()
-    #dp = "/home/jenkins/test/process_20161118_111317/test"
-    dp = "test"
-    sta_time = 1479436452044
-    end_time = 1479436745045
+    #dp = "/home/jenkins/test/process_20161121_072124"
+    dp = "/home/jenkins/test/process_20161121_090514"
+    #dp = "test"
+    #date = "20161120213800"
+    date = time.mktime([2016,11,21,05,38,00,0,0,0])
+    sta_time = int(date*1000)
+    end_time = int(date*1000 + 3600000)
     res = x.process_dir(dp, sta_time, end_time)

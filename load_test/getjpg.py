@@ -144,8 +144,10 @@ class dtjpg():
     from datetime import datetime, timedelta 
     def datetime_from_millis(self, millis, epoch=datetime(1970, 1, 1)):
         """Return UTC time that corresponds to milliseconds since Epoch."""
-        res =  epoch + timedelta(milliseconds=millis)
-        return res
+        #res =  epoch + timedelta(milliseconds=millis)
+        secs = int(millis)/1000
+        return time.strftime("%Y-%m-%d %H:%M:%S",time.localtime(secs))
+        #return res
 
 
     def get_cook_jpg(self, labes_u, sizes_u, file_p): 

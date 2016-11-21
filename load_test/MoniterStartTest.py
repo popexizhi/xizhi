@@ -22,7 +22,18 @@ class mon_sta_test(unittest.TestCase):
         self.assertEqual(3, x.split_log([4,6,"3_4_6"], sta_ms, end_ms))
         self.assertEqual(3, x.split_log([2,6,"3_2_6"], sta_ms, end_ms))
         self.assertEqual(5, x.split_log([0,6,"5_0_6"], sta_ms, end_ms))
-
+    def test_process_dir(self):
+        
+        x =  mon_sta()
+        dp = "/home/jenkins/test/process_20161118_111317/test"
+        sta_time = 1479436452044
+        end_time = 1479436745045
+        print "*****************"
+        self.assertEqual(2, x.split_log([sta_time, end_time, "log_%d_%d" % (sta_time, end_time)], sta_time, end_time))
+        res = x.process_dir(dp, sta_time, end_time)
+        for key in res:
+            self.assertEqual(res[key], 2)
+        print "*****************"
 
 if __name__=="__main__":
     unittest.main()

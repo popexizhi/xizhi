@@ -8,7 +8,8 @@ class sh_control():
     
     def log(self, message):
         #print "*" * 20
-        print message
+        #print message
+        pass
     
     def _com(self, cmd):
         getchar = "a"
@@ -50,17 +51,22 @@ class sh_control():
                 res.append([int(res_out.split("\n")[0]), str(i)])
         return res
 
-    def get_files_cmd(self, path, file_format="log.txt", cmd_s="tail -n 1 %s/%s"):
+    def get_files_cmd(self, path, file_format="log.txt", cmd_s=["tail -n 1 %s/%s", "head -n 1 %s/%s"]):
         res = []
-        cmd_str = cmd_s
+        tail_cmd = cmd_s[0]
+        head_cmd = cmd_s[1]
         for i in os.listdir(path):
             if re.findall(file_format, i):
-                res_out,res_err = self._com(cmd_str % (str(path), str(i)))
-                #print "res_out %s; res_err %s" % (str(res_out), str(res_err))
-                fri_data = res_out.split(",")[0]
+                line_res = []
+                head_out,res_err = self._com(head_cmd % (str(path), str(i)))
                 assert None == res_err # res_err wc -l 出现问题请手动检查
+                tail_out,res_err = self._com(tail_cmd % (str(path), str(i)))
+                assert None == res_err # res_err wc -l 出现问题请手动检查
+                #print "res_out %s; res_err %s" % (str(res_out), str(res_err))
+                head_out = head_out.split(",")[0]
+                tail_out = tail_out.split(",")[0]
                 
-                res.append([fri_data, str(i)])
+                res.append([head_out, tail_out, str(i)])
         return res
 
     def get_dir_files_lines(self, path, file_format="log.txt"):

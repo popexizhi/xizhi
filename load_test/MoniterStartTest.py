@@ -1,6 +1,6 @@
 #-*-coding:utf8 -*-
 from MoniterStart import mon_sta
-import unittest
+import unittest, re
 
 class mon_sta_test(unittest.TestCase):
     def test_split_log(self):
@@ -25,14 +25,16 @@ class mon_sta_test(unittest.TestCase):
     def test_process_dir(self):
         
         x =  mon_sta()
-        dp = "/home/jenkins/test/process_20161118_111317/test"
+        dp = "test"
         sta_time = 1479436452044
         end_time = 1479436745045
         print "*****************"
         self.assertEqual(2, x.split_log([sta_time, end_time, "log_%d_%d" % (sta_time, end_time)], sta_time, end_time))
         res = x.process_dir(dp, sta_time, end_time)
         for key in res:
-            self.assertEqual(res[key], 2)
+            pre_res = int(re.findall("\d$", key)[0])
+            print pre_res
+            self.assertEqual(res[key], pre_res)
         print "*****************"
 
 if __name__=="__main__":

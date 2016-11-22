@@ -101,7 +101,7 @@ class sh_control():
             com.remove(j)
 
         #self.save_file("%s_bk" % fp, com)
-        self.save_file("%s_bk" % fp, com)
+        self.save_file("%s" % fp, com)
         self.save_file(new_fp, new_com)
         return new_fp
 

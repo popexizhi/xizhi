@@ -85,7 +85,7 @@ if __name__=="__main__":
     print "sta_t %s" % sta_t
     time_l = sta_t.split(",") #开始时间,使用,分割
     print len(time_l)
-    time_l = [int(time_l[0]), int(time_l[1]),int(time_l[2]), int(time_l[3]), int(time_l[4]),int(time_l[5]), 0, 0, 0]
+    time_l = [int(time_l[0]), int(time_l[1]),int(time_l[2]), int(time_l[3])-1, int(time_l[4]),int(time_l[5]), 0, 0, 0]
     print "time_l %s" % str(time_l)
     date = time.mktime(time_l)
     print date
@@ -93,11 +93,11 @@ if __name__=="__main__":
     #dp = "/home/jenkins/test/process_20161121_090514"
     #date = time.mktime([2016,11,21,05,38,00,0,0,0])
     #long_t = 3600 * 1000 * 2
-    sta_time = int(date*1000)
-    end_time = int(date*1000 + long_t)
+    sta_time = int(date*1000 - long_t)
+    end_time = int(date*1000)
     print "dp %s; sta_time :%s; end_time : %s" % (dp, str(sta_time), str(end_time))
-    #assert 1 == 0
     x =  mon_sta()
     res_dir, err_p, res = x.process_dir(dp, sta_time, end_time)
+    #assert 1 == 0
     from analysis_data import use_report
     use_report(res_dir)

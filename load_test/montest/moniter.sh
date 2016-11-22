@@ -38,7 +38,7 @@ save_log()
     now_d=`date +%Y,%m,%d,%H,%M,%S,`
     time_long="3600"
     echo "save_log ${now_d}"
-    
+    chmod 666 ${dev_path}/*    
     cd ${do_path} && python MoniterStart.py ${dev_path} ${now_d} ${time_long}
 }
 

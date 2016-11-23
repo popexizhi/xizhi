@@ -79,7 +79,7 @@ class mon_sta():
         print "[MoniterStart] %s" % mes
 
     def ana_use_dir(self, mes, filep):
-        str_ = 'echo "%s">%s' % (str(mes), str(filep))
+        str_ = 'echo "%s">>%s' % (str(mes), str(filep))
         self.sh._com(str_)
 
     def filter_files(self, source_dir=load_test_cfg["source_dir"], process_dir=load_test_cfg["process_dir"], backup_dir=load_test_cfg["backup_dir"]):

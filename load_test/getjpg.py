@@ -62,6 +62,7 @@ class dtjpg():
         plt.xticks(x, x_lab) #设置横坐标标记,(对应的坐标值,对应的坐标标签 )
         #y 轴处理
         if len(y_max) > 0:
+            y_max.append(Max(y_max)*1.3)
             self.ylim(plt, y_max)
         # 设置图的底边距
         plt.subplots_adjust(bottom = 0.50)

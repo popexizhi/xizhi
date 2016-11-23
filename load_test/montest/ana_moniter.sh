@@ -23,19 +23,18 @@ backup_log()
 }
 do_ana()
 {   
-    now_d=`date +%Y%m%d_%H%M%S`
-    echo "sta ana ${now_d}"
-    mv ${dev_path} ${dev_path}_${now_d}
-    mkdir ${dev_path}
-    chmod 777 ${dev_path}
-    backup_log ${now_d}
-    echo "">nohup.out
-    cd ${do_path} && python analysis_data.py ${dev_path}_${now_d} 
+    cd ${do_path} && python analysis_data.py $1 
     
 }
 save_log()
 {
-    cd ${do_path} && python MoniterStart.py
+    now_d=`date +%Y,%m,%d,%H,%M,%S,`
+    time_long="3600"
+    echo "save_log ${now_d}"
+    chmod 666 ${dev_path}/*    
+    cd ${do_path} && python MoniterStart.py ${dev_path} ${now_d} ${time_long}
+    dir_p=`cat ${ana_log}`
+    echo ${dir_p}
 }
 
 
@@ -52,8 +51,18 @@ diff_num()
         return -1
     fi
 }
+old_dir=""
 while true
 do
     echo "[`date`]**********************************************"
-    save_log 
+    dir_new=`tail -n 1 ${ana_log}`
+    echo "dir_new is ${dir_new}"
+    if [ "${dir_new}"x == "${old_dir}"x ]
+    then
+        echo "old_dir is now"
+        sleep 600
+    else
+        do_ana ${dir_new} 
+        old_dir=${dir_new}
+    fi
 done    

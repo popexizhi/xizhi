@@ -1,6 +1,6 @@
 #-*-coding:utf8 -*-
 from MoniterStart import mon_sta
-import unittest, re
+import unittest, re, time
 
 class mon_sta_test(unittest.TestCase):
     def test_split_log(self):
@@ -49,6 +49,10 @@ class mon_sta_test(unittest.TestCase):
     def test_filter_files(self):
         x = mon_sta()
         x.filter_files()
+
+    def test_start_doing(self):
+        x = mon_sta()
+        x.start_doing(time.time())
 
 if __name__=="__main__":
     unittest.main()

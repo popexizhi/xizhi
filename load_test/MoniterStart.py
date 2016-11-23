@@ -30,7 +30,7 @@ class mon_sta():
             return 5
         return res
     
-    def process_dir(self, dir_p, start_ms, end_ms):
+    def process_dir_for_ana(self, dir_p, start_ms, end_ms):
         
         null_ue=[]
         res = self.sh.get_files_cmd(dir_p)
@@ -85,25 +85,21 @@ class mon_sta():
     def filter_files(self, source_dir=load_test_cfg["source_dir"], process_dir=load_test_cfg["process_dir"], backup_dir=load_test_cfg["backup_dir"]):
         self.sh.get_dir_files(source_dir, process_dir, backup_dir)
 
+    def start_doing(self, start_time, long_time=load_test_cfg["long_time"], log_save_time=load_test_cfg["log_save_time"]):
+        self.log("start_time: %s" % str(start_time))
+        
+        diff_time = 0
+        while diff_time <= log_save_time*3600:
+            self.filter_files(load_test_cfg["source_dir"], load_test_cfg["process_dir"], load_test_cfg["backup_dir"])
+            now_time = int(time.time())
+            diff_time = now_time - start_time 
+            #self.log("diff_time %s; log_save_time %s" % (str(diff_time), str(log_save_time)) ) 
+        sta_time = int(start_time*1000 - log_save_time*3600*1000) 
+        end_time = int(start_time*1000) #单位毫秒
+        res_dir, err_p, res = self.process_dir_for_ana(load_test_cfg["process_dir"], sta_time, end_time)
+        self.ana_use_dir(res_dir, load_test_cfg["ana_log"])
+        
+
 if __name__=="__main__":
-    dp = sys.argv[1] #文件路径
-    print "dp %s" % dp
-    long_t = int(sys.argv[3]) * 1000 #单位:s,转换为毫秒
-    print "long_t %d" % long_t 
-    sta_t = sys.argv[2] #
-    print "sta_t %s" % sta_t
-    time_l = sta_t.split(",") #开始时间,使用,分割
-    print len(time_l)
-    time_l = [int(time_l[0]), int(time_l[1]),int(time_l[2]), int(time_l[3])-1, int(time_l[4]),int(time_l[5]), 0, 0, 0]
-    print "time_l %s" % str(time_l)
-    date = time.mktime(time_l)
-    print date
-    sta_time = int(date*1000 - long_t)
-    end_time = int(date*1000)
-    print "dp %s; sta_time :%s; end_time : %s" % (dp, str(sta_time), str(end_time))
     x =  mon_sta()
-    res_dir, err_p, res = x.process_dir(dp, sta_time, end_time)
-    #assert 1 == 0
-    #from analysis_data import use_report
-    #use_report(res_dir)
-    x.ana_use_dir(res_dir, "/data/load_use/ana.log")
+    x.start_doing(time.time())

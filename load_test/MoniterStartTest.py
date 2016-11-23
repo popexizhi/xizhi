@@ -46,6 +46,10 @@ class mon_sta_test(unittest.TestCase):
         x = mon_sta()
         x.zero_d( dir_p="test", fp="all", mess="testall", err_fp="test/err")
 
+    def test_filter_files(self):
+        x = mon_sta()
+        x.filter_files()
+
 if __name__=="__main__":
     unittest.main()
 

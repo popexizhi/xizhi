@@ -2,6 +2,8 @@
 import os, datetime, time
 import re, sys
 from ShellCon import sh_control
+from Map import load_test_cfg
+
 
 class mon_sta():
     def __init__(self):
@@ -80,6 +82,9 @@ class mon_sta():
         str_ = 'echo "%s">%s' % (str(mes), str(filep))
         self.sh._com(str_)
 
+    def filter_files(self, source_dir=load_test_cfg["source_dir"], process_dir=load_test_cfg["process_dir"]):
+        self.sh.get_dir_files(source_dir, process_dir)
+
 if __name__=="__main__":
     dp = sys.argv[1] #文件路径
     print "dp %s" % dp
@@ -93,10 +98,6 @@ if __name__=="__main__":
     print "time_l %s" % str(time_l)
     date = time.mktime(time_l)
     print date
-    #dp = "/home/jenkins/test/process_20161121_072124"
-    #dp = "/home/jenkins/test/process_20161121_090514"
-    #date = time.mktime([2016,11,21,05,38,00,0,0,0])
-    #long_t = 3600 * 1000 * 2
     sta_time = int(date*1000 - long_t)
     end_time = int(date*1000)
     print "dp %s; sta_time :%s; end_time : %s" % (dp, str(sta_time), str(end_time))

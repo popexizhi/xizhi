@@ -1,6 +1,6 @@
 #-*-coding:utf8 -*-
 from ShellCon import sh_control
-import unittest
+import unittest, time
 
 class sh_control_test(unittest.TestCase):
     def test_get_files_cmd(self):
@@ -21,6 +21,14 @@ class sh_control_test(unittest.TestCase):
         x = sh_control()
         x._com("cp testdata/ue.down.hostid.15449.pid.119099.log.txt_4 testdata/1.log")
         x.filter_file_to_new(fp="1.log", old_dir="testdata", new_dir="testdata/filter")
+
+    def test_get_dir_files(self):
+        x = sh_control()
+        print x._com("ls -all /home/jenkins/test2|wc -l")
+        print time.time()
+        x.get_dir_files("/home/jenkins/test2","testdata/filter")
+        print time.time()
+        print x._com("ls -all testdata/filter|wc -l")
 
 if __name__=="__main__":
     unittest.main()

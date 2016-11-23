@@ -120,7 +120,14 @@ class sh_control():
 
     def filter_file_to_new(self, fp, old_dir, new_dir):
         str_com = """sh log_data.sh %s %s %s""" % (fp, old_dir, new_dir)
-        print self._com(str_com)
+        self._com(str_com)
+    
+    def get_dir_files(self, old_dir, new_dir, file_format=".log.txt"):
+
+        for i in os.listdir(old_dir):
+            if re.findall(file_format, i):
+                line_res = []
+                self.filter_file_to_new(i, old_dir, new_dir)
 
 if __name__=="__main__":
     x = sh_control()

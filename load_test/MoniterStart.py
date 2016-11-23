@@ -82,8 +82,8 @@ class mon_sta():
         str_ = 'echo "%s">%s' % (str(mes), str(filep))
         self.sh._com(str_)
 
-    def filter_files(self, source_dir=load_test_cfg["source_dir"], process_dir=load_test_cfg["process_dir"]):
-        self.sh.get_dir_files(source_dir, process_dir)
+    def filter_files(self, source_dir=load_test_cfg["source_dir"], process_dir=load_test_cfg["process_dir"], backup_dir=load_test_cfg["backup_dir"]):
+        self.sh.get_dir_files(source_dir, process_dir, backup_dir)
 
 if __name__=="__main__":
     dp = sys.argv[1] #文件路径

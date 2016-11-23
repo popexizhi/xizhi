@@ -12,7 +12,8 @@ class sh_control():
         pass
     
     def _com(self, cmd):
-        getchar = "a"
+        #getchar = "a"
+        getchar = ""
         self.log(cmd)
         self.app_log_b = subprocess.Popen([cmd], shell=True,  stdout = subprocess.PIPE, stdin = subprocess.PIPE)
         # Send the data and get the output
@@ -116,6 +117,10 @@ class sh_control():
         for i in com:
             f.write(i)
         f.close()
+
+    def filter_file_to_new(self, fp, old_dir, new_dir):
+        str_com = """sh log_data.sh %s %s %s""" % (fp, old_dir, new_dir)
+        print self._com(str_com)
 
 if __name__=="__main__":
     x = sh_control()

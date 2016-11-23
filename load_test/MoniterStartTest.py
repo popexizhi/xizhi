@@ -24,6 +24,9 @@ class mon_sta_test(unittest.TestCase):
         self.assertEqual(5, x.split_log([0,6,"5_0_6"], sta_ms, end_ms))
 
         self.assertEqual(4, x.split_log([1479436746035, 1479436746035, 'ue.down.hostid.27456.pid.24563.log.txt_4_3_4'], 1479436452044, 1479436745045))
+        #[1479807930172, 1479808229428, 'ue.down.hostid.36272.pid.97458.log.txt_4']: start_ms:1479803675000 ;end_ms: 1479807275000
+        self.assertEqual(4, x.split_log([1479807930172, 1479808229428, 'ue.down.hostid.36272.pid.97458.log.txt_4'], 1479803675000, 1479807275000))
+    
     def test_process_dir(self):
         
         x =  mon_sta()

@@ -8,7 +8,7 @@ log_path="/home/jenkins/test" #检查路径
 log_back="/data/nocloadtest" #备份log路径
 core_path="/home/slim/test/dev_provision/provision_ue_use"
 do_path="/home/lijie/test/xizhi/load_test" #运行路径
-
+ana_log="/data/load_use/ana.log"
 
 
 send_mail()
@@ -40,6 +40,8 @@ save_log()
     echo "save_log ${now_d}"
     chmod 666 ${dev_path}/*    
     cd ${do_path} && python MoniterStart.py ${dev_path} ${now_d} ${time_long}
+    dir_p=`cat ${ana_log}`
+    echo ${dir_p}
 }
 
 
@@ -56,8 +58,8 @@ diff_num()
         return -1
     fi
 }
-while true
-do
+#while true
+#do
     echo "[`date`]**********************************************"
     #dev_log_num=`ls -all ${dev_path}|grep "log.txt"|wc -l`
     echo "dev db_num ${dev_log_num}"
@@ -66,5 +68,5 @@ do
     #echo "[load test log 准备pass]个数检查 is pass" >mail_err
     #diff_num ${dev_log_num} ${VALVE_NUM}
     save_log 
-    sleep 3600
-done    
+    #sleep 3600
+#done    

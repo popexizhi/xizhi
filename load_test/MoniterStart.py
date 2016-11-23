@@ -9,10 +9,10 @@ class mon_sta():
 
     def split_log(self, head_tail_log, start_ms, end_ms):
         res = None
+        print "%s: start_ms:%s ;end_ms: %s;" % (str(head_tail_log), str(start_ms), str(end_ms))
         assert head_tail_log[0] <= head_tail_log[1] # head_tail_log 存在问题
         assert start_ms <= end_ms # split point 存在问题
 
-        print "%s: start_ms:%s ;end_ms: %s;" % (str(head_tail_log), str(start_ms), str(end_ms))
         if head_tail_log[1] <= start_ms:
             return 0
         #if (end_ms <= head_tail_log[0]) and (head_tail_log[0]!= head_tail_log[1]): #如果只有一个点请在2中处理
@@ -76,6 +76,10 @@ class mon_sta():
     def log(self, mes):
         print "[MoniterStart] %s" % mes
 
+    def ana_use_dir(self, mes, filep):
+        str_ = 'echo "%s">%s' % (str(mes), str(filep))
+        self.sh._com(str_)
+
 if __name__=="__main__":
     dp = sys.argv[1] #文件路径
     print "dp %s" % dp
@@ -99,5 +103,6 @@ if __name__=="__main__":
     x =  mon_sta()
     res_dir, err_p, res = x.process_dir(dp, sta_time, end_time)
     #assert 1 == 0
-    from analysis_data import use_report
-    use_report(res_dir)
+    #from analysis_data import use_report
+    #use_report(res_dir)
+    x.ana_use_dir(res_dir, "/data/load_use/ana.log")

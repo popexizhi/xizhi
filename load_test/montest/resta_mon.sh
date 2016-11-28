@@ -1,5 +1,5 @@
-
-for pid in $(ps aux|grep "moniter.sh\|MoniterStart" |grep -v grep|awk '{print $2}');do
+#!bin/bash
+for pid in $(ps aux|grep "moniter.sh\|MoniterStart" |grep -v grep|grep -v ana_moniter|awk '{print $2}');do
     echo Stop moniter.sh , killing pid: $pid
         kill -9 $pid
 done
@@ -8,7 +8,7 @@ tar -cvzf nohup.tar.gz nohup.out  --remove-files
 ps -ef | egrep moniter.sh | egrep -v egrep
 
 sleep 2
-
+echo "**************************************************"
 echo "start moniter.sh"
 nohup ./moniter.sh &
 ps -ef | egrep "moniter.sh|MoniterStart" | egrep -v egrep

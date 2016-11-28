@@ -41,10 +41,12 @@ class mon_sta():
         self.sh._com("mkdir %s" % new_dir)
         self.sh._com("mkdir %s" % err_dir)
         for i in res:
-            if "" == i[0]:
+            if "" == i[0] or len(str(i[0]))>16:
                 null_ue.append(i[2])
                 self.sh._com("mv %s/%s %s" % (dir_p, i[2], new_dir) ) #0 files mv
                 continue
+            #print str(i)
+            #print dir_p
             i = [int(i[0]), int(i[1]), i[2]]
             split_num = self.split_log(i, start_ms, end_ms)
             self.log("%s is %s" % (str(split_num), i[2]))
@@ -85,15 +87,16 @@ class mon_sta():
     def filter_files(self, source_dir=load_test_cfg["source_dir"], process_dir=load_test_cfg["process_dir"], backup_dir=load_test_cfg["backup_dir"]):
         self.sh.get_dir_files(source_dir, process_dir, backup_dir)
 
-    def start_doing(self, start_time, long_time=load_test_cfg["long_time"], log_save_time=load_test_cfg["log_save_time"]):
+    def start_doing(self, start_time, long_time=load_test_cfg["long_time"], log_save_time=load_test_cfg["log_save_time"], is_wait = 1):
         self.log("start_time: %s" % str(start_time))
         
         diff_time = 0
-        while diff_time <= log_save_time*3600:
+        while (diff_time <= log_save_time*3600 and 1 == is_wait):
             self.filter_files(load_test_cfg["source_dir"], load_test_cfg["process_dir"], load_test_cfg["backup_dir"])
             now_time = int(time.time())
             diff_time = now_time - start_time 
-            #self.log("diff_time %s; log_save_time %s" % (str(diff_time), str(log_save_time)) ) 
+            #self.log("diff_time %s; log_save_time %s" % (str(diff_time), str(log_save_time)) )
+        self.log("start process_dir_for_ana")
         sta_time = int(start_time*1000 - log_save_time*3600*1000) 
         end_time = int(start_time*1000) #单位毫秒
         res_dir, err_p, res = self.process_dir_for_ana(load_test_cfg["process_dir"], sta_time, end_time)
@@ -102,4 +105,5 @@ class mon_sta():
 
 if __name__=="__main__":
     x =  mon_sta()
+    #x.start_doing(time.time(), is_wait=0)
     x.start_doing(time.time())

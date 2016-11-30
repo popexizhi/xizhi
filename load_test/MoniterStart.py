@@ -87,6 +87,10 @@ class mon_sta():
     def filter_files(self, source_dir=load_test_cfg["source_dir"], process_dir=load_test_cfg["process_dir"], backup_dir=load_test_cfg["backup_dir"]):
         self.sh.get_dir_files(source_dir, process_dir, backup_dir)
 
+    def tar_save_log(self, dir_process, dir_tar, format_file="log.txt"):
+        str_ = "mv %s/*%s* %s" % (dir_process, format_file, dir_tar)
+        self.sh._com(str_)
+
     def start_doing(self, start_time, long_time=load_test_cfg["long_time"], log_save_time=load_test_cfg["log_save_time"], is_wait = 1):
         self.log("start_time: %s" % str(start_time))
         
@@ -97,6 +101,7 @@ class mon_sta():
             diff_time = now_time - start_time 
             #self.log("diff_time %s; log_save_time %s" % (str(diff_time), str(log_save_time)) )
         self.log("start process_dir_for_ana")
+        self.tar_save_log(load_test_cfg["backup_dir"], load_test_cfg["tar_backup_dir"])
         sta_time = int(start_time*1000 - log_save_time*3600*1000) 
         end_time = int(start_time*1000) #单位毫秒
         res_dir, err_p, res = self.process_dir_for_ana(load_test_cfg["process_dir"], sta_time, end_time)

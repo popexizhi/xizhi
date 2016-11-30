@@ -8,13 +8,13 @@ class sh_control():
     
     def log(self, message):
         #print "*" * 20
-        #print message
+        print "[ShellCon] %s" % str(message)
         pass
     
     def _com(self, cmd):
         #getchar = "a"
         getchar = ""
-        self.log(cmd)
+        #self.log(cmd)
         self.app_log_b = subprocess.Popen([cmd], shell=True,  stdout = subprocess.PIPE, stdin = subprocess.PIPE)
         # Send the data and get the output
         stdout, stderr = self.app_log_b.communicate(getchar)
@@ -118,21 +118,60 @@ class sh_control():
             f.write(i)
         f.close()
 
-    def filter_file_to_new(self, fp, old_dir, new_dir):
-        str_com = """sh log_data.sh %s %s %s""" % (fp, old_dir, new_dir)
-        self._com(str_com)
+    def filter_file_to_new(self, fp, old_dir, new_dir, backup_dir, is_zero_process=1):
+        if False == self.is_new_file("%s/%s" % (old_dir, fp)):
+            return None 
+        if None == backup_dir or 0 == is_zero_process:
+            pass
+        else:
+            self._com("mv %s/%s %s" % (old_dir, fp, backup_dir))
+        #time.sleep(1)    
+        str_com = """sh log_data.sh %s %s %s""" % (fp, backup_dir, new_dir)
+        self.log("str_com (%s)" % str(str_com))
+        res = self._com(str_com)
+        return res
+    def is_new_file(self, fp, wait_time=30):
+        res = False
+        if wait_time <= int(time.time() - os.stat(fp).st_mtime) :
+            return True
+        return res
     
-    def get_dir_files(self, old_dir, new_dir, backup_dir=None, file_format=".log.txt"):
+
+    def zero_file_process(self, backup_dir, new_dir):
+        #get zero line file
+        res = self.get_dir_files_lines(backup_dir,"log.txt")        
+        #second process files
+        line_list = res[1]
+        file_list = res[0]
+        index = 0
+        res_zero_file = []
+        for i in line_list:
+            self.log("index is %s" % str(index))
+            fp = str(file_list[index])
+            if 0 == int(i) and re.findall("log.txt",fp):
+               res_zero_file.append(fp)
+               #old_dir, new_dir, backup_dir
+               str_com = """sh log_data.sh %s %s %s""" % (fp, new_dir, backup_dir)
+               self.log(fp)
+               self.log(str_com)
+               res = self._com(str_com)
+            index = index + 1
+        return res_zero_file
+
+    def get_dir_files(self, old_dir, new_dir, backup_dir, file_format=".log.txt"):
         
         for i in os.listdir(old_dir):
             if re.findall(file_format, i):
                 line_res = []
-                self.filter_file_to_new(i, old_dir, new_dir)
-                if None == backup_dir:
-                    pass
-                else:
-                    self._com("mv %s/%s %s" % (old_dir, i, backup_dir))
-
+                res = self.filter_file_to_new(i, old_dir, new_dir, backup_dir)
+                self.log("file: %s;\n res: %s" % (i,str(res)))
+                #if None != res[1] :
+                #    self.log("_com res is %s , %s" % (str(res[0]), str(res[1])))
+                #if None == backup_dir: #移动到filter_file_to_new 处理
+                #    pass
+                #else:
+                #    self._com("mv %s/%s %s" % (old_dir, i, backup_dir))
+        #self.zero_file_process(backup_dir, new_dir)
 if __name__=="__main__":
     x = sh_control()
     #x.get_ue_log("/home/jenkins/test")

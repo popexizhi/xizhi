@@ -54,6 +54,11 @@ class mon_sta_test(unittest.TestCase):
         x = mon_sta()
         x.start_doing(time.time())
 
+    def test_tar_save_log(self):
+        x = mon_sta()
+        x.tar_save_log("/home/jenkins/test/process_20161128_1480323621046to1480327221046","/data/load_use/tar_backup")
+
+
 if __name__=="__main__":
     unittest.main()
 

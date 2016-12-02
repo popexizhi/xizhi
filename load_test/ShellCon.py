@@ -164,13 +164,7 @@ class sh_control():
             if re.findall(file_format, i):
                 line_res = []
                 res = self.filter_file_to_new(i, old_dir, new_dir, backup_dir)
-                self.log("file: %s;\n res: %s" % (i,str(res)))
-                #if None != res[1] :
-                #    self.log("_com res is %s , %s" % (str(res[0]), str(res[1])))
-                #if None == backup_dir: #移动到filter_file_to_new 处理
-                #    pass
-                #else:
-                #    self._com("mv %s/%s %s" % (old_dir, i, backup_dir))
+                #self.log("file: %s;\n res: %s" % (i,str(res)))
         #self.zero_file_process(backup_dir, new_dir)
 if __name__=="__main__":
     x = sh_control()

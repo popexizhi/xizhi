@@ -247,14 +247,14 @@ class processt():
             return -1
         returnMat = numpy.zeros((arrayOLlines_len, 4))
         index = 0
-        diff_time = 1000#92000 # appserver 与ue的server时间差, 单位:毫秒
+        diff_time = 0#92000 # appserver 与ue的server时间差, 单位:毫秒
         fr = open(filename)
         for line in fr.readlines():
             line = line.split("\n")[0]
             listFromline = line.split(",")
-            if len(listFromline) < (4-1): # numpy.zeros 初始化时的形状要求，如果小于这个值，说明数据不完整
+            if len(listFromline) < (2-1): # numpy.zeros 初始化时的形状要求，如果小于这个值，说明数据不完整
                 continue
-            listFromline_res = [listFromline[0], listFromline[2], listFromline[1], 0]
+            listFromline_res = [listFromline[0], listFromline[1], 0, 0]
             listFromline_res[1] = int(listFromline_res[0]) - int(listFromline_res[1]) + diff_time #use_time = receive_time - send_time + diff_time
             
             print listFromline_res
@@ -286,7 +286,8 @@ class processt():
         for i in fl:
             #get ueid for filename
             ueid = self.get_ueid_for_filename(i)
-            diff_time = float(diff_ue_dir[ueid]) #为diff_data赋值,为空没有处理
+            #diff_time = float(diff_ue_dir[ueid]) #为diff_data赋值,为空没有处理
+            diff_time = float(0.0) #使用机器矫时，不再使用校正文件
             fr = open("%s/%s" % (dirname, i))
             err_line = 0
             max_err = 0

@@ -15,7 +15,7 @@ class ana_rtt():
         self.processt = processt()
 
 
-    def doing(self, fp):
+    def doing(self, fp, sta, end):
         """ 
         1.open file
         2.处理数据
@@ -29,7 +29,9 @@ class ana_rtt():
 
         #3
         xy_res = self.processt.sta_sec(datas)
-        xy_res = self.range_time(xy_res, [None, None])
+        sta_time = self.change_time_to_second(sta)
+        end_time = self.change_time_to_second(end)
+        xy_res = self.range_time(xy_res, [sta_time, end_time])
         x_u, y_u, max_u, std_u = self.time_statistics_dic_list(xy_res)
         print self.save_csv([self.datetime_from_second(x_u),y_u, max_u, std_u], fp)
 
@@ -125,4 +127,4 @@ if __name__=="__main__":
     #dp="/data/load_use/rtt_use/ping_time_500"
     dp="/data/load_use/rtt_use/ping_time_1000_nst"
     #dp="/data/load_use/rtt_use/ping_time_1500"
-    x.doing(dp)
+    x.doing(dp, "2016,12,01,20,26,20", "2016,12,01,22,10,00")

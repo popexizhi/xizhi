@@ -54,6 +54,12 @@ class ana_rtt():
             else:
                 s_sta.pop(key)
         return s_sta
+    
+    def change_time_to_second(self, time_s):
+        listt = time_s.split(",")
+        dt = datetime.datetime(int(listt[0]), int(listt[1]), int(listt[2]), int(listt[3]), int(listt[4]),int(listt[5]))
+        return time.mktime(dt.timetuple())
+
 
     def time_statistics_dic_list(self, s_sta):
         x_res = []

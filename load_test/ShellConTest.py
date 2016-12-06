@@ -30,6 +30,14 @@ class sh_control_test(unittest.TestCase):
         print time.time()
         print x._com("ls -all testdata/filter|wc -l")
 
+    def test_get_dir_files_rtt(self):
+        x = sh_control()
+        print x._com("ls -all testdata|wc -l")
+        print time.time()
+        x.get_dir_files("testdata","testdata/res","testdata")
+        print time.time()
+        print x._com("ls -all /home/jenkins/test/rtt_process|wc -l")
+    
     def test_com(self):
         x = sh_control()
         print x._com("sh log_data.sh ue.down.hostid.32245.pid.184468.log.txt_4 testdata test")

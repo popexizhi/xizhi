@@ -2,6 +2,7 @@
 import subprocess
 import re, time, sys
 import thread, os
+from Map import load_test_cfg
 class sh_control():
     def __init__(self):
         pass
@@ -129,15 +130,15 @@ class sh_control():
         str_com = """sh log_data.sh %s %s %s""" % (fp, backup_dir, new_dir)
         self.log("str_com (%s)" % str(str_com))
         res = self._com(str_com)
-        self.filter_file_for_rtt(fp, backup_dir, new_dir)
         return res
+    
     def is_new_file(self, fp, wait_time=30):
         res = False
         if wait_time <= int(time.time() - os.stat(fp).st_mtime) :
             return True
         return res
     
-    def filter_file_for_rtt(self, fp, new_dir, backup_dir):
+    def filter_file_for_rtt(self, fp, backup_dir, new_dir):
         str_com = """sh rtt_data.sh %s %s %s""" % (fp, backup_dir, new_dir)
         self.log("str_com (%s)" % str(str_com))
         res = self._com(str_com)
@@ -170,7 +171,9 @@ class sh_control():
             if re.findall(file_format, i):
                 line_res = []
                 res = self.filter_file_to_new(i, old_dir, new_dir, backup_dir)
-                #self.log("file: %s;\n res: %s" % (i,str(res)))
+                if len(res) > 1:
+                    rtt_res = self.filter_file_for_rtt(i, backup_dir, load_test_cfg["processRtt_dir"])
+                    #self.log("file: %s;\n res: %s" % (i,str(rtt_res)))
         #self.zero_file_process(backup_dir, new_dir)
 if __name__=="__main__":
     x = sh_control()

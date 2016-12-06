@@ -144,6 +144,36 @@ class sh_control():
         res = self._com(str_com)
         return res
 
+    def rtt_save_time(self, rtt_dir, rtt_process, statime, endtime):
+        #rtt_save.sh
+        rf = "%sto%s.rttd" % (str(statime), str(endtime))
+        str_com = """sh rtt_save.sh %s %s %s""" % (rtt_dir , rf , rtt_process)
+        self.log("str_com (%s)" % str(str_com))
+        res = self._com(str_com)
+        #process data range [statime, endtime]
+        self.split_range_file("%s/%s" % (rtt_process, rf), statime, endtime, rtt_dir)
+
+        return res
+    def split_range_file(self, rtt_dir, sta, end, old_dir):
+        """ save [sta, end] in rtt_dir; other in old_dir"""
+        f = open(rtt_dir)
+        com = f.readlines()
+        f.close()
+        other=""
+        range_in = ""
+        for line in com:
+            if 2 == len(line.split(",")): #数据结构验证
+                i = line.split(",")[0]
+            else:
+                continue
+            if int(sta)<= int(i) <= int(end):
+                range_in = "%s%s" % (str(range_in), str(line))
+            else:
+                other = "%s%s" % (str(other), str(line))
+        self.save_file(rtt_dir, range_in)
+        self.save_file("%s/other_rtt" % old_dir, other)
+
+
     def zero_file_process(self, backup_dir, new_dir):
         #get zero line file
         res = self.get_dir_files_lines(backup_dir,"log.txt")        
@@ -171,7 +201,7 @@ class sh_control():
             if re.findall(file_format, i):
                 line_res = []
                 res = self.filter_file_to_new(i, old_dir, new_dir, backup_dir)
-                if len(res) > 1:
+                if None != res:
                     rtt_res = self.filter_file_for_rtt(i, backup_dir, load_test_cfg["processRtt_dir"])
                     #self.log("file: %s;\n res: %s" % (i,str(rtt_res)))
         #self.zero_file_process(backup_dir, new_dir)

@@ -84,6 +84,9 @@ class mon_sta():
         str_ = 'echo "%s">>%s' % (str(mes), str(filep))
         self.sh._com(str_)
 
+    def save_rtt_data(self, rtt_process, res_dir, sta_time, end_time):
+        self.sh.rtt_save_time(rtt_process, res_dir, sta_time, end_time)
+
     def filter_files(self, source_dir=load_test_cfg["source_dir"], process_dir=load_test_cfg["process_dir"], backup_dir=load_test_cfg["backup_dir"]):
         self.sh.get_dir_files(source_dir, process_dir, backup_dir)
 
@@ -105,6 +108,7 @@ class mon_sta():
         sta_time = int(start_time*1000 - log_save_time*3600*1000) 
         end_time = int(start_time*1000) #单位毫秒
         res_dir, err_p, res = self.process_dir_for_ana(load_test_cfg["process_dir"], sta_time, end_time)
+        self.save_rtt_data(load_test_cfg["processRtt_dir"], res_dir, sta_time, end_time)
         self.ana_use_dir(res_dir, load_test_cfg["ana_log"])
         
 

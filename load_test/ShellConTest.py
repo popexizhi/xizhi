@@ -58,6 +58,11 @@ class sh_control_test(unittest.TestCase):
     def test_filter_file_for_rtt(self):
         x = sh_control()
         print x.filter_file_for_rtt("ue.down.hostid.10000.pid.107228.log.txt_4", "testdata/res", "testdata")
+    
+    def test_rtt_save_time(self):
+        x = sh_control()
+        x.rtt_save_time("/home/jenkins/test/rtt_backup", "testdata", 1481007628223, 1481007869235)
+
 if __name__=="__main__":
     unittest.main()
 

@@ -15,7 +15,7 @@ class ana_rtt():
         self.processt = processt()
 
 
-    def doing(self, fp, sta, end):
+    def doing(self, fp, sta, end, save_dir=None):
         """ 
         1.open file
         2.处理数据
@@ -33,7 +33,7 @@ class ana_rtt():
         end_time = self.change_time_to_second(end)
         xy_res = self.range_time(xy_res, [sta_time, end_time])
         x_u, y_u, max_u, std_u = self.time_statistics_dic_list(xy_res)
-        print self.save_csv([self.datetime_from_second(x_u),y_u, max_u, std_u], fp)
+        print self.save_csv([self.datetime_from_second(x_u),y_u, max_u, std_u], fp, save_dir)
 
         #x_u, y_u= self.processt.use_time_second(xy_res)
         #print self.save_csv([self.datetime_from_second(x_u),y_u], fp)
@@ -42,6 +42,7 @@ class ana_rtt():
         res = self.statistics_list(yl)
         dl = {"Max(microsecond)":res[0], "Min(microsecond)":res[1] , "num": res[2], "avg": res[3], "stdev": res[4]}
         print dl
+        return dl
     
     def range_time(self, s_sta, rt):
         sta = rt[0] if None != rt[0] else 0
@@ -56,6 +57,8 @@ class ana_rtt():
         return s_sta
     
     def change_time_to_second(self, time_s):
+        if None == time_s :
+            return time_s
         listt = time_s.split(",")
         dt = datetime.datetime(int(listt[0]), int(listt[1]), int(listt[2]), int(listt[3]), int(listt[4]),int(listt[5]))
         return time.mktime(dt.timetuple())
@@ -104,7 +107,7 @@ class ana_rtt():
             res.append(new_t)    
         return res 
 
-    def save_csv(self, xy_list, fp):
+    def save_csv(self, xy_list, fp, save_dir):
         x = xy_list[0]
         y = xy_list[1]
         z = xy_list[2]
@@ -114,7 +117,11 @@ class ana_rtt():
         for i in x:
             com = "%s\n%s,%s,%s,%s" % (com, str(i), str(z[index]), str(y[index]), str(a[index]))
             index = index + 1
-
+        if None == save_dir:
+            pass
+        else:
+            fp = fp.split("/")[-1]
+            fp = "%s/%s" % (save_dir, str(fp))
         fp_name = "%s.csv" % fp
         f = open("%s.csvx" % fp, "w")
         f.write(com)

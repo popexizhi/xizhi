@@ -7,6 +7,8 @@ from getjpg import dtjpg
 import random
 from ShellCon import sh_control
 import sys
+from ana_rttx import ana_rtt 
+
 
 PRE_PACK=10 #单ue预定义的发包量
 UE_NUM = 3000 #ue数量
@@ -16,6 +18,7 @@ class analy_d():
         self.jpg = dtjpg()
         self.sh = sh_control()
         self.now_lab = str(int(time.time()))
+        self.ana_rtt = ana_rtt()
         self.rh = Report("test/test_%s" % str(datetime.datetime.now().strftime("%Y-%m-%d_%H_%M_%S")))
     
     def get_z(self, path):
@@ -148,6 +151,13 @@ class analy_d():
             res_l.append(save_path)
 
         return res_l
+    
+    def get_ana_rtt(self, path, data_dir):
+        sta = path.split("_")[-1].split("to")[-2]
+        end = path.split("_")[-1].split("to")[-1]
+        rtt_d = "%s/%sto%s.rttd" % (path, sta, end.split("/")[0])
+        dl = self.ana_rtt.doing(rtt_d, None, None, data_dir)
+
 
     def get_report(self, path):
         #get datas
@@ -177,7 +187,10 @@ class analy_d():
             dis = {"tps": [x_t, y_t, z_t]}
             f_ue = self.save_txt(dis, str(tps_jpg_name))
             tps_jpg_list = self.diff_jpg(x_t, y_t, z_t, tps_jpg_name)
-            
+
+            #rtt 
+            #self.get_ana_rtt(path)
+            #use_time
             x_u, y_u = self.processt.use_time_second(res)
             use_time_jpg_name = "test/use_time_second_%s_" % str(self.now_lab)
             #self.jpg.get_jpg(x_u, y_u, use_time_jpg_name)

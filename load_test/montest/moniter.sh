@@ -14,7 +14,7 @@ save_log()
 while true
 do
     echo "[`date`]**********************************************"
-    for pid in $(ps aux|grep "MoniterStart.py" |grep -v grep|awk '{print $2}');do
+    for pid in $(ps aux|grep "python MoniterStart.py" |grep -v grep|awk '{print $2}');do
         echo Stop moniter.sh , killing pid: $pid
         kill -9 $pid
     done

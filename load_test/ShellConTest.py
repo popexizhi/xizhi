@@ -20,7 +20,7 @@ class sh_control_test(unittest.TestCase):
     def test_filter_file_to_new(self):
         x = sh_control()
         x._com("cp testdata/ue.down.hostid.15449.pid.119099.log.txt_4 testdata/1.log")
-        x.filter_file_to_new(fp="1.log", old_dir="testdata", new_dir="testdata/filter")
+        x.filter_file_to_new(fp="1.log", old_dir="testdata", new_dir="testdata/filter", backup_dir="testdata")
 
     def test_get_dir_files(self):
         x = sh_control()
@@ -46,6 +46,10 @@ class sh_control_test(unittest.TestCase):
         x._com("echo 'test'>%s" % fp)
         time.sleep(1)
         self.assertEqual(x.is_new_file(fp, 1), True)
+
+    def test_filter_file_for_rtt(self):
+        x = sh_control()
+        print x.filter_file_for_rtt("ue.down.hostid.10000.pid.107228.log.txt_4", "testdata/res", "testdata")
 if __name__=="__main__":
     unittest.main()
 

@@ -38,9 +38,7 @@ class ana_rtt():
         #x_u, y_u= self.processt.use_time_second(xy_res)
         #print self.save_csv([self.datetime_from_second(x_u),y_u], fp)
 
-        #yl = y_u[-1401:-1] #500
-        #yl = y_u[1152:6552] # 1000
-        yl = y_u[2496:10458] #1500
+        yl = y_u
         res = self.statistics_list(yl)
         dl = {"Max(microsecond)":res[0], "Min(microsecond)":res[1] , "num": res[2], "avg": res[3], "stdev": res[4]}
         print dl
@@ -125,6 +123,9 @@ class ana_rtt():
 if __name__=="__main__":
     x = ana_rtt()
     #dp="/data/load_use/rtt_use/ping_time_500"
-    dp="/data/load_use/rtt_use/ping_time_1000_nst"
-    #dp="/data/load_use/rtt_use/ping_time_1500"
-    x.doing(dp, "2016,12,01,20,26,20", "2016,12,01,22,10,00")
+    #dp="/data/load_use/rtt_use/ping_time_1000_nst" #"2016,12,01,20,26,20", "2016,12,01,22,10,00"
+    #dp="/data/load_use/rtt_use/ping_time_1500_nst" # "2016,12,02,10,05,00", "2016,12,02,12,00,00"
+    #dp="/data/load_use/rtt_use/ping_time_1500" # "2016,12,01,13,00,00", "2016,12,01,15,30,59"
+    #dp="/data/load_use/rtt_use/ping_time_2000_nst" # "2016,12,02,12,00,00", "2016,12,02,15,30,59"
+    dp="/data/load_use/rtt_use/ping_time_2000" # "2016,12,01,16,00,00", "2016,12,01,18,10,59"
+    x.doing(dp, "2016,12,01,16,00,00", "2016,12,01,18,10,59")

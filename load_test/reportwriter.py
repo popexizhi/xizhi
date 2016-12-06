@@ -78,6 +78,9 @@ class Report(object):
             padding-left: 20px;
         }
     </style>
+    <script type="text/javascript"
+       src="rtt/dygraph-combined-dev.js"></script>
+
 </head>
 <body>
 <h1>Performance Results Report</h1>

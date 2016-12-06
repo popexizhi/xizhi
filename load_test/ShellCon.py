@@ -129,6 +129,7 @@ class sh_control():
         str_com = """sh log_data.sh %s %s %s""" % (fp, backup_dir, new_dir)
         self.log("str_com (%s)" % str(str_com))
         res = self._com(str_com)
+        self.filter_file_for_rtt(fp, backup_dir, new_dir)
         return res
     def is_new_file(self, fp, wait_time=30):
         res = False
@@ -136,6 +137,11 @@ class sh_control():
             return True
         return res
     
+    def filter_file_for_rtt(self, fp, new_dir, backup_dir):
+        str_com = """sh rtt_data.sh %s %s %s""" % (fp, backup_dir, new_dir)
+        self.log("str_com (%s)" % str(str_com))
+        res = self._com(str_com)
+        return res
 
     def zero_file_process(self, backup_dir, new_dir):
         #get zero line file

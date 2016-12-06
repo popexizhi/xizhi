@@ -38,7 +38,7 @@ class sh_control():
         return ue_dir, ue_log
 
     def back_test(self, spath="test", dpath="/data/provision_test/load_test"):
-        com_list = ["mkdir %s/test" % spath, "mv %s/*.jpg %s/test" % (spath, spath), "mv %s/*.txt %s/test" % (spath, spath),"scp -r %s slim@192.168.1.216:%s" % (spath, dpath), "rm -rf %s/*" % spath]
+        com_list = ["mkdir %s/test" % spath, "mv %s/*.jpg %s/test" % (spath, spath), "mv %s/*.txt %s/test" % (spath, spath),"scp -r %s slim@192.168.1.216:%s" % (spath, dpath), "rm -rf %s/*" % spath, "mkdir %s/test" % spath, "mkdir %s/test/rtt_data" % spath]
         self._list_com(com_list)
 
     def get_files_wc(self, path, file_format="log.txt"):

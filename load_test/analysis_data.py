@@ -156,8 +156,12 @@ class analy_d():
         sta = path.split("_")[-1].split("to")[-2]
         end = path.split("_")[-1].split("to")[-1]
         rtt_d = "%s/%sto%s.rttd" % (path, sta, end.split("/")[0])
-        dl = self.ana_rtt.doing(rtt_d, None, None, data_dir)
-
+        res_d = self.ana_rtt.doing(rtt_d, None, None, data_dir)
+        cvs_f = res_d[0].split("/")[-1]
+        dl = res_d[1]
+        res_rtt = {"dl":dl, "name": "rtt", "csv": cvs_f, "dir":data_dir}
+        return res_rtt
+        
 
     def get_report(self, path):
         #get datas
@@ -189,7 +193,11 @@ class analy_d():
             tps_jpg_list = self.diff_jpg(x_t, y_t, z_t, tps_jpg_name)
 
             #rtt 
-            #self.get_ana_rtt(path)
+            res_rtt = self.get_ana_rtt(path, "test/rtt_data")
+            rtt_dl = res_rtt["dl"]
+            rtt_name = res_rtt["name"]
+            rtt_csv = res_rtt["csv"]
+            rtt_dir = res_rtt["dir"]
             #use_time
             x_u, y_u = self.processt.use_time_second(res)
             use_time_jpg_name = "test/use_time_second_%s_" % str(self.now_lab)
@@ -201,6 +209,7 @@ class analy_d():
             #save html
             self.rh.set_summary(dl)
             self.rh.set_h3_sum_list("tps", tps_jpg_list)
+            self.rh.rtt_set(rtt_dl, rtt_name, rtt_csv, rtt_dir)
             self.rh.set_h3_sum_list("use_time_second", use_time_list)
            
 

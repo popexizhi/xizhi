@@ -33,7 +33,8 @@ class ana_rtt():
         end_time = self.change_time_to_second(end)
         xy_res = self.range_time(xy_res, [sta_time, end_time])
         x_u, y_u, max_u, std_u = self.time_statistics_dic_list(xy_res)
-        print self.save_csv([self.datetime_from_second(x_u),y_u, max_u, std_u], fp, save_dir)
+        save_fp= self.save_csv([self.datetime_from_second(x_u),y_u, max_u, std_u], fp, save_dir)
+        print save_fp
 
         #x_u, y_u= self.processt.use_time_second(xy_res)
         #print self.save_csv([self.datetime_from_second(x_u),y_u], fp)
@@ -42,7 +43,7 @@ class ana_rtt():
         res = self.statistics_list(yl)
         dl = {"Max(microsecond)":res[0], "Min(microsecond)":res[1] , "num": res[2], "avg": res[3], "stdev": res[4]}
         print dl
-        return dl
+        return save_fp, res
     
     def range_time(self, s_sta, rt):
         sta = rt[0] if None != rt[0] else 0
@@ -121,12 +122,12 @@ class ana_rtt():
             pass
         else:
             fp = fp.split("/")[-1]
-            fp = "%s/%s" % (save_dir, str(fp))
-        fp_name = "%s.csv" % fp
-        f = open("%s.csvx" % fp, "w")
+            fp = "test/%s/%s" % (save_dir, str(fp))
+        self.log(fp)
+        f = open("%s.csv" % fp, "w")
         f.write(com)
         f.close()
-        return fp_name
+        return "%s.csv" % fp
 if __name__=="__main__":
     x = ana_rtt()
     #dp="/data/load_use/rtt_use/ping_time_500"

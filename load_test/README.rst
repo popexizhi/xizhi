@@ -1,5 +1,11 @@
 load_test
 =====
+备份依赖
+-------
+./sh/moniter_load_data.sh #二次处理的文件备份脚本
+./montest/moniter.sh #ue log 初步处理的脚本
+./montest/ana/ana_moniter.sh #定时生成结果的依赖脚本
+
 
 
 负载测试工具

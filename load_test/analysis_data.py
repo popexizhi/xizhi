@@ -157,6 +157,8 @@ class analy_d():
         end = path.split("_")[-1].split("to")[-1]
         rtt_d = "%s/%sto%s.rttd" % (path, sta, end.split("/")[0])
         res_d = self.ana_rtt.doing(rtt_d, None, None, data_dir)
+        if -1 == res_d[0]:
+            return -1
         cvs_f = res_d[0].split("/")[-1]
         dl = res_d[1]
         res_rtt = {"dl":dl, "name": "rtt", "csv": cvs_f, "dir":data_dir}
@@ -171,7 +173,7 @@ class analy_d():
         #for i in self.processt.get_files(uedir):  #使用文件加载
             #datas = self.processt.file2matrix(i)
         for i in [1]:
-            datas, er_fd = self.processt.dir2matrix(path, "test/soure_%s" % self.now_lab) #加载文件夹中全部log的数据
+            datas, er_fd = self.processt.dir2matrix(path, "test/test/soure_%s" % self.now_lab) #加载文件夹中全部log的数据
             if type(-1) == type(datas):
                 return -1 #无数据处理
             
@@ -194,10 +196,16 @@ class analy_d():
 
             #rtt 
             res_rtt = self.get_ana_rtt(path, "test/rtt_data")
-            rtt_dl = res_rtt["dl"]
-            rtt_name = res_rtt["name"]
-            rtt_csv = res_rtt["csv"]
-            rtt_dir = res_rtt["dir"]
+            if type(-1) != type(res_rtt):
+                rtt_dl = res_rtt["dl"]
+                rtt_name = res_rtt["name"]
+                rtt_csv = res_rtt["csv"]
+                rtt_dir = res_rtt["dir"]
+            else:
+                rtt_dl = {}
+                rtt_name = "null"
+                rtt_csv = ""
+                rtt_dir = ""
             #use_time
             x_u, y_u = self.processt.use_time_second(res)
             use_time_jpg_name = "test/use_time_second_%s_" % str(self.now_lab)
@@ -216,9 +224,12 @@ class analy_d():
     def save_report(self):
         self.sh.back_test()
 
+    def save_process_data(self, dir_ue_log):
+        self.sh.tar_save(dir_ue_log)
+
     def save_txt(self, data_l, file_name):
         file_p = "%s.txt" % str(file_name)
-        com = ""
+        com = "t1,t2,t3"
         for key in data_l:
             com = com + "%s:\n" % str(key)
             for value in data_l[key]:

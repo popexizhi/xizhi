@@ -143,6 +143,8 @@ class Report(object):
     def rtt_set(self, rtt_dl, rtt_name, rtt_csv, rtt_dir):
         res = rtt_dl
         print str(res)
+        if 0 == len(res):
+            res = [0,0,0,0,0]
         dl = {"Max(microsecond)":res[0], "Min(microsecond)":res[1], "avg": res[3], "stdev": res[4]} 
         self.set_dygraph_h3("rtt", dl, rtt_name, rtt_csv, rtt_dir)
 

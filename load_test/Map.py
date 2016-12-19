@@ -13,5 +13,8 @@ load_test_cfg = {
     "long_time" :1, #process data处理的持续时间, 单位:h
     "log_save_time" : 1, #log_save data处理时间, 单位:h
     "ana_log" : "/data/load_use/ana.log" ,#可以处理的analysis_data dir file
+
+    #nginx 
+    "ng_process_tar": "/data/provision_test/log_backup/process", #nginx process backup
     "end" : 0 
 }

@@ -37,8 +37,15 @@ class sh_control():
         self._list_com(com_list)
         return ue_dir, ue_log
 
+    def tar_save(self, dir_ue_log, ng_dir=load_test_cfg["ng_process_tar"]):
+        dir_ue_log = re.sub(u"/$","", dir_ue_log)
+        self.log(dir_ue_log)
+        com_list = ["tar -cvzf %s.tar.gz %s --remove-files" % (dir_ue_log, dir_ue_log), "scp %s.tar.gz slim@192.168.1.216:%s" % (dir_ue_log, ng_dir), "rm -rf %s.tar.gz" % dir_ue_log ]
+        return self._list_com(com_list)
+
+
     def back_test(self, spath="test", dpath="/data/provision_test/load_test"):
-        com_list = ["mkdir %s/test" % spath, "mv %s/*.jpg %s/test" % (spath, spath), "mv %s/*.txt %s/test" % (spath, spath),"scp -r %s slim@192.168.1.216:%s" % (spath, dpath), "rm -rf %s/*" % spath, "mkdir %s/test" % spath, "mkdir %s/test/rtt_data" % spath]
+        com_list = ["mkdir %s/test" % spath, "mv %s/*.jpg %s/test" % (spath, spath), "mv %s/*.txt %s/test" % (spath, spath),"scp -r %s slim@192.168.1.216:%s" % (spath, dpath), "rm -rf %s/*" % spath, "mkdir %s/test" % spath, "mkdir %s/test/rtt_data" % spath, "mkdir %s/test/test" % spath]
         self._list_com(com_list)
 
     def get_files_wc(self, path, file_format="log.txt"):
@@ -152,6 +159,11 @@ class sh_control():
         res = self._com(str_com)
         #process data range [statime, endtime]
         self.split_range_file("%s/%s" % (rtt_process, rf), statime, endtime, rtt_dir)
+        
+        new_dir_rtt = "%s/%s_%s" % (rtt_dir, str(statime), str(endtime))
+        new_dir = """mkdir %s""" % new_dir_rtt
+        mv_file = """mv %s/*_rtt %s""" % (rtt_dir, new_dir_rtt)
+        self._list_com([new_dir, mv_file])
 
         return res
     def split_range_file(self, rtt_dir, sta, end, old_dir):

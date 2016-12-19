@@ -23,6 +23,8 @@ class ana_rtt():
         """
         #1
         datas = self.processt.file2matrix(fp)
+        if type(-1) == type(datas):
+            return -1, -1
         #2
         #res = self.processt.statistics_use(datas, 1)
         #dl = {"Max(microsecond)":res[0], "Min(microsecond)":res[1] , "num": res[2], "avg": res[3], "stdev": res[4]}
@@ -135,5 +137,6 @@ if __name__=="__main__":
     #dp="/data/load_use/rtt_use/ping_time_1500_nst" # "2016,12,02,10,05,00", "2016,12,02,12,00,00"
     #dp="/data/load_use/rtt_use/ping_time_1500" # "2016,12,01,13,00,00", "2016,12,01,15,30,59"
     #dp="/data/load_use/rtt_use/ping_time_2000_nst" # "2016,12,02,12,00,00", "2016,12,02,15,30,59"
-    dp="/data/load_use/rtt_use/ping_time_2000" # "2016,12,01,16,00,00", "2016,12,01,18,10,59"
-    x.doing(dp, "2016,12,01,16,00,00", "2016,12,01,18,10,59")
+    #dp="/data/load_use/rtt_use/ping_time_2000" # "2016,12,01,16,00,00", "2016,12,01,18,10,59"
+    dp="/home/jenkins/test/process_20161212_1481521738683to1481525338683/1481521738683to1481525338683.rttd"
+    x.doing(dp, "2016,12,12,09,00,00", "2016,12,12,18,10,59")

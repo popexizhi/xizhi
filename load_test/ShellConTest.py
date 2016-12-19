@@ -62,6 +62,10 @@ class sh_control_test(unittest.TestCase):
     def test_rtt_save_time(self):
         x = sh_control()
         x.rtt_save_time("/home/jenkins/test/rtt_backup", "testdata", 1481007628223, 1481007869235)
+    
+    def test_tar_save(self):
+        x = sh_control()
+        x.tar_save("/home/jenkins/test/process_20161212_1481487225749to1481490825749/")
 
 if __name__=="__main__":
     unittest.main()

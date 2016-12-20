@@ -163,7 +163,8 @@ class sh_control():
         new_dir_rtt = "%s/%s_%s" % (rtt_dir, str(statime), str(endtime))
         new_dir = """mkdir %s""" % new_dir_rtt
         mv_file = """mv %s/*_rtt %s""" % (rtt_dir, new_dir_rtt)
-        self._list_com([new_dir, mv_file])
+        backup_rtt_file = "sh rtt_backup.sh %s %s" % (rtt_dir, new_dir_rtt)
+        self._list_com([backup_rtt_file])
 
         return res
     def split_range_file(self, rtt_dir, sta, end, old_dir):

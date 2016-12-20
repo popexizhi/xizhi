@@ -61,7 +61,7 @@ class sh_control_test(unittest.TestCase):
     
     def test_rtt_save_time(self):
         x = sh_control()
-        x.rtt_save_time("/home/jenkins/test/rtt_backup", "testdata", 1481007628223, 1481007869235)
+        x.rtt_save_time("/home/jenkins/test/rtt_process/back/back", "/home/jenkins/test/rtt_process/back/test", 1481007628223, 1483183259600)
     
     def test_tar_save(self):
         x = sh_control()

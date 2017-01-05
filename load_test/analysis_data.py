@@ -257,8 +257,10 @@ def use_report(dir_ue_log="/home/jenkins/test/process"):
 def test():
     x = analy_d()
     #dir_p = "/home/jenkins/test/process_20161110_135236/"
-    dir_p = "/home/jenkins/test/process_20161116_160840/"
-    x.get_report(dir_p)
+    #dir_p = "/home/jenkins/test/process_20161116_160840/"
+    #x.get_report(dir_p)
+    dir_p="/home/jenkins/test/process_20170105_1483560654675to1483564254675/"
+    x.get_ana_rtt(dir_p,"test/rtt_data")
     #x.static_ue_list(dir_p)
     #x.random_ue_list(dir_p)
 

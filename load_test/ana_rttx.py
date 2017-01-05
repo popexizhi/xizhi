@@ -23,6 +23,7 @@ class ana_rtt():
         """
         #1
         datas = self.processt.file2matrix(fp)
+        self.log(datas)
         if type(-1) == type(datas):
             return -1, -1
         #2
@@ -52,7 +53,9 @@ class ana_rtt():
         end = rt[1] if None != rt[1] else 9999999999999999
         source = copy.deepcopy(s_sta)
         for key in source:
-            self.log("[sta: %s, end: %s]key %s" % (str(sta), str(end), str(key)))
+            if "0" == key: #初始化的时间不做处理
+                continue 
+            self.log("[sta: %s, end: %s]key %s range_time" % (str(sta), str(end), str(key)))
             if float(sta) <= float(key) <= float(end):
                 pass
             else:
@@ -74,7 +77,8 @@ class ana_rtt():
         std_res = []
         for sec in s_sta:
             res = self.statistics_list(s_sta[sec], key=1)
-            self.log("res %s" % str(res))
+            self.log("res %s time_statistics_dic_list" % str(res))
+            #assert 1 == 0
             x_res.append(sec)
             avg_res.append(res[3])
             max_res.append(res[0])
@@ -90,7 +94,7 @@ class ana_rtt():
             for i in dlist:
                 new_list.append(i[key])
             dlist = new_list
-        self.log(dlist)
+        #self.log("(%s) statistics_list" % str(dlist))
         Max = max(dlist)
         Min = min(dlist)
         num = len(dlist)
@@ -138,5 +142,9 @@ if __name__=="__main__":
     #dp="/data/load_use/rtt_use/ping_time_1500" # "2016,12,01,13,00,00", "2016,12,01,15,30,59"
     #dp="/data/load_use/rtt_use/ping_time_2000_nst" # "2016,12,02,12,00,00", "2016,12,02,15,30,59"
     #dp="/data/load_use/rtt_use/ping_time_2000" # "2016,12,01,16,00,00", "2016,12,01,18,10,59"
-    dp="/home/jenkins/test/process_20161212_1481521738683to1481525338683/1481521738683to1481525338683.rttd"
-    x.doing(dp, "2016,12,12,09,00,00", "2016,12,12,18,10,59")
+    #dp="/home/jenkins/test/process_20161212_1481521738683to1481525338683/1481521738683to1481525338683.rttd"
+    #dp="/home/jenkins/test/process_20161223_1482453016015to1482456616015/1482453016015to1482456616015.rttd"
+    #dp="/home/jenkins/test/rtt_process/test_rtt_save/back/1.log"
+    #dp="/home/lijie/test/xizhi/load_test/testdata/1500.rttd"
+    dp="/home/jenkins/test/process_20170105_1483560654675to1483564254675/1483560654675to1483564254675.rttd"
+    print x.doing(dp, "2016,12,12,09,00,00", None, "../testdata/")

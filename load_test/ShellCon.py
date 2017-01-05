@@ -222,6 +222,9 @@ if __name__=="__main__":
     x = sh_control()
     #x.get_ue_log("/home/jenkins/test")
     #print x.get_files_wc("/home/jenkins/test")
-    fl, ll = x.get_dir_files_lines("/home/jenkins/test/process_20161115_103635")
-    print len(fl)
-    print sum(ll)
+    #fl, ll = x.get_dir_files_lines("/home/jenkins/test/process_20161115_103635")
+    #print len(fl)
+    #print sum(ll)
+    while 1:
+        print x._com("sh test_lo.sh")
+        time.sleep(10)

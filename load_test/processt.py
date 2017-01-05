@@ -245,6 +245,7 @@ class processt():
         if 0 == arrayOLlines_len:
             print "%s is null" % filename
             return -1
+        print "arrayOLlines_len %s" % str(arrayOLlines_len)
         returnMat = numpy.zeros((arrayOLlines_len, 4))
         index = 0
         diff_time = 0#92000 # appserver 与ue的server时间差, 单位:毫秒
@@ -254,10 +255,16 @@ class processt():
             listFromline = line.split(",")
             if len(listFromline) < (2-1): # numpy.zeros 初始化时的形状要求，如果小于这个值，说明数据不完整
                 continue
+            if len(re.findall(u"\D", listFromline[0]))> 0 or len(re.findall(u"\D", listFromline[1]))> 0 : #行数据不完整,忽略此内容
+                listFromline[1] = listFromline[1].split(" ")[0] #处理结尾的空格
+                if len(re.findall(u"\D", listFromline[0]))> 0 or len(re.findall(u"\D", listFromline[1]))> 0 : #行数据不完整,忽略此内容
+                    print "(%s) \\D" % str(listFromline)
+                    continue
+                else:
+                    pass #继续处理
             listFromline_res = [listFromline[0], listFromline[1], 0, 0]
             listFromline_res[1] = int(listFromline_res[0]) - int(listFromline_res[1]) + diff_time #use_time = receive_time - send_time + diff_time
             
-            print listFromline_res
             returnMat[index,:] = listFromline_res
             index +=1
 

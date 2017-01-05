@@ -1,11 +1,18 @@
 load_test
 =====
-备份依赖
+启动脚本位置及功能
 -------
-./sh/moniter_load_data.sh #二次处理的文件备份脚本
-./montest/moniter.sh #ue log 初步处理的脚本
-./montest/ana/ana_moniter.sh #定时生成结果的依赖脚本
+当前用户权限:
+[备份 tar_backup]
+./montest/backup_log_mon/moniter_load_data_backup.sh
+[计算处理结果，出测试报告]
+./montest/ana/ana_moniter.sh
 
+sudo :
+[处理原始log]
+./montest/moniter.sh
+[备份全部结果log]
+./sh/moniter_load_data.sh
 
 
 负载测试工具

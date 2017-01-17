@@ -11,9 +11,14 @@ class mon_sta():
 
     def split_log(self, head_tail_log, start_ms, end_ms):
         res = None
+        print "*"*50
+        print "split log in err_log or process...."
         print "%s: start_ms:%s ;end_ms: %s;" % (str(head_tail_log), str(start_ms), str(end_ms))
-        assert head_tail_log[0] <= head_tail_log[1] # head_tail_log 存在问题
-        assert start_ms <= end_ms # split point 存在问题
+        #assert head_tail_log[0] <= head_tail_log[1] # head_tail_log 存在问题
+        if head_tail_log[0] <= head_tail_log[1]: # head_tail_log 存在问题
+            assert start_ms <= end_ms # split point 存在问题
+        else:
+            return res
 
         if head_tail_log[1] <= start_ms:
             return 0
@@ -114,5 +119,5 @@ class mon_sta():
 
 if __name__=="__main__":
     x =  mon_sta()
-    #x.start_doing(time.time(), is_wait=0)
-    x.start_doing(time.time())
+    x.start_doing(time.time(), is_wait=0)
+    #x.start_doing(time.time())

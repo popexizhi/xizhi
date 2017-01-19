@@ -86,8 +86,10 @@ class mon_sta():
         print "[MoniterStart] %s" % mes
 
     def ana_use_dir(self, mes, filep):
+        print "*" * 30
         str_ = 'echo "%s">>%s' % (str(mes), str(filep))
         self.sh._com(str_)
+        print str_
 
     def save_rtt_data(self, rtt_process, res_dir, sta_time, end_time):
         self.sh.rtt_save_time(rtt_process, res_dir, sta_time, end_time)
@@ -96,7 +98,10 @@ class mon_sta():
         self.sh.get_dir_files(source_dir, process_dir, backup_dir)
 
     def tar_save_log(self, dir_process, dir_tar, format_file="log.txt"):
-        str_ = "mv %s/*%s* %s" % (dir_process, format_file, dir_tar)
+        #str_ = "mv %s/*%s* %s" % (dir_process, format_file, dir_tar)
+        str_ = "mv %s %s" % (dir_process,  dir_tar)
+        self.sh._com(str_)
+        str_ = "mkdir %s" % (dir_process)
         self.sh._com(str_)
 
     def start_doing(self, start_time, long_time=load_test_cfg["long_time"], log_save_time=load_test_cfg["log_save_time"], is_wait = 1):
@@ -119,5 +124,5 @@ class mon_sta():
 
 if __name__=="__main__":
     x =  mon_sta()
-    x.start_doing(time.time(), is_wait=0)
-    #x.start_doing(time.time())
+    #x.start_doing(time.time(), is_wait=0)
+    x.start_doing(time.time())

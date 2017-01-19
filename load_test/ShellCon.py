@@ -169,6 +169,7 @@ class sh_control():
         return res
     def split_range_file(self, rtt_dir, sta, end, old_dir):
         """ save [sta, end] in rtt_dir; other in old_dir"""
+        print "start:split_range_file"
         f = open(rtt_dir)
         com = f.readlines()
         f.close()

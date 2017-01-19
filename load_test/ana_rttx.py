@@ -15,7 +15,7 @@ class ana_rtt():
         self.processt = processt()
 
 
-    def doing(self, fp, sta, end, save_dir=None):
+    def doing(self, fp, sta, end, save_dir=None, is_change_to_second=1):
         """ 
         1.open file
         2.处理数据
@@ -32,8 +32,12 @@ class ana_rtt():
 
         #3
         xy_res = self.processt.sta_sec(datas)
-        sta_time = self.change_time_to_second(sta)
-        end_time = self.change_time_to_second(end)
+        if 1 == is_change_to_second:
+            sta_time = self.change_time_to_second(sta)
+            end_time = self.change_time_to_second(end)
+        else:
+            sta_time = int(int(sta)/1000)
+            end_time = int(int(end)/1000)
         xy_res = self.range_time(xy_res, [sta_time, end_time])
         x_u, y_u, max_u, std_u = self.time_statistics_dic_list(xy_res)
         save_fp= self.save_csv([self.datetime_from_second(x_u),y_u, max_u, std_u], fp, save_dir)
@@ -146,5 +150,5 @@ if __name__=="__main__":
     #dp="/home/jenkins/test/process_20161223_1482453016015to1482456616015/1482453016015to1482456616015.rttd"
     #dp="/home/jenkins/test/rtt_process/test_rtt_save/back/1.log"
     #dp="/home/lijie/test/xizhi/load_test/testdata/1500.rttd"
-    dp="/home/jenkins/test/process_20170105_1483560654675to1483564254675/1483560654675to1483564254675.rttd"
-    print x.doing(dp, "2016,12,12,09,00,00", None, "../testdata/")
+    dp="/home/jenkins/test/process_20170118_1484731973539to1484735573539/1484731973539to1484735573539.rttd"
+    print x.doing(dp, "2017,01,18,18,20,00", None, "../testdata/")

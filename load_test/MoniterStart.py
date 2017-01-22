@@ -99,7 +99,7 @@ class mon_sta():
 
     def tar_save_log(self, dir_process, dir_tar, format_file="log.txt"):
         #str_ = "mv %s/*%s* %s" % (dir_process, format_file, dir_tar)
-        str_ = "mv %s %s" % (dir_process,  dir_tar)
+        str_ = "mv -f %s %s" % (dir_process,  dir_tar) #fix:dir 覆盖问题
         self.sh._com(str_)
         str_ = "mkdir %s" % (dir_process)
         self.sh._com(str_)
@@ -124,5 +124,9 @@ class mon_sta():
 
 if __name__=="__main__":
     x =  mon_sta()
-    #x.start_doing(time.time(), is_wait=0)
-    x.start_doing(time.time())
+    try :
+        avg = sys.argv[1]
+        x.start_doing(time.time(), is_wait=0)
+    except IndexError:
+        avg = None
+        x.start_doing(time.time())

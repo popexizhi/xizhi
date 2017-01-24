@@ -7,7 +7,7 @@ from getjpg import dtjpg
 import random
 from ShellCon import sh_control
 import sys
-from ana_rttx import ana_rtt 
+from ana_rtt import ana_rtt 
 
 
 PRE_PACK=10 #单ue预定义的发包量
@@ -161,7 +161,7 @@ class analy_d():
             return -1
         cvs_f = res_d[0].split("/")[-1]
         dl = res_d[1]
-        res_rtt = {"dl":dl, "name": "rtt", "csv": cvs_f, "dir":data_dir}
+        res_rtt = {"dl":dl, "name": "rtt", "csv": cvs_f, "dir":data_dir, "pre_csv": res_d[2]}
         return res_rtt
         
 
@@ -201,11 +201,13 @@ class analy_d():
                 rtt_name = res_rtt["name"]
                 rtt_csv = res_rtt["csv"]
                 rtt_dir = res_rtt["dir"]
+                rtt_pre_csv = res_rtt["pre_csv"]
             else:
                 rtt_dl = {}
                 rtt_name = "null"
                 rtt_csv = ""
                 rtt_dir = ""
+                rtt_pre_csv = ""
             #use_time
             x_u, y_u = self.processt.use_time_second(res)
             use_time_jpg_name = "test/use_time_second_%s_" % str(self.now_lab)
@@ -217,7 +219,7 @@ class analy_d():
             #save html
             self.rh.set_summary(dl)
             self.rh.set_h3_sum_list("tps", tps_jpg_list)
-            self.rh.rtt_set(rtt_dl, rtt_name, rtt_csv, rtt_dir)
+            self.rh.rtt_set(rtt_dl, rtt_name, rtt_csv, rtt_dir, rtt_pre_csv)
             self.rh.set_h3_sum_list("use_time_second", use_time_list)
            
 

@@ -117,7 +117,7 @@ class Report(object):
 
         print str_j
         self.write_line(str_j)
-    def set_dygraph_h3(self, title_h3, dl, dy_name, dy_csv, dy_dir):
+    def set_dygraph_h3(self, title_h3, dl, dy_name, dy_csv, dy_dir, rtt_pre_csv):
         html_str ="""\
 <h3>%s</h3>
 <p>%s</p>
@@ -136,17 +136,36 @@ class Report(object):
             maxNumberWidth:9,//整数位数超过这个值就转为科学计数法显示1e6
         }//options
     );
-</script> """ % (title_h3, str(dl), dy_name, dy_name, dy_dir, dy_csv, dy_name)
+</script> 
+
+<div id="%s"style="width:1500px;height:300px;"></div>
+<script type="text/javascript">
+    g4 = new Dygraph(
+    document.getElementById("%s"),
+        "%s",//pathtoCSVfile
+        {
+            rollPeriod:1,
+            showRoller:true,
+            avoidMinZero:true,//y轴的最小值不为0，相当于y=0那条线上升了
+            title:"%s",
+            titleHeight:50,//标题高度
+            axisLabelWidth:100,//XY轴的标题的宽度
+            maxNumberWidth:9,//整数位数超过这个值就转为科学计数法显示1e6
+        }//options
+    );
+</script> 
+
+""" % (title_h3, str(dl), dy_name, dy_name, dy_dir, dy_csv, dy_name, "rtt_percentage", "rtt_percentage", rtt_pre_csv, "rtt_percentage")
         print html_str
         self.write_line(html_str)
     
-    def rtt_set(self, rtt_dl, rtt_name, rtt_csv, rtt_dir):
+    def rtt_set(self, rtt_dl, rtt_name, rtt_csv, rtt_dir, rtt_pre_csv):
         res = rtt_dl
         print str(res)
         if 0 == len(res):
             res = [0,0,0,0,0]
         dl = {"Max(microsecond)":res[0], "Min(microsecond)":res[1], "avg": res[3], "stdev": res[4]} 
-        self.set_dygraph_h3("rtt", dl, rtt_name, rtt_csv, rtt_dir)
+        self.set_dygraph_h3("rtt", dl, rtt_name, rtt_csv, rtt_dir, rtt_pre_csv)
 
 
     def set_cooke_list(self, list_cook_file, jpg_file, title_name = ""):

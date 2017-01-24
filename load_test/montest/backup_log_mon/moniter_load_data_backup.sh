@@ -14,7 +14,7 @@ do
     echo "stop ${now_data}"
 
     #ssh to ng
-    scp ${backlog_dir}/*.tar.gz slim@192.168.1.216:${ng_backup_uelog_dir}
+    sshpass -p "abc123,./" scp ${backlog_dir}/*.tar.gz slim@192.168.1.216:${ng_backup_uelog_dir}
     rm ${backlog_dir}/*.tar.gz
     sleep 3600
 done

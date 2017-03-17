@@ -44,30 +44,30 @@ class mon_sta():
         err_dir = "/data/err_dir/%s_%st%s" % (now_date, str(start_ms), str(end_ms))
         new_dir = "/home/jenkins/test/process_%s_%sto%s" % (now_date, str(start_ms), str(end_ms))
         self.sh._com("mkdir %s" % new_dir)
-        self.sh._com("mkdir %s" % err_dir)
-        for i in res:
-            if "" == i[0] or len(str(i[0]))>16:
-                null_ue.append(i[2])
-                self.sh._com("mv %s/%s %s" % (dir_p, i[2], new_dir) ) #0 files mv
-                continue
-            #print str(i)
-            #print dir_p
-            i = [int(i[0]), int(i[1]), i[2]]
-            split_num = self.split_log(i, start_ms, end_ms)
-            self.log("%s is %s" % (str(split_num), i[2]))
-            list_res[i[2]] = split_num
-            
-            if 0 == split_num:
-                self.zero_d(dir_p, i[2],"%s_%s" % (str(start_ms), str(end_ms)), err_dir)     
-            if 1 == split_num:
-                self.one_d((start_ms, end_ms), "%s/%s" % (new_dir, i[2]), "%s/%s" % (dir_p, i[2]))
-                self.zero_d(dir_p, i[2],"%s_%s" % (str(start_ms), str(end_ms)), err_dir)     
-            if 2 == split_num:
-                self.sh._com("mv %s/%s %s" % (dir_p, i[2], new_dir) )
-            if 3 == split_num:
-                self.one_d((start_ms, end_ms), "%s/%s" % (new_dir, i[2]), "%s/%s" % (dir_p, i[2]))
-            if 4 == split_num:
-                pass
+        self.sh._com("mv %s/*  %s" % (dir_p, new_dir) )
+#        for i in res:
+#            if "" == i[0] or len(str(i[0]))>16:
+#                null_ue.append(i[2])
+#                self.sh._com("mv %s/%s %s" % (dir_p, i[2], new_dir) ) #0 files mv
+#                continue
+#            #print str(i)
+#            #print dir_p
+#            i = [int(i[0]), int(i[1]), i[2]]
+#            split_num = self.split_log(i, start_ms, end_ms)
+#            self.log("%s is %s" % (str(split_num), i[2]))
+#            list_res[i[2]] = split_num
+#            
+#            if 0 == split_num:
+#                self.zero_d(dir_p, i[2],"%s_%s" % (str(start_ms), str(end_ms)), err_dir)     
+#            if 1 == split_num:
+#                self.one_d((start_ms, end_ms), "%s/%s" % (new_dir, i[2]), "%s/%s" % (dir_p, i[2]))
+#                self.zero_d(dir_p, i[2],"%s_%s" % (str(start_ms), str(end_ms)), err_dir)     
+#            if 2 == split_num:
+#                self.sh._com("mv %s/%s %s" % (dir_p, i[2], new_dir) )
+#            if 3 == split_num:
+#                self.one_d((start_ms, end_ms), "%s/%s" % (new_dir, i[2]), "%s/%s" % (dir_p, i[2]))
+#            if 4 == split_num:
+#                pass
 
 
         return new_dir, err_dir, list_res
@@ -92,42 +92,36 @@ class mon_sta():
         print str_
 
     def save_rtt_data(self, rtt_process, res_dir, sta_time, end_time):
-        self.sh.rtt_save_time(rtt_process, res_dir, sta_time, end_time)
+        self.sh.rtt_save_time_only(rtt_process, res_dir, sta_time, end_time)
 
     def filter_files(self, source_dir=load_test_cfg["source_dir"], process_dir=load_test_cfg["process_dir"], backup_dir=load_test_cfg["backup_dir"]):
         self.sh.get_dir_files(source_dir, process_dir, backup_dir)
 
     def tar_save_log(self, dir_process, dir_tar, format_file="log.txt"):
         #str_ = "mv %s/*%s* %s" % (dir_process, format_file, dir_tar)
-        #str_ = "mv -f %s %s" % (dir_process,  dir_tar) #fix:dir 覆盖问题
         str_ = "rm -rf %s&&mkdir %s&&chmod 777 %s" % (dir_process,  dir_process, dir_process) #fix:不再保持直接删除,17-03-17
-        self.sh._com(str_)
-        #str_ = "mkdir %s" % (dir_process)
         self.sh._com(str_)
 
     def start_doing(self, start_time, long_time=load_test_cfg["long_time"], log_save_time=load_test_cfg["log_save_time"], is_wait = 1):
         self.log("start_time: %s" % str(start_time))
         
         diff_time = 0
-        while (diff_time <= log_save_time*3600 and 1 == is_wait):
-            self.filter_files(load_test_cfg["source_dir"], load_test_cfg["process_dir"], load_test_cfg["backup_dir"])
-            now_time = int(time.time())
-            diff_time = now_time - start_time 
-            #self.log("diff_time %s; log_save_time %s" % (str(diff_time), str(log_save_time)) )
+        load_test_cfg["source_dir"] = "/home/lijie/load_use/"
+        self.filter_files(load_test_cfg["source_dir"], load_test_cfg["process_dir"], load_test_cfg["backup_dir"])
+        now_time = int(time.time())
         self.log("start process_dir_for_ana")
+
         self.tar_save_log(load_test_cfg["backup_dir"], load_test_cfg["tar_backup_dir"])
         sta_time = int(start_time*1000 - log_save_time*3600*1000) 
         end_time = int(start_time*1000) #单位毫秒
         res_dir, err_p, res = self.process_dir_for_ana(load_test_cfg["process_dir"], sta_time, end_time)
+        print res_dir
+        #assert 1 == 0 
         self.save_rtt_data(load_test_cfg["processRtt_dir"], res_dir, sta_time, end_time)
-        self.ana_use_dir(res_dir, load_test_cfg["ana_log"])
+        #self.ana_use_dir(res_dir, load_test_cfg["ana_log"])
+        print "python analysis_data_Ue.py %s" % res_dir
         
 
 if __name__=="__main__":
     x =  mon_sta()
-    try :
-        avg = sys.argv[1]
-        x.start_doing(time.time(), is_wait=0)
-    except IndexError:
-        avg = None
-        x.start_doing(time.time())
+    x.start_doing(time.time())

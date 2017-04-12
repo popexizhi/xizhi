@@ -163,9 +163,18 @@ class sh_control():
         new_dir_rtt = "%s/%s_%s" % (rtt_dir, str(statime), str(endtime))
         new_dir = """mkdir %s""" % new_dir_rtt
         mv_file = """mv %s/*_rtt %s""" % (rtt_dir, new_dir_rtt)
-        backup_rtt_file = "sh rtt_backup.sh %s %s" % (rtt_dir, new_dir_rtt)
+        #backup_rtt_file = "sh rtt_backup.sh %s %s" % (rtt_dir, new_dir_rtt)
+        backup_rtt_file = "sh rtt_backupX.sh %s %s" % (rtt_dir, new_dir_rtt)
         self._list_com([backup_rtt_file])
 
+        return res
+    def rtt_save_time_only(self, rtt_dir, rtt_process, statime, endtime):
+        #rtt_save.sh,只保存使用
+        rf = "%sto%s.rttd" % (str(statime), str(endtime))
+        str_com = """sh rtt_save.sh %s %s %s""" % (rtt_dir , rf , rtt_process)
+        self.log("str_com (%s)" % str(str_com))
+        res = self._com(str_com)
+        
         return res
     def split_range_file(self, rtt_dir, sta, end, old_dir):
         """ save [sta, end] in rtt_dir; other in old_dir"""

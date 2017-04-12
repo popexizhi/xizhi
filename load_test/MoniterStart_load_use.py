@@ -92,7 +92,8 @@ class mon_sta():
         print str_
 
     def save_rtt_data(self, rtt_process, res_dir, sta_time, end_time):
-        self.sh.rtt_save_time_only(rtt_process, res_dir, sta_time, end_time)
+        #self.sh.rtt_save_time_only(rtt_process, res_dir, sta_time, end_time)
+        self.sh.rtt_save_time(rtt_process, res_dir, sta_time, end_time)
 
     def filter_files(self, source_dir=load_test_cfg["source_dir"], process_dir=load_test_cfg["process_dir"], backup_dir=load_test_cfg["backup_dir"]):
         self.sh.get_dir_files(source_dir, process_dir, backup_dir)

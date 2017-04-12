@@ -23,8 +23,11 @@ class analy_d():
     
     def get_z(self, path):
         """从ue.down.hostid.10279.pid.169185.log.txt_4 中获得log.txt_后的数字 """
-        res = float(path.split("log.txt_")[-1])
-        return res
+        try:
+            res = float(path.split("log.txt_")[-1])
+            return res
+        except ValueError:
+            return 0
     def test_get_z(self):
         file_p = "ue.down.hostid.10279.pid.169185.log.txt_4"
         assert 4.0 == self.get_z(file_p)
@@ -177,7 +180,7 @@ class analy_d():
             if type(-1) == type(datas):
                 return -1 #无数据处理
             
-            loss = loss + self.processt.loss(datas, pre_data)
+            #loss = loss + self.processt.loss(datas, pre_data)
             res = self.processt.statistics_use(datas, 1)
             dl = {"Max(microsecond)":res[0], "Min(microsecond)":res[1] , "num": res[2], "avg": res[3], "stdev": res[4]}
             #assert 1 == 0                
@@ -228,6 +231,7 @@ class analy_d():
 
     def save_process_data(self, dir_ue_log):
         self.sh.tar_save(dir_ue_log)
+    
 
     def save_txt(self, data_l, file_name):
         file_p = "%s.txt" % str(file_name)

@@ -52,7 +52,10 @@ class mon_sta():
                 continue
             #print str(i)
             #print dir_p
-            i = [int(i[0]), int(i[1]), i[2]]
+            try:
+                i = [int(i[0]), int(i[1]), i[2]]
+            except ValueError:
+                continue
             split_num = self.split_log(i, start_ms, end_ms)
             self.log("%s is %s" % (str(split_num), i[2]))
             list_res[i[2]] = split_num

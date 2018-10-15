@@ -31,7 +31,7 @@ if(int(thisChar)==int("o") )
 
 
 
-[note](note.md)
-SPI使用时会占用13口，自己测试时开始定义pin13为OUTPUT,调试时led总是hight，后来吞提醒才发现的，要好好看手册啊!
-add：http://arduino.cc/en/Tutorial/BarometricPressureSensor
-占用的是13，12，11
+[note](note.md) 
+SPI使用时会占用13口，自己测试时开始定义pin13为OUTPUT,调试时led总是hight，后来吞提醒才发现的，要好好看手册啊! 
+add：http://arduino.cc/en/Tutorial/BarometricPressureSensor 
+占用的是13，12，11 

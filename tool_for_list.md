@@ -23,6 +23,13 @@ Iloj -- pope的开箱即用工具 记录
     四分位: x.quartiles
     标准统计结果: x.statistics_list 
     指定百分比的排序值: x.percentage_avg 
-## nginx log 分析工具
 
+## nginx log 分析工具
+    
+    https://github.com/popexizhi/moniter_log.git 
+
+    branch: nginx_monitor 
+
+    process_log $1  # 过滤原始log,生成只包含$request_time $upstream_response_time 的log  
+    python process_log.py $1_tmp  #对此log 统计处理,并产生ld类似的报告,这里的图形展示依赖dygraph的相关js
 ## dygraph use list

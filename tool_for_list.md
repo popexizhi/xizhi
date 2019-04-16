@@ -19,7 +19,10 @@ Iloj -- pope的开箱即用工具 记录
     https://github.com/popexizhi/moniter_log.git 
 
     branch: base_statistics
-
+    static.py   
+    四分位: x.quartiles
+    标准统计结果: x.statistics_list 
+    指定百分比的排序值: x.percentage_avg 
 ## nginx log 分析工具
 
 ## dygraph use list
